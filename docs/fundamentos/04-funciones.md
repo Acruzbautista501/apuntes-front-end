@@ -23,7 +23,6 @@ function saludar(nombre: string): void {
   console.log(`Hola, ${nombre}`);
 }
 ```
-
 ## 4.2 Parámetros Opcionales y por Defecto
 
 No siempre necesitamos enviar todos los datos. TypeScript nos permite ser flexibles:
