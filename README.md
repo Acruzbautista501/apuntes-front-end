@@ -1,8 +1,8 @@
-# 🚀 Apuntes de Frontend Development
+# Apuntes de Frontend Development
 
 Bienvenido a mi repositorio personal de documentación técnica y hojas de referencia (*cheat sheets*). Aquí centralizo conceptos clave, mejores prácticas y ejemplos de implementación sobre las tecnologías que utilizo para construir interfaces web modernas, escalables y tipadas.
 
-## 📋 Contenido del Repositorio
+## Contenido del Repositorio
 
 El repositorio está organizado por módulos para facilitar la consulta rápida de sintaxis y lógica de programación:
 
@@ -39,7 +39,7 @@ Hojas de estilo y frameworks de utilidad para maquetación ágil.
 
 ---
 
-## 📂 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```text
 apuntes-front-end/
@@ -51,7 +51,7 @@ apuntes-front-end/
 
 ---
 
-## 👤 Autor
+## Autor
 
 **Aldair Cruz Bautista**
 * **Rol:** Frontend Developer / Maquetador Web
