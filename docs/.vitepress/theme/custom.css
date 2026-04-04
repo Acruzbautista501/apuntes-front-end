@@ -1,0 +1,6 @@
+/* .vitepress/theme/custom.css */
+
+:root {
+  --vp-font-family-base: 'Sora', system-ui, -apple-system, sans-serif;
+  --vp-font-family-mono: 'Fira Code', monospace; /* Opcional para los bloques de código */
+}

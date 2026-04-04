@@ -6,19 +6,51 @@ export default defineConfig({
   description: "Mi base de conocimientos",
   
   // Mejora el SEO y la apariencia en pestañas
-  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    ['link', { href: 'https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap', rel: 'stylesheet' }]    
+  ],
 
   themeConfig: {
     // 1. Añadimos buscador (Esencial para "profesionalizar")
     search: {
-      provider: 'local'
+      provider: 'local',
+      options: {
+        locales: {
+          root: {
+            translations: {
+              button: {
+                buttonText: 'Buscar',
+                buttonAriaLabel: 'Buscar documentos'
+              },
+              modal: {
+                noResultsText: 'No se han encontrado resultados',
+                resetButtonTitle: 'Borrar criterios de búsqueda',
+                footer: {
+                  selectText: 'para seleccionar',
+                  navigateText: 'para navegar',
+                  closeText: 'para cerrar'
+                }
+              }
+            }
+          }
+        }
+      }
     },
 
     outlineTitle: 'En esta página',
+    darkModeSwitchLabel: 'Apariencia',
+    lightModeSwitchTitle: 'Cambiar a modo claro',
+    darkModeSwitchTitle: 'Cambiar a modo oscuro',
+    sidebarMenuLabel: 'Menú',
+    returnToTopLabel: 'Volver al principio',
+    langMenuLabel: 'Seleccionar idioma',
     
     nav: [
       { text: 'Inicio', link: '/' },
-      { text: 'Guías', link: '/guia/intro', activeMatch: '/fundamentos/' }
+      { text: 'Guías', link: '/guia/intro', activeMatch: '/guia/intro' }
     ],
 
     sidebar: [
@@ -33,7 +65,7 @@ export default defineConfig({
               { text: 'Introducción y Configuración', link: '/fundamentos/01-introduccion' },
               { text: 'Tipado y Estructuras', link: '/fundamentos/02-estructuras' },
               { text: 'Control de Flujo', link: '/fundamentos/03-flujo' },
-              { text: 'Funciones en TypeScript', link: '/fundamentos/04-functions' },
+              { text: 'Funciones en TypeScript', link: '/fundamentos/04-funciones' },
               { text: 'Interfaces y Tipos', link: '/fundamentos/05-interfaces' },
               { text: 'POO Avanzada', link: '/fundamentos/06-poo' },
               { text: 'Asincronismo y API Rest', link: '/fundamentos/07-asincronismo' },
@@ -61,15 +93,28 @@ export default defineConfig({
         collapsed: true,
         items: [
           { 
-            text: 'CSS3 Avanzado', 
+            text: 'CSS3', 
             collapsed: true,
             items: [
-              { text: 'Flexbox & Grid', link: '/css/layout' },
-              { text: 'SASS & Preprocesadores', link: '/css/sass' },
-              { text: 'Bootstrap 5', link: '/css/bootstrap' }
+              { text: '¿Qué es CSS?', link: '/css/01-introduccion' },
+              { text: 'Layout y Posicionamiento', link: '/css/02-layout' },
+              { text: 'Diseño Adaptativo y Fluidez Moderna', link: '/css/03-responsive' },
+              { text: 'Animaciones y Experiencia de Usuario (UX)', link: '/css/04-animaciones' },
+              { text: 'CSS Avanzado y Ecosistema', link:'/css/05-avanzado'}
             ]
           },
-          { text: 'Tailwind CSS 4', link: '/css/tailwind' },
+          { 
+            text: 'Tailwind CSS 4', 
+            collapsed: true,
+            items: [
+              { text: 'Introducción y Fundamentos de Tailwind CSS 4', link:'/tailwind/01-fundamentos'},
+              { text: 'Diseño y Maquetación (The Layout Engine)', link: '/tailwind/02-maquetacion'},
+              { text: 'Responsive Design, Estados y Modo Oscuro', link:'/tailwind/03-responsive'},
+              { text: 'Estilización Visual (Colores, Tipografía y Efectos)', link:'/tailwind/04-estilizacion'},
+              { text: 'Personalización y Configuración (Theming)', link:'/tailwind/05-personalizacion'},
+              { text: 'Optimización, Componentes y Buenas Prácticas', link:'/tailwind/06-optimizacion'},
+            ]
+          },
         ]
       },
       {
@@ -103,7 +148,7 @@ export default defineConfig({
 
     footer: {
       message: 'Liberado bajo la licencia MIT.',
-      copyright: `Copyright © ${new Date().getFullYear()} - Aldair Cruz`
+      copyright: `Copyright © ${new Date().getFullYear()} - Aldair Cruz Bautista`
     }
   }
 })
