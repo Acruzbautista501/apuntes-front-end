@@ -121,7 +121,18 @@ export default defineConfig({
         text: '⚡ Frameworks y Ecosistema',
         collapsed: true,
         items: [
-          { text: 'Vue.js 3', link: '/frameworks/vue-3' },
+          { 
+            text: 'Vue.js 3 con Typescript', 
+            collapsed: true,
+            items: [
+              { text: 'Introducción a Vue.js 3', link:'/vue/01-introduccion'},
+              { text: 'Fundamentos del Composition API', link: '/vue/02-composition-api'},
+              // { text: 'Responsive Design, Estados y Modo Oscuro', link:'/tailwind/03-responsive'},
+              // { text: 'Estilización Visual (Colores, Tipografía y Efectos)', link:'/tailwind/04-estilizacion'},
+              // { text: 'Personalización y Configuración (Theming)', link:'/tailwind/05-personalizacion'},
+              // { text: 'Optimización, Componentes y Buenas Prácticas', link:'/tailwind/06-optimizacion'},
+            ]
+          },
           { text: 'Nuxt (SSR/Static)', link: '/frameworks/nuxt' },
           { text: 'Angular', link: '/frameworks/angular' }
         ]
