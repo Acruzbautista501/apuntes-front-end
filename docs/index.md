@@ -22,7 +22,7 @@ hero:
 
 features:
   - title: Vue.js 3 & Composition API
-    details: Implementaciones avanzadas con <script setup>, gestión de estado y patrones reactivos.
+    details: Implementaciones avanzadas con &lt;script setup&gt;, gestión de estado y patrones reactivos.
     icon: 🟢
   - title: TypeScript Estricto
     details: Tipado avanzado, interfaces para APIs y uso de genéricos para código escalable.
