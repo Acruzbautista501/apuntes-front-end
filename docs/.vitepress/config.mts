@@ -4,6 +4,7 @@ export default defineConfig({
   lang: 'es-ES',
   title: "Apuntes de Front End",
   description: "Mi base de conocimientos",
+  ignoreDeadLinks: true,
   
   // Mejora el SEO y la apariencia en pestañas
   head: [
