@@ -18,22 +18,18 @@ export default defineConfig({
     search: {
       provider: 'local',
       options: {
-        locales: {
-          root: {
-            translations: {
-              button: {
-                buttonText: 'Buscar',
-                buttonAriaLabel: 'Buscar documentos'
-              },
-              modal: {
-                noResultsText: 'No se han encontrado resultados',
-                resetButtonTitle: 'Borrar criterios de búsqueda',
-                footer: {
-                  selectText: 'para seleccionar',
-                  navigateText: 'para navegar',
-                  closeText: 'para cerrar'
-                }
-              }
+        translations: { // Quita la capa de 'locales' y 'root' si solo usas español
+          button: {
+            buttonText: 'Buscar',
+            buttonAriaLabel: 'Buscar documentos'
+          },
+          modal: {
+            noResultsText: 'No se han encontrado resultados',
+            resetButtonTitle: 'Borrar criterios de búsqueda',
+            footer: {
+              selectText: 'para seleccionar',
+              navigateText: 'para navegar',
+              closeText: 'para cerrar'
             }
           }
         }
