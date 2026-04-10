@@ -15,7 +15,7 @@ hero:
   actions:
     - theme: brand
       text: Empezar a leer
-      link: /introduccion
+      link: /guia/intro
     - theme: alt
       text: Ver en GitHub
       link: https://github.com/Acruzbautista501/apuntes-front-end

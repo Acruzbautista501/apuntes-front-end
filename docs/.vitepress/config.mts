@@ -101,6 +101,17 @@ export default defineConfig({
             ]
           },
           { 
+            text: 'Bootstrap 5', 
+            collapsed: true,
+            items: [
+              { text: 'Fundamentos e Instalación', link:'/bootstrap/01-fundamentos'},
+              { text: 'El Sistema de Grid y Layout', link: '/bootstrap/02-grid'},
+              { text: 'Componentes Esenciales de Interfaz', link:'/bootstrap/03-componentes'},
+              { text: 'Utilidades (Espaciado, Bordes y Visibilidad)', link:'/bootstrap/04-utilidades'},
+              { text: 'Interactividad y Componentes Avanzados', link:'/bootstrap/05-interactividad'},
+            ]
+          },          
+          { 
             text: 'Tailwind CSS 4', 
             collapsed: true,
             items: [
@@ -130,8 +141,8 @@ export default defineConfig({
               // { text: 'Optimización, Componentes y Buenas Prácticas', link:'/tailwind/06-optimizacion'},
             ]
           },
-          { text: 'Nuxt (SSR/Static)', link: '/frameworks/nuxt' },
-          { text: 'Angular', link: '/frameworks/angular' }
+          // { text: 'Nuxt (SSR/Static)', link: '/frameworks/nuxt' },
+          // { text: 'Angular', link: '/frameworks/angular' }
         ]
       }
     ],
