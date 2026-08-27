@@ -100,7 +100,7 @@ state.todos.push('Aprender Vue')
 **Tips**
 
 - En el script accedes con `.value`.
-- En el template Vue hace el *unwrapping* por ti: `{{ name }}`.
+- En el template Vue hace el *unwrapping* por ti automáticamente, mostrando `name` directamente sin `.value`.
 
 ## 2.5 Iterando sobre el state (v-for)
 

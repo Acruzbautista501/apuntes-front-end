@@ -200,7 +200,7 @@ Explicaciones rápidas:
 
 ```
 
-- `{{ variable }}` = interpolación.
+- Doble llave con el nombre de una variable = interpolación (ej. mostrar el valor de `contador` en el texto).
 - `@click="..."` = escucha de eventos (equiv. `v-on:click`).
 - `:class="..."` o `v-bind:attribute` para enlazar atributos.
 

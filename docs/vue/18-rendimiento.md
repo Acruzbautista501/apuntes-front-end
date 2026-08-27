@@ -38,7 +38,7 @@ tabla.value[0].nombre = 'Nuevo valor' // NO dispara actualización — no es lo 
 
 ## 18.3 `computed` en Lugar de Métodos en el Template
 
-Un método llamado directamente en el template (`{{ calcularTotal() }}`) se ejecuta en **cada render**, sin importar si sus dependencias cambiaron. `computed` cachea el resultado y solo recalcula cuando sus dependencias reactivas cambian.
+Un método invocado directamente en el template (llamando a `calcularTotal()` dentro de una interpolación) se ejecuta en **cada render**, sin importar si sus dependencias cambiaron. `computed` cachea el resultado y solo recalcula cuando sus dependencias reactivas cambian.
 
 ```vue
 <script setup lang="ts">
