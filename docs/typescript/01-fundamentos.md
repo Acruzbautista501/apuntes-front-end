@@ -1,5 +1,7 @@
 # Módulo 1: Introducción y Configuración
 
+> 🎯 **Sobre esta pista:** Esta sección asume que ya conoces la sintaxis básica de TypeScript (tipos primitivos, funciones, interfaces) —si vienes de cero, empieza por [Fundamentos de Programación](/fundamentos/01-introduccion)—. Aquí nos enfocamos en la parte aplicada: cómo usar TypeScript para tipar el DOM, manejar eventos del navegador, consumir APIs con Axios/fetch, trabajar con genéricos y aplicarlo en frameworks modernos como Vue y React.
+
 ## 1.1 ¿Por qué TypeScript en el Front End?
 JavaScript es un lenguaje de **tipado dinámico**, lo que significa que las variables pueden cambiar de tipo en cualquier momento. Esto es flexible, pero en proyectos grandes genera errores difíciles de rastrear.
 

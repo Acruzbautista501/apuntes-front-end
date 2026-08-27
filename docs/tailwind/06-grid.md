@@ -1,6 +1,6 @@
 # MÓDULO 6: CSS Grid con Tailwind CSS
 
-CSS Grid es el sistema de diseño más potente disponible. A diferencia de Flexbox, que es unidimensional (fila **o** columna), Grid es **bidimensional**; te permite controlar filas y columnas simultáneamente. Es perfecto para las "rejillas" de tu aplicación: el dashboard de estadísticas, la galería de fotos de los equipos o el diseño completo de *Soccer League Elite*.
+CSS Grid es el sistema de diseño más potente disponible. A diferencia de Flexbox, que es unidimensional (fila **o** columna), Grid es **bidimensional**; te permite controlar filas y columnas simultáneamente. Es perfecto para las "rejillas" de tu aplicación: el dashboard de estadísticas, la galería de fotos de los equipos o el diseño completo de tu aplicación.
 
 ## 6.1 Grid Container
 
@@ -23,7 +23,7 @@ Tailwind te permite definir columnas con números del 1 al 12. Esto divide el an
 #### Definición de filas (`grid-rows-*`)
 Aunque no siempre es necesario (ya que Grid puede crear filas nuevas automáticamente según el contenido), puedes fijar una estructura rígida si lo deseas.
 
-### Ejemplo de código: Rejilla base de Soccer League Elite
+### Ejemplo de código: Rejilla base de un dashboard
 Imagina que quieres mostrar una lista de 6 equipos en tu dashboard. Usando Grid, puedes controlar exactamente cuántos equipos aparecen por fila sin importar el tamaño de la pantalla.
 
 ```html
@@ -70,7 +70,7 @@ Las filas definen cuántas divisiones verticales tiene tu rejilla.
 * **¿Cuándo usarlas?**: Es menos común definir filas explícitas que columnas, ya que por defecto Grid es "inteligente": si tienes 12 elementos y una rejilla de 3 columnas, Grid creará automáticamente 4 filas (`12 / 3 = 4`). Solo usarás `grid-rows-*` cuando necesites que el layout tenga una altura fija o un número exacto de filas predefinidas.
 * **Tailwind Scale:** Comúnmente `grid-rows-1` hasta `grid-rows-6` (aunque puedes extenderlo en tu configuración si lo necesitas).
 
-### Ejemplo Práctico: Dashboard de "Soccer League Elite"
+### Ejemplo Práctico: Dashboard de Estadísticas
 Vamos a construir la vista principal de un torneo. Usaremos **3 columnas** para escritorio y **1 sola columna** para móviles.
 
 ```html
@@ -119,7 +119,7 @@ Permite que un elemento ocupe varias filas hacia abajo.
 * **Escala:** `row-span-1` hasta `row-span-6` (puedes añadir más en tu configuración si lo necesitas).
 * **Uso:** Ideal para elementos que requieren más altura visual, como una imagen de un jugador o una sección de "Noticias Destacadas" que quieres que acompañe a otras dos tarjetas más pequeñas.
 
-### Ejemplo Práctico: Dashboard de "Soccer League Elite"
+### Ejemplo Práctico: Dashboard de Estadísticas
 Vamos a diseñar una sección donde el **partido principal** es más grande que los resultados secundarios. 
 
 Imagina un layout de **3 columnas**:
@@ -276,7 +276,7 @@ Imagina que tienes una galería donde algunos elementos son grandes (destacados)
 * **Advertencia:** Si el orden de tus elementos es importante para la lectura lógica (por ejemplo, si los partidos de la liga deben seguir un orden cronológico), **no uses `dense`**. Mantén el orden natural (`grid-flow-row`) para que la experiencia de usuario sea predecible.
 :::
 
-### Ejemplo Maestro: Dashboard de *Soccer League Elite*
+### Ejemplo Maestro: Dashboard de tu aplicación
 Este código crea un dashboard donde la tarjeta principal de estadísticas destaca y las demás se organizan debajo:
 
 ```html
@@ -293,7 +293,7 @@ Este código crea un dashboard donde la tarjeta principal de estadísticas desta
 
 ### Resumen para tu toma de decisiones
 
-| Clase | Función | Uso en *Soccer League Elite* |
+| Clase | Función | Uso en tu aplicación |
 | :--- | :--- | :--- |
 | `grid-cols-N` | Define la estructura | Crear la rejilla de los equipos de la liga. |
 | `col-span-N` | Expande elementos | Hacer que una estadística sea más importante. |

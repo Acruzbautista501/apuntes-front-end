@@ -23,7 +23,7 @@ En Vue 3 el *state* puede ser:
 - Devuelve un objeto con la propiedad `.value`.
 - En templates Vue unwrapea `.value` automáticamente.
 
-```tsx
+```typescript
 import { ref } from 'vue'
 const count = ref(0)
 count.value++            // en script
@@ -37,7 +37,7 @@ count.value++            // en script
 - No usa `.value`; accedes/modificas propiedades directamente.
 - Es una *proxy* que envuelve el objeto original.
 
-```tsx
+```typescript
 import { reactive } from 'vue'
 const state = reactive({ todos: [] as string[] })
 state.todos.push('Aprender Vue')
@@ -138,7 +138,7 @@ Las verás mucho al manipular el state.
 - `computed` crea un valor derivado y **cacheado**: solo se recalcula si sus dependencias cambian.
 - Útil para contar, filtrar, formatear datos.
 
-```tsx
+```typescript
 import { computed } from 'vue'
 
 const remaining = computed(() => state.tasks.filter(t => !t.done).length)
@@ -166,7 +166,7 @@ En template:
 
 Ejemplo — guardar `tasks` en localStorage:
 
-```tsx
+```typescript
 import { watch } from 'vue'
 
 watch(
@@ -190,7 +190,7 @@ watch(
 
 Ejemplo:
 
-```tsx
+```typescript
 import { watchEffect } from 'vue'
 
 watchEffect((onInvalidate) => {
@@ -223,7 +223,7 @@ Los hooks del ciclo de vida se usan para ejecutar código en puntos concretos:
 
 Ejemplo: cargar datos al montar y limpiar al desmontar.
 
-```tsx
+```typescript
 import { onMounted, onUnmounted } from 'vue'
 
 onMounted(() => {
@@ -241,7 +241,7 @@ onUnmounted(() => {
 
 - **Desestructurar `reactive` puede romper la reactividad**:
     
-    ```tsx
+    ```typescript
     const user = reactive({ name: 'Aldair', age: 30 })
     const { name } = user             // ❌ `name` ya NO es reactivo
     // usa: const { name } = toRefs(user)  // ✅ mantiene reactividad

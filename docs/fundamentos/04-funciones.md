@@ -1,4 +1,3 @@
-
 # Módulo 4: Funciones en TypeScript
 
 Una función en TypeScript no es solo un conjunto de pasos; es un **contrato**. Si dices que una función recibe un número, TypeScript se asegurará de que nadie le pase un texto por error.
@@ -74,24 +73,24 @@ const division: OperacionMatematica = (a, b) => a / b;
 ```
 
 ## 🛠️ Aplicación Práctica en tu `main.ts`:
-Imagina que estás gestionando los puntos de tu liga de fútbol. Vamos a crear una función que actualice el marcador y verifique si un equipo ganó:
+Imagina que estás gestionando el programa de lealtad de una tienda. Vamos a crear una función que sume puntos a un cliente cuando realiza una compra:
 
 ```typescript
-interface Equipo {
+interface Cliente {
   nombre: string;
   puntos: number;
 }
 
-const actualizarPuntos = (equipo: Equipo, victoria: boolean): void => {
-  if (victoria) {
-    equipo.puntos += 3;
-    console.log(`¡Ganó ${equipo.nombre}! Ahora tiene ${equipo.puntos} puntos.`);
+const sumarPuntos = (cliente: Cliente, compraRealizada: boolean): void => {
+  if (compraRealizada) {
+    cliente.puntos += 3;
+    console.log(`¡Compra registrada! ${cliente.nombre} ahora tiene ${cliente.puntos} puntos.`);
   } else {
-    equipo.puntos += 1;
-    console.log(`${equipo.nombre} empató.`);
+    cliente.puntos += 1;
+    console.log(`${cliente.nombre} sumó puntos por su visita.`);
   }
 };
 
-const miEquipo: Equipo = { nombre: "Vite FC", puntos: 10 };
-actualizarPuntos(miEquipo, true);
+const clienteFrecuente: Cliente = { nombre: "Ana", puntos: 10 };
+sumarPuntos(clienteFrecuente, true);
 ```

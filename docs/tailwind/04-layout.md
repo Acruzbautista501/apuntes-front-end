@@ -1,6 +1,6 @@
 # MÓDULO 4: Layout y Posicionamiento
 
-Este módulo es fundamental para dejar de "adivinar" dónde se ubican los elementos en la pantalla. Aprenderás a dominar el flujo del documento y cómo sacar elementos de él para crear interfaces avanzadas como menús, modales o *badges* de notificación para *Soccer League Elite*.
+Este módulo es fundamental para dejar de "adivinar" dónde se ubican los elementos en la pantalla. Aprenderás a dominar el flujo del documento y cómo sacar elementos de él para crear interfaces avanzadas como menús, modales o *badges* de notificación para tu aplicación.
 
 ## 4.1 Display
 
@@ -54,7 +54,7 @@ Para que no vuelvas a tener problemas de diseño en tu proyecto, visualízalo as
 
 
 ### Ejemplo Práctico: Tabla de Posiciones
-En tu proyecto de *Soccer League Elite*, podrías usar estas propiedades así:
+En tu proyecto de tu aplicación, podrías usar estas propiedades así:
 
 ```html
 <div class="block w-full p-4">
@@ -101,7 +101,7 @@ El elemento se saca del flujo y se fija en el navegador. No importa cuánto haga
 Es un híbrido entre `relative` y `fixed`. El elemento fluye normalmente hasta que alcanza un umbral (ej. `top-0`). Al llegar ahí, se "pega" y se comporta como `fixed`.
 * **Uso:** Encabezados de tablas de posiciones que quieres que sigan visibles mientras el usuario hace scroll hacia abajo.
 
-### Resumen para Soccer League Elite
+### Resumen para tu proyecto
 
 | Posición | Comportamiento | Ejemplo en tu App |
 | :--- | :--- | :--- |
@@ -144,7 +144,7 @@ Tailwind no te obliga a usar números aleatorios como 999 o 1000. Utiliza una es
 * `z-40`: Modales o *overlays*.
 * `z-50`: Popovers, notificaciones tipo "toast" o *tooltips*.
 
-### Ejemplo Práctico en Soccer League Elite
+### Ejemplo Práctico
 Imagina un modal que muestra los detalles de un jugador. Quieres asegurarte de que siempre esté encima de todo:
 
 ```html
@@ -171,7 +171,7 @@ En el desarrollo profesional de dashboards (como tu sistema de gestión), manté
 
 ## 4.4 Overflow (Gestión del desbordamiento)
 
-La propiedad `overflow` controla qué sucede cuando el contenido de un elemento es **más grande** que el área definida para él. En una aplicación de gestión deportiva como *Soccer League Elite*, donde manejas tablas largas de jugadores o listas de resultados, esto es vital para mantener un diseño limpio.
+La propiedad `overflow` controla qué sucede cuando el contenido de un elemento es **más grande** que el área definida para él. En una aplicación de gestión deportiva como tu aplicación, donde manejas tablas largas de jugadores o listas de resultados, esto es vital para mantener un diseño limpio.
 
 
 ### Los 4 Estados de Overflow
@@ -208,7 +208,7 @@ Imagina tu tabla de posiciones. En móviles, las columnas son muchas y el ancho 
 
 ### Resumen Técnico: ¿Cuándo usar cada uno?
 
-| Clase | Comportamiento | Uso en *Soccer League Elite* |
+| Clase | Comportamiento | Uso en tu aplicación |
 | :--- | :--- | :--- |
 | `overflow-hidden` | Corta el contenido | Recortar fotos de jugadores en un círculo o cuadrado. |
 | `overflow-auto` | Scroll dinámico | Tablas de posiciones, listas de comentarios. |

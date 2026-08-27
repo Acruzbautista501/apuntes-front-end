@@ -22,28 +22,28 @@ hero:
 
 features:
   - title: Vue.js 3 & Composition API
-    details: Implementaciones avanzadas con &lt;script setup&gt;, gestión de estado y patrones reactivos.
+    details: De &lt;script setup&gt; y reactividad hasta Pinia, Vue Router, Suspense, testing y accesibilidad.
     icon: 🟢
   - title: TypeScript Estricto
-    details: Tipado avanzado, interfaces para APIs y uso de genéricos para código escalable.
+    details: Fundamentos de programación, tipado avanzado, genéricos y aplicación práctica en el frontend.
     icon: 🟦
   - title: Styling Moderno
-    details: Dominio de Tailwind CSS 4, Bootstrap 5 y maquetación responsiva orientada a UI/UX.
+    details: Dominio de CSS3 avanzado, Tailwind CSS 4 y Bootstrap 5, con temarios de cero a nivel experto.
     icon: 🎨
-  - title: Proyectos & Lógica
-    details: Estructuración de aplicaciones reales, desde sistemas de gestión deportiva hasta consumo de APIs.
+  - title: Proyectos & Buenas Prácticas
+    details: Arquitectura de proyectos reales, consumo de APIs, rendimiento y accesibilidad en cada sección.
     icon: 🚀
 ---
 
 ## ¿Qué encontrarás en este repositorio?
 
-Este espacio funciona como una **Single Source of Truth** (Fuente única de verdad) para mi proceso de aprendizaje. El objetivo es mantener notas claras y reutilizables que faciliten la maquetación y el desarrollo de interfaces robustas.
+Este espacio funciona como una **Single Source of Truth** (Fuente única de verdad) para mi proceso de aprendizaje. El objetivo es mantener notas claras y reutilizables que faciliten la maquetación y el desarrollo de interfaces robustas, con temarios que van de cero a nivel avanzado en cada tecnología.
 
 ### 🛠️ Stack Principal
-- **Framework:** Vue 3 (Vite)
+- **Framework:** Vue 3 (Vite) + Composition API
 - **Lenguaje:** TypeScript
-- **Estilos:** Tailwind CSS / Bootstrap
-- **Herramientas:** Axios, Firestore, Git
+- **Estilos:** CSS3 avanzado, Tailwind CSS 4, Bootstrap 5
+- **Herramientas:** Vue Router, Pinia, Vitest, Axios, Firestore, Git
 
 ---
 

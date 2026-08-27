@@ -31,6 +31,7 @@ Aquí es donde ocurre la "magia". Queremos que en una PC se vean 3 columnas, per
 | `md` | Tablets (Medium) | ≥ 768px |
 | `lg` | Laptops/PC (Large) | ≥ 992px |
 | `xl` | Pantallas grandes (X-Large) | ≥ 1200px |
+| `xxl` | Pantallas extra grandes (XX-Large) | ≥ 1400px |
 
 ### Ejemplo Práctico:
 Imagina que quieres una tarjeta que ocupe todo el ancho en móvil, pero la mitad en una tablet:

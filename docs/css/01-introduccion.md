@@ -1,4 +1,3 @@
-
 # Módulo 1: Fundamentos y Modelo de Caja
 
 ## 1.1 Introducción al Cómputo Visual
@@ -11,7 +10,21 @@ Para entender CSS, primero debemos entender qué pasa detrás de escena cuando a
 
 > **Nota:** Si el CSS está mal estructurado, el navegador tardará más en calcular el *Render Tree*, lo que afecta el rendimiento.
 
-## 1.2 Sintaxis y Selectores
+## 1.2 Formas de Vincular CSS
+
+Antes de escribir tu primera regla, necesitas saber dónde vive ese CSS respecto a tu HTML. Hay tres formas, y solo una es recomendable en proyectos reales:
+
+1.  **En línea (`inline`):** El estilo va directo en el atributo `style` del elemento (`<p style="color: red;">`). Tiene la especificidad más alta y es imposible de reutilizar. **Evítalo siempre que puedas.**
+2.  **Interno (`internal`):** Un bloque `<style>` dentro del `<head>` del HTML. Útil solo para pruebas rápidas o emails HTML, nunca para un sitio real.
+3.  **Externo (`external`):** Un archivo `.css` separado, enlazado con `<link rel="stylesheet" href="estilos.css">`. **Es el estándar profesional**: el navegador lo cachea, se reutiliza entre páginas y mantiene el HTML limpio.
+
+```html
+<head>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+```
+
+## 1.3 Sintaxis y Selectores
 La unidad básica de CSS es la **regla**, compuesta por un **selector** y un **bloque de declaración**.
 
 ### Selectores Básicos
@@ -26,7 +39,7 @@ Permiten seleccionar elementos basados en su relación con otros:
 * **Hijo directo (`>`):** `ul > li` solo selecciona los hijos inmediatos.
 * **Hermano adyacente (`+`):** `h1 + p` selecciona el primer `<p>` que aparece justo después de un `h1`.
 
-## 1.3 La Cascada y Especificidad
+## 1.4 La Cascada y Especificidad
 CSS significa *Cascading Style Sheets*. La "Cascada" es el algoritmo que decide qué regla gana cuando hay un conflicto.
 
 ### Factores que determinan quién gana:
@@ -38,7 +51,21 @@ CSS significa *Cascading Style Sheets*. La "Cascada" es el algoritmo que decide 
     * Estilo en línea (dentro del HTML): **1000 puntos**.
 3.  **Orden de aparición:** Si dos reglas tienen la misma especificidad, gana la que esté escrita al final del archivo.
 
-## 1.4 Modelo de Caja (Box Model)
+### Herencia (`inheritance`)
+Antes de pelear con la especificidad, entiende esto: **algunas propiedades pasan de padre a hijo automáticamente, y otras no.**
+
+* **Propiedades que SÍ heredan (por defecto):** las relacionadas con texto — `color`, `font-family`, `font-size`, `line-height`, `text-align`. Por eso definir la tipografía en el `body` "baja" a todos los elementos.
+* **Propiedades que NO heredan (por defecto):** las relacionadas con caja y layout — `margin`, `padding`, `border`, `width`, `display`. Tiene sentido: si el `padding` de un `div` se heredara, cada hijo anidado sumaría más y más espacio.
+* **Forzar el comportamiento:** puedes usar la palabra clave `inherit` para obligar a heredar una propiedad que no lo hace por defecto, o `initial` para resetearla a su valor original del navegador.
+
+```css
+.tarjeta {
+  border: 2px solid #ccc; /* NO se hereda a los hijos de .tarjeta */
+  color: #1a1a1a;          /* SÍ se hereda a todos los textos internos */
+}
+```
+
+## 1.5 Modelo de Caja (Box Model)
 Este es el concepto más importante de CSS. **Todo en la web es una caja rectangular**, incluso si parece un círculo.
 
 ### Partes de la caja:
@@ -59,7 +86,7 @@ Por defecto, el navegador usa `content-box`. Esto significa que si le das a un d
 ```
 Con `border-box`, si defines `300px`, el navegador restará el padding y el borde del interior, manteniendo el tamaño total siempre en `300px`.
 
-## 1.5 Unidades de Medida
+## 1.6 Unidades de Medida
 Para que un sitio sea moderno, no podemos usar solo píxeles.
 
 ### Unidades Absolutas
@@ -70,6 +97,32 @@ Para que un sitio sea moderno, no podemos usar solo píxeles.
 * **em:** Relativo al tamaño de fuente del elemento padre. Útil para componentes modulares.
 * **vw / vh:** Porcentaje del ancho (`vw`) o alto (`vh`) de la ventana del navegador. `100vh` ocupa toda la pantalla de alto.
 * **%:** Relativo al tamaño del contenedor padre.
+
+### Funciones Matemáticas (`calc`, `min`, `max`)
+CSS no solo acepta valores fijos; puede **calcular** valores en tiempo real, incluso mezclando unidades distintas.
+
+* **`calc()`:** Permite sumar, restar, multiplicar o dividir valores de distintas unidades en una sola expresión.
+* **`min()`:** Usa el valor **más pequeño** de la lista que le des. Ideal para poner un límite superior flexible.
+* **`max()`:** Usa el valor **más grande** de la lista. Ideal para poner un límite inferior flexible.
+
+```css
+.contenedor {
+  /* El 100% del ancho, menos 40px fijos de márgenes laterales */
+  width: calc(100% - 40px);
+}
+
+.tarjeta {
+  /* Nunca más angosta que 300px, pero fluida hasta el 90% del contenedor */
+  width: min(90%, 600px);
+}
+
+.titulo {
+  /* Nunca más pequeño que 1.5rem, aunque el viewport sea diminuto */
+  font-size: max(1.5rem, 4vw);
+}
+```
+
+> **Nota:** `clamp(min, ideal, max)`, que verás en el Módulo 3, es en realidad un atajo que combina `min()` y `max()` en una sola función.
 
 ---
 

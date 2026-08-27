@@ -1,4 +1,3 @@
-
 # Módulo 2: Layout y Posicionamiento
 
 Este módulo se centra en cómo las cajas (definidas en el Módulo 1) se organizan y se relacionan entre sí en el espacio de la pantalla.
@@ -140,5 +139,3 @@ Solo funciona en elementos que tengan un `position` definido (que no sea `static
 | Una rejilla de fotos (tipo Instagram) | **CSS Grid** (`repeat(auto-fill, ... )`) |
 | Un botón que flote en la esquina | **Position: fixed** |
 | Que el header no se mueva al bajar | **Position: sticky** |
-
-¿Qué te parece si aplicamos todo esto en un pequeño proyecto para crear una **tarjeta de producto avanzada**?

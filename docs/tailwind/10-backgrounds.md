@@ -1,6 +1,6 @@
 # MÓDULO 10 — Backgrounds y Efectos
 
-Has llegado al módulo donde elevamos el diseño de "funcional" a "impresionante". Aquí aprenderás a manipular la atmósfera visual de tu aplicación *Soccer League Elite*. Los fondos y efectos son los que separan una web hecha con plantillas de una aplicación con identidad propia y diseño moderno.
+Has llegado al módulo donde elevamos el diseño de "funcional" a "impresionante". Aquí aprenderás a manipular la atmósfera visual de tu aplicación. Los fondos y efectos son los que separan una web hecha con plantillas de una aplicación con identidad propia y diseño moderno.
 
 ## 10.1 Background Images (Imágenes de Fondo)
 
@@ -38,13 +38,13 @@ En Tailwind, si no tienes una imagen definida en tu configuración, puedes usar 
 Si colocas texto sobre una imagen de fondo, el mayor problema es la **legibilidad**. Si la imagen es muy clara o muy oscura, el texto se pierde. La solución profesional es añadir una capa de color semitransparente (overlay) entre la imagen y el contenido.
 
 ```html
-<div class="relative h-96 w-full bg-[url('/img/soccer-field.jpg')] bg-cover bg-center rounded-2xl overflow-hidden">
+<div class="relative h-96 w-full bg-[url('/img/hero-bg.jpg')] bg-cover bg-center rounded-2xl overflow-hidden">
   
   <div class="absolute inset-0 bg-black/50"></div>
   
   <div class="relative z-10 flex flex-col items-center justify-center h-full text-white">
-    <h1 class="text-4xl font-bold">Soccer League Elite</h1>
-    <p class="text-lg">Gestiona tu liga profesional aquí</p>
+    <h1 class="text-4xl font-bold">Bienvenido</h1>
+    <p class="text-lg">Gestiona tu proyecto de forma profesional</p>
   </div>
   
 </div>
@@ -61,14 +61,14 @@ Si colocas texto sobre una imagen de fondo, el mayor problema es la **legibilida
 | **Fijado** | `bg-fixed` | La imagen se queda estática mientras el usuario hace scroll (efecto Parallax). |
 
 ::: tip 💡 Consejos del Diseñador Frontend:
-1.  **Formatos Modernos:** Si estás trabajando en tus proyectos (*Soccer League Elite*), usa formatos como **WebP** o **AVIF** en lugar de JPG/PNG. Son mucho más ligeros y cargan instantáneamente.
+1.  **Formatos Modernos:** Si estás trabajando en tus proyectos (tu aplicación), usa formatos como **WebP** o **AVIF** en lugar de JPG/PNG. Son mucho más ligeros y cargan instantáneamente.
 2.  **`bg-fixed` con cuidado:** El efecto de fondo fijo (`bg-fixed`) consume más recursos del navegador y puede causar "saltos" en dispositivos móviles. Úsalo con moderación en secciones pequeñas.
 3.  **Accesibilidad:** Si la imagen de fondo es vital para entender el contenido (ej. un mapa o una infografía), **no** la pongas como `background-image`. Ponla como un elemento `<img>` con su atributo `alt` correspondiente para que los lectores de pantalla puedan describirla. Las imágenes de fondo CSS son ignoradas por las tecnologías de asistencia.
 :::
 
 ## 10.2 Gradients (Degradados)
 
-Los degradados son el lenguaje del **diseño UI moderno**. A diferencia de los colores sólidos, que pueden parecer planos o estáticos, un gradiente aporta **profundidad, luz y dirección** a tu interfaz. En *Soccer League Elite*, un gradiente bien aplicado en un botón de acción o en el encabezado de un perfil de equipo comunica que la aplicación está viva y pulida.
+Los degradados son el lenguaje del **diseño UI moderno**. A diferencia de los colores sólidos, que pueden parecer planos o estáticos, un gradiente aporta **profundidad, luz y dirección** a tu interfaz. En tu aplicación, un gradiente bien aplicado en un botón de acción o en el encabezado de un perfil de equipo comunica que la aplicación está viva y pulida.
 
 ### La Anatomía del Gradiente en Tailwind
 
@@ -141,7 +141,7 @@ No todos los textos deben tener la misma importancia. Usa opacidad para diferenc
 <h2 class="text-xl font-bold text-gray-900">Resultados de la Fecha 10</h2>
 
 <p class="text-sm text-gray-900 opacity-60">
-  Actualizado hace 5 minutos • Liga Elite MX
+  Actualizado hace 5 minutos
 </p>
 ```
 
@@ -256,7 +256,7 @@ Tailwind simplifica la sintaxis de filtros. Anteriormente, CSS requería escribi
 
 ### Código: Galería de Jugadores con Interacción (Hover)
 
-En tu aplicación *Soccer League Elite*, una galería de jugadores donde la foto cobra vida al pasar el ratón es un detalle de "UI Premium" que mejora drásticamente la percepción del usuario sobre la calidad de la app.
+En tu aplicación, una galería de jugadores donde la foto cobra vida al pasar el ratón es un detalle de "UI Premium" que mejora drásticamente la percepción del usuario sobre la calidad de la app.
 
 ```html
 <div class="group relative overflow-hidden rounded-xl cursor-pointer">

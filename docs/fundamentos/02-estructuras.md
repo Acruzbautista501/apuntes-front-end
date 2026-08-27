@@ -1,4 +1,3 @@
-
 # Módulo 2: Tipado Básico y Estructuras de Datos
 
 En este módulo aprenderemos cómo decirle a TypeScript qué tipo de información estamos manejando. Esto es lo que permite que el editor nos avise de errores antes de probar el código en el navegador.
@@ -84,16 +83,16 @@ id = "U-789";  // Válido
 ```
 
 ## 🛠️ Ejercicio de Práctica para tu `main.ts`:
-Para aplicar esto en tu proyecto de Vite, borra el contenido de `src/main.ts` y prueba a crear un objeto que represente un videojuego o un equipo de fútbol utilizando lo aprendido:
+Para aplicar esto en tu proyecto de Vite, borra el contenido de `src/main.ts` y prueba a crear un objeto que represente un pedido de una tienda en línea utilizando lo aprendido:
 
 ```typescript
 // Ejemplo de aplicación
-type EstadoPartido = 'pendiente' | 'jugando' | 'finalizado';
+type EstadoPedido = 'pendiente' | 'procesando' | 'enviado';
 
-let equipoNombre: string = "FC TypeScript";
-let jugadores: string[] = ["Nico", "Santi", "Leo"];
-let marcador: [number, number] = [0, 0];
-let estado: EstadoPartido = 'pendiente';
+let productoNombre: string = "Teclado Mecánico";
+let etiquetas: string[] = ["oferta", "nuevo", "recomendado"];
+let coordenadas: [number, number] = [0, 0];
+let estado: EstadoPedido = 'pendiente';
 
-console.log(`El equipo ${equipoNombre} tiene el estado: ${estado}`);
+console.log(`El producto ${productoNombre} tiene el estado: ${estado}`);
 ```

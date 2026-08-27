@@ -21,6 +21,24 @@ Descargas los archivos `.css` y `.js` desde el sitio oficial y los guardas en tu
 * **Pros:** Puedes trabajar sin conexión a internet.
 * **Contras:** Aumenta un poco el peso de tu carpeta de proyecto.
 
+### C. Vía npm (El estándar en proyectos reales)
+Cuando trabajas con una herramienta de build como **Vite** (la que usamos en las secciones de TypeScript y Vue de este sitio) o Webpack, la forma correcta de instalar Bootstrap es como una dependencia de tu proyecto:
+
+```bash
+npm install bootstrap
+```
+
+Con esto, importas Bootstrap directamente en tu archivo de entrada JS/TS en lugar de un `<link>` en el HTML:
+
+```typescript
+// src/main.ts
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+```
+
+* **¿Por qué esto es mejor que el CDN en un proyecto real?** El *bundler* (Vite/Webpack) puede combinar el CSS de Bootstrap con el tuyo en un solo archivo optimizado para producción, y — lo más importante — te permite instalar el **código fuente en Sass** de Bootstrap en lugar del `.css` ya compilado, que es el requisito indispensable para personalizarlo a fondo (verás esto en el Módulo 12, *Personalización con Sass*).
+* **CDN vs. npm, en una frase:** el CDN es ideal para prototipos rápidos o práctica; **npm es el estándar en cualquier proyecto que vayas a mantener o hacer crecer.**
+
 ## 1.3 La Plantilla Base (HTML5)
 Bootstrap requiere que tu HTML tenga una estructura específica para funcionar correctamente, especialmente para que se vea bien en móviles.
 

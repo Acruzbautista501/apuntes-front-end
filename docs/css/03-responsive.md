@@ -1,4 +1,3 @@
-
 # Módulo 3: Diseño Adaptativo y Fluidez Moderna
 El **Módulo 3** es lo que separa a un maquetador novato de un **Arquitecto Frontend**. Ya no se trata de que las cosas "quepan" en la pantalla, sino de que el diseño sea **fluido, inteligente y eficiente**.
 
@@ -36,7 +35,7 @@ Históricamente, diseñábamos para escritorio y luego "parchábamos" para móvi
 }
 ```
 
-## 3.2 . Tipografía y Espaciado Fluido (`clamp`)
+## 3.2 Tipografía y Espaciado Fluido (`clamp`)
 El error común es cambiar el tamaño de letra con 5 media queries distintas. Con `clamp()`, la letra crece suavemente mientras arrastras el borde de la ventana.
 
 ### Teoría Explícita
@@ -90,6 +89,39 @@ body {
 }
 ```
 
+### Valores de Respaldo (`fallback`)
+`var()` acepta un segundo argumento: el valor a usar si la variable no está definida. Es útil para componentes que deben funcionar incluso fuera de su contexto de tema habitual.
+
+```css
+.boton-generico {
+  /* Si --color-boton no existe en este contexto, usa #3b82f6 */
+  background: var(--color-boton, #3b82f6);
+}
+```
+
+### `@property`: Tipar tus Variables CSS
+Por defecto, una variable CSS es solo texto sin tipo — el navegador no sabe si `--progreso` es un número, un color o un ángulo, lo que impide animarla suavemente. `@property` le da un tipo real, habilitando transiciones que antes eran imposibles.
+
+```css
+@property --progreso {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+.barra {
+  --progreso: 0%;
+  background: conic-gradient(#3b82f6 var(--progreso), #e5e7eb 0);
+  transition: --progreso 0.4s ease; /* Sin @property, esta línea NO animaría nada */
+}
+
+.barra.completo {
+  --progreso: 100%;
+}
+```
+
+Sin `@property`, cambiar `--progreso` de `0%` a `100%` con una transición se vería como un salto instantáneo, porque el navegador no sabe *interpolar* un valor sin tipo. Con `@property`, la barra de progreso gira suavemente.
+
 ## 3.4 Control de Aspecto e Imágenes (`aspect-ratio`)
 Antes, para que un video de YouTube no se deformara, usábamos trucos horribles de padding. Ahora tenemos una propiedad nativa.
 
@@ -135,5 +167,3 @@ En lugar de fijar alturas con `px`, usamos las nuevas unidades de Viewport para 
 2.  **Usa `max-width` en lugar de `width`:** Así permites que la caja se encoja en pantallas pequeñas.
 3.  **Aprovecha `gap` en Flex y Grid:** Es mucho más limpio que pelear con `margin-right`.
 4.  **Prueba con el inspector:** No asumas que porque se ve bien en tu monitor, se ve bien en un celular.
-
-¿Te gustaría que pasemos al **Módulo 4** para darle vida a todo esto con **Animaciones y Transiciones**?

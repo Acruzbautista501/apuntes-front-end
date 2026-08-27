@@ -16,7 +16,7 @@ Nunca pierdas tiempo ordenando clases manualmente. El estándar de la industria 
 npm install -D prettier prettier-plugin-tailwindcss
 ```
 
-Una vez instalado, Prettier automáticamente detectará el orden correcto cada vez que guardes tu archivo (`Ctrl + S`). Si trabajas con otros en *Soccer League Elite* o *CitaFacil*, esto asegura que el código de todos se vea igual.
+Una vez instalado, Prettier automáticamente detectará el orden correcto cada vez que guardes tu archivo (`Ctrl + S`). Si trabajas con otros en tus proyectos, esto asegura que el código de todos se vea igual.
 
 
 ### 2. El Orden Mental (Jerarquía de Clases)
@@ -141,7 +141,7 @@ const buttonStyles = computed(() => [
 
 La abstracción es un arma de doble filo. Si no abstraes, tu código se vuelve repetitivo y difícil de actualizar (deuda técnica). Si abstraes demasiado pronto (abstracción prematura), terminas con un proyecto lleno de archivos "fantasmas" de 5 líneas que añaden complejidad innecesaria al navegar por tu código.
 
-Para proyectos SaaS como **Soccer League Elite** o **CitaFacil**, la clave es la **moderación estratégica**.
+Para proyectos SaaS como tus proyectos, la clave es la **moderación estratégica**.
 
 ### La Regla de los Tres Usos
 Como regla general, no extraigas un componente hasta que hayas copiado y pegado la estructura al menos **tres veces**.
@@ -160,7 +160,7 @@ Independientemente de la "Regla de los tres usos", debes abstraer inmediatamente
 
 ### Código: Evolución de un Elemento
 
-Veamos el caso de un "Badge de Estado" para los partidos en *Soccer League Elite*.
+Veamos el caso de un "Badge de Estado" para los partidos en tu aplicación.
 
 #### Paso 1: El inicio (Inline)
 No abstraigas. Es simple y está bien aquí.
@@ -219,7 +219,7 @@ El *naming* (nomenclatura) y la organización son los pilares que separan un pro
 El error más grave es nombrar variables o clases basándote en cómo se ven (descripción). **Nómbralas basándote en para qué sirven (intención).**
 
 #### El Problema del Naming Funcional
-Si nombras tu variable `--color-blue-dark`, y en seis meses decides que *Soccer League Elite* tendrá una paleta de colores "Negro y Dorado", esa variable `--color-blue-dark` se vuelve una mentira en tu código.
+Si nombras tu variable `--color-blue-dark`, y en seis meses decides que tu aplicación tendrá una paleta de colores "Negro y Dorado", esa variable `--color-blue-dark` se vuelve una mentira en tu código.
 
 #### La Solución: Naming Semántico (Pro)
 Define roles. Si el color es para fondos principales, nómbralo según su función.
@@ -260,7 +260,7 @@ El orden en el que escribes tus clases dentro del atributo `class="..."` importa
 
 ### 3. Organización de Archivos y Componentes
 
-Para proyectos como *CitaFacil* o *Soccer League Elite*, la organización debe seguir una jerarquía de "baja a alta fidelidad".
+Para proyectos como tus proyectos, la organización debe seguir una jerarquía de "baja a alta fidelidad".
 
 * **`components/ui/`**: Componentes atómicos. *Naming:* PascalCase (ej. `BaseButton.vue`).
 * **`components/features/`**: Lógica de negocio. *Naming:* Basado en el dominio (ej. `AppointmentCalendar.vue`).
@@ -296,7 +296,7 @@ El error más común es ensuciar la etiqueta `<template>` con lógica condiciona
 * **Regla:** Si una clase depende de un estado (ej. "si está activo, verde; si no, rojo"), **mueve esa lógica al `script`**.
 
 #### 2. Evitar el "Magic String"
-No inyectes valores arbitrarios directamente en el HTML si puedes evitarlos. Utiliza tus variables definidas en `@theme` (Módulo 12). Esto asegura que si el diseño de *Soccer League Elite* cambia, solo tengas que actualizar un archivo CSS y todo el sistema se ajuste automáticamente.
+No inyectes valores arbitrarios directamente en el HTML si puedes evitarlos. Utiliza tus variables definidas en `@theme` (Módulo 12). Esto asegura que si el diseño de tu aplicación cambia, solo tengas que actualizar un archivo CSS y todo el sistema se ajuste automáticamente.
 
 ### Código: Refactorización Profesional (Antes vs. Después)
 
@@ -351,7 +351,7 @@ const matchStatusClasses = computed(() => ({
 
 ### Lista de Control de Clean Code para tus Proyectos
 
-Para mantener la calidad de *CitaFacil* y *Soccer League Elite*, aplica este checklist antes de hacer un commit:
+Para mantener la calidad de tus proyectos, aplica este checklist antes de hacer un commit:
 
 | Principio | Acción | ¿Por qué? |
 | :--- | :--- | :--- |

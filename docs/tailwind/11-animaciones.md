@@ -32,7 +32,7 @@ Define el **ritmo** del movimiento. No es lineal, sino que tiene personalidad:
 #### 4. Delay (`delay-*`)
 Añade una pausa antes de empezar. Es vital para crear "staggering", donde los elementos aparecen en cascada en lugar de todos al mismo tiempo.
 
-### Código: Implementación en *Soccer League Elite*
+### Código: Implementación en tu aplicación
 
 Para que tu aplicación se sienta "Premium", no basta con cambiar colores. Mira cómo unimos estas propiedades para crear una tarjeta de jugador profesional.
 
@@ -94,7 +94,7 @@ Mueve el elemento de su posición original sin afectar el flujo del documento.
 * `translate-x-4`: Mueve el elemento 16px (1rem) a la derecha.
 * `translate-y-[-10px]`: Mueve 10px hacia arriba.
 
-### Implementación Profesional: Dashboard de "Soccer League Elite"
+### Implementación Profesional: Dashboard de Estadísticas
 
 Para que tu aplicación no se sienta estática, vamos a aplicar estas transformaciones en interacciones clave.
 
@@ -148,7 +148,7 @@ Estas animaciones son **cíclicas** por defecto (se repiten infinitamente), por 
 
 ### Desglose de Utilidades
 
-| Clase | Efecto Visual | Caso de Uso en *Soccer League Elite* |
+| Clase | Efecto Visual | Caso de Uso en tu aplicación |
 | :--- | :--- | :--- |
 | `animate-spin` | Giro constante (360°) | Indicadores de carga al procesar resultados o registros. |
 | `animate-pulse` | Opacidad oscilante | "Skeleton screens" (esquemas de carga) en tablas de posiciones. |
@@ -158,7 +158,7 @@ Estas animaciones son **cíclicas** por defecto (se repiten infinitamente), por 
 
 ### Implementación Práctica
 
-Para integrar estas animaciones en tu dashboard de *Soccer League Elite*, sigue estos ejemplos de implementación:
+Para integrar estas animaciones en tu dashboard, sigue estos ejemplos de implementación:
 
 #### 1. `animate-spin` (Carga de Datos)
 Ideal cuando el usuario hace clic en "Actualizar Tabla" y esperas la respuesta del servidor.
@@ -253,7 +253,7 @@ Gracias a Tailwind 4, la clase `animate-gol-celebracion` se genera automáticame
 </div>
 ```
 
-### Caso de Estudio: "Entrada de Jugador" (Soccer League Elite)
+### Caso de Estudio: "Entrada de Jugador"
 
 Para que tu aplicación de *Fútbol Llanero* destaque, las tarjetas de los jugadores no deberían aparecer de forma aburrida. Hagamos que "deslicen y aparezcan" con un efecto suave.
 

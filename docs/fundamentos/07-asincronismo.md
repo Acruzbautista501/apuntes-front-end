@@ -1,4 +1,3 @@
-
 # Módulo 7: Asincronismo y API Rest
 
 El asincronismo permite que tu programa inicie una tarea larga y siga haciendo otras cosas mientras espera que esa tarea termine.
@@ -30,7 +29,7 @@ async function obtenerDatos() {
 `fetch` es la herramienta nativa del navegador para hacer peticiones HTTP. En TypeScript, es vital tipar lo que recibimos para no trabajar "a ciegas".
 
 ### Ejemplo práctico con una API real:
-Imagina que queremos traer información de un Pokémon o de un equipo de fútbol desde un JSON:
+Imagina que queremos traer información de un Pokémon desde un JSON:
 
 ```typescript
 interface Pokemon {
@@ -76,46 +75,51 @@ try {
 A veces creamos funciones que traen datos de diferentes tipos. Podemos usar **Genéricos** para que la función sea reutilizable:
 
 ```typescript
+interface Producto {
+  nombre: string;
+  precio: number;
+}
+
 async function peticionSegura<T>(url: string): Promise<T> {
   const res = await fetch(url);
   return await res.json() as T;
 }
 
 // Uso:
-const equipo = await peticionSegura<Equipo>('/api/equipo/1');
+const producto = await peticionSegura<Producto>('/api/producto/1');
 ```
 
 ## 🛠️ Aplicación Práctica en tu `main.ts`:
-Para tu proyecto de fútbol, podrías simular la carga de los partidos desde un servidor (o un archivo JSON local en Vite):
+Para tu proyecto, podrías simular la carga de una lista de eventos desde un servidor (o un archivo JSON local en Vite):
 
 ```typescript
-interface Partido {
+interface Evento {
   id: string;
-  local: string;
-  visitante: string;
+  nombre: string;
+  fecha: string;
 }
 
-const cargarCalendario = async () => {
+const cargarEventos = async () => {
   const app = document.querySelector<HTMLDivElement>('#app')!;
-  app.innerHTML = '<p>Cargando partidos...</p>';
+  app.innerHTML = '<p>Cargando eventos...</p>';
 
   try {
     // Simulamos una espera de 2 segundos
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    const partidos: Partido[] = [
-      { id: '1', local: 'Vite FC', visitante: 'React United' },
-      { id: '2', local: 'TS Athletic', visitante: 'Vue City' }
+    const eventos: Evento[] = [
+      { id: '1', nombre: 'Conferencia de TypeScript', fecha: '2026-09-10' },
+      { id: '2', nombre: 'Taller de Vite', fecha: '2026-09-17' }
     ];
 
     app.innerHTML = '<ul>' + 
-      partidos.map(p => `<li>${p.local} vs ${p.visitante}</li>`).join('') + 
+      eventos.map(e => `<li>${e.nombre} — ${e.fecha}</li>`).join('') + 
       '</ul>';
 
   } catch (err) {
-    app.innerHTML = '<p>Error al cargar el calendario.</p>';
+    app.innerHTML = '<p>Error al cargar los eventos.</p>';
   }
 };
 
-cargarCalendario();
+cargarEventos();
 ```

@@ -1,4 +1,3 @@
-
 # Módulo 3: Control de Flujo y Lógica
 
 En programación, el control de flujo es el orden en que se ejecutan las instrucciones. TypeScript nos da herramientas para decidir qué código se ejecuta (condicionales) y cuántas veces debe repetirse (bucles).
@@ -71,7 +70,13 @@ const caros = precios.filter(p => p > 400); // [500, 1000]
 
 // Aplicar un descuento del 10% a todos
 const conDescuento = precios.map(p => p * 0.9);
+
+// Reducir todo el array a un solo valor: el total del carrito
+const total = precios.reduce((acumulado, precioActual) => acumulado + precioActual, 0);
+console.log(`Total del carrito: ${total}`); // 1850
 ```
+
+`.reduce()` recibe dos argumentos: una función que combina el `acumulado` con cada `precioActual`, y un valor inicial para el acumulador (aquí, `0`). Es el método más flexible de los cuatro, porque puedes usarlo para sumar, contar, agrupar o incluso construir un objeto nuevo a partir del array.
 
 ## 3.4 Estrechamiento de Tipos (Type Narrowing)
 
@@ -90,25 +95,27 @@ function procesarId(id: string | number) {
 ```
 
 ## 🛠️ Reto de Práctica para tu Proyecto:
-En tu archivo `main.ts`, intenta simular la lógica de una liga de fútbol sencilla:
+En tu archivo `main.ts`, intenta simular el catálogo de una tienda en línea sencilla:
 
 ```typescript
-interface Equipo {
+interface Producto {
   nombre: string;
-  puntos: number;
+  precio: number;
 }
 
-const liga: Equipo[] = [
-  { nombre: "Tigres", puntos: 10 },
-  { nombre: "Rayados", puntos: 15 },
-  { nombre: "América", puntos: 8 }
+const catalogo: Producto[] = [
+  { nombre: "Monitor", precio: 250 },
+  { nombre: "Teclado", precio: 45 },
+  { nombre: "Mouse", precio: 20 }
 ];
 
-// 1. Filtrar equipos con más de 9 puntos
-const clasificados = liga.filter(equipo => equipo.puntos > 9);
+// 1. Filtrar productos con precio mayor a 30
+const disponibles = catalogo.filter(producto => producto.precio > 30);
 
 // 2. Mostrar en consola usando forEach
-clasificados.forEach(e => {
-  console.log(`Equipo clasificado: ${e.nombre}`);
+disponibles.forEach(p => {
+  console.log(`Producto disponible: ${p.nombre}`);
 });
+
+// 3. Reto extra: usa .reduce() para calcular el precio total del catálogo
 ```

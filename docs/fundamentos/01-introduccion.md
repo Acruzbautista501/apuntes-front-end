@@ -1,5 +1,6 @@
-
 # Módulo 1: Introducción y Configuración del Entorno
+
+> 🎯 **Sobre esta pista:** Aquí aprenderás TypeScript como lenguaje de programación —su sintaxis, su lógica y su forma de pensar— usando Vite como entorno de ejecución, sin atarte a ningún framework. Es el punto de partida ideal si nunca has programado con tipos o si quieres consolidar las bases antes de dar el salto a Vue o React. Si ya conoces lo básico y quieres ver cómo se aplica TypeScript en un proyecto Frontend real (DOM, APIs, componentes), continúa con [TypeScript para Frontend](/typescript/01-fundamentos).
 
 ## 1.1 ¿Qué es TypeScript?
 Para entender TypeScript, primero debemos mirar a **JavaScript (JS)**. JavaScript es el lenguaje que entienden todos los navegadores web. Es fantástico y flexible, pero tiene un problema: es de **tipado dinámico**. Esto significa que puedes guardar un número en una variable y, tres líneas más abajo, cambiarlo por un texto. El navegador no se quejará hasta que el código falle en producción frente al usuario.

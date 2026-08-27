@@ -1,6 +1,6 @@
 # MÓDULO 13 — Componentización Profesional
 
-La componentización es el paso de "escribir HTML con clases" a "construir una interfaz de usuario como una aplicación de software". Para proyectos como **Soccer League Elite** o **CitaFacil**, donde la escalabilidad y el mantenimiento son críticos, Tailwind CSS no debe usarse como una lista interminable de clases en el HTML, sino como el motor de diseño de componentes encapsulados.
+La componentización es el paso de "escribir HTML con clases" a "construir una interfaz de usuario como una aplicación de software". Para proyectos como tus proyectos, donde la escalabilidad y el mantenimiento son críticos, Tailwind CSS no debe usarse como una lista interminable de clases en el HTML, sino como el motor de diseño de componentes encapsulados.
 
 ## 13.1 Reutilización de Clases: El paso de "Utilidades" a "Componentes"
 
@@ -77,7 +77,7 @@ Ejemplo:
 ```
 
 **Por qué evitarlo:**
-* **Leaky Abstractions:** Al usar `@apply`, estás ocultando las clases de Tailwind. Cuando necesites hacer un ajuste minúsculo (ej. más padding en un botón específico de *Soccer League Elite*), te verás obligado a crear otra clase o añadir más estilos en línea, ensuciando tu código.
+* **Leaky Abstractions:** Al usar `@apply`, estás ocultando las clases de Tailwind. Cuando necesites hacer un ajuste minúsculo (ej. más padding en un botón específico de tu aplicación), te verás obligado a crear otra clase o añadir más estilos en línea, ensuciando tu código.
 * **Mantenibilidad:** Es mucho más fácil buscar `<BaseButton />` en tu IDE que buscar una clase CSS que podría estar en cualquier archivo.
 
 
@@ -97,7 +97,7 @@ En lugar de que tu página padre (ej. `Dashboard.vue`) controle el padding, el c
 
 #### Ejemplo de Extracción Profesional: `MatchCard.vue`
 
-Supongamos que en *Soccer League Elite* tienes tarjetas de partidos. No escribas el HTML dentro de la vista principal; extráelo a su propio componente.
+Supongamos que en tu aplicación tienes tarjetas de partidos. No escribas el HTML dentro de la vista principal; extráelo a su propio componente.
 
 ```vue
 <script setup lang="ts">
@@ -171,7 +171,7 @@ Es vital que entiendas esta diferencia para no caer en trampas de mantenimiento:
 
 ### Patrones de Abstracción Senior
 
-Para mantener tus proyectos como *Soccer League Elite* o *CitaFacil* limpios, no intentes crear un "Componente Supremo" con 20 props. Eso genera **prop drilling** y un código ilegible. Usa estos dos patrones:
+Para mantener tus proyectos como tus proyectos limpios, no intentes crear un "Componente Supremo" con 20 props. Eso genera **prop drilling** y un código ilegible. Usa estos dos patrones:
 
 #### 1. Patrón de Composición (Slots)
 En lugar de pasar props para todo (ej. `:show-icon="true"`, `:icon-name="'check'"`), usa **Slots**. Esto permite que el componente padre controle la estructura interna del hijo, manteniendo el componente hijo extremadamente "seco" (DRY) y genérico.
@@ -225,7 +225,7 @@ Mira cómo un componente de "Tarjeta" (`BaseCard`) puede ser DRY sin ser rígido
 
 ::: tip 💡 Reglas de Oro para un DRY efectivo
 1.  **Regla de los tres usos:** No extraigas lógica o componentes hasta que hayas repetido el patrón tres veces. Si lo haces prematuramente, crearás abstracciones "falsas" que luego tendrás que deshacer cuando los requisitos cambien.
-2.  **Composables para lógica:** Si notas que estás repitiendo lógica de JavaScript (ej. cálculos de fechas en *Soccer League Elite* o validación de formularios en *CitaFacil*), no lo metas en el componente de UI. Crea un **Composable** (ej. `useDateFormatter.ts`). Eso es DRY a nivel de lógica.
+2.  **Composables para lógica:** Si notas que estás repitiendo lógica de JavaScript (ej. cálculos de fechas en tu aplicación o validación de formularios en tu aplicación), no lo metas en el componente de UI. Crea un **Composable** (ej. `useDateFormatter.ts`). Eso es DRY a nivel de lógica.
 3.  **Evita el "Componente Frankenstein":** Si tu componente necesita un `v-if` para cada prop que recibe, estás haciendo algo mal. Ese componente intenta ser demasiadas cosas a la vez. Es mejor tener dos componentes distintos que un solo componente complejo que intente ser todo.
 :::
 
@@ -233,7 +233,7 @@ Mira cómo un componente de "Tarjeta" (`BaseCard`) puede ser DRY sin ser rígido
 
 En el desarrollo de software, la arquitectura de archivos no es un tema estético; es una decisión de **supervivencia**. Si tu proyecto crece y todo está en una sola carpeta `components/`, llegará un punto donde tardarás más buscando un archivo que escribiendo código. Esta es la fase donde los desarrolladores sufren de "fatiga de navegación".
 
-Para proyectos como *Soccer League Elite* o *CitaFacil*, necesitamos un modelo **Híbrido de Escalabilidad**: combinamos una estructura por *tipos* (para componentes base) y una estructura por *dominios o características* (para lógica de negocio).
+Para proyectos como tus proyectos, necesitamos un modelo **Híbrido de Escalabilidad**: combinamos una estructura por *tipos* (para componentes base) y una estructura por *dominios o características* (para lógica de negocio).
 
 ### La Arquitectura Recomendada: "Domain-Driven"
 
@@ -247,11 +247,11 @@ src/
 ├── components/
 │   ├── ui/           # "Átomos": Botones, Inputs, Modales (Genéricos)
 │   └── features/     # Componentes de Negocio:
-│       ├── matches/  # Todo lo relacionado a partidos (Soccer League)
+│       ├── matches/  # Todo lo relacionado a partidos
 │       │   ├── MatchCard.vue
 │       │   ├── MatchList.vue
 │       │   └── useMatchService.ts
-│       └── appointments/ # Todo lo relacionado a citas (CitaFacil)
+│       └── appointments/ # Todo lo relacionado a citas
 │           ├── AppointmentForm.vue
 │           └── AppointmentCalendar.vue
 ├── composables/      # Lógica global (ej. useAuth, useTheme)
@@ -297,5 +297,5 @@ import { BaseButton, BaseCard } from '@/components/ui';
 ::: tip 💡 Consejo del Diseñador Frontend:
 Hazte esta pregunta: *"Si añado un nuevo desarrollador al equipo mañana, ¿podría encontrar dónde está la lógica de las citas en menos de 2 minutos?"*. Si la respuesta es sí, tu arquitectura es exitosa.
 
-Si tu estructura actual es un caos, no intentes mover todo de golpe. **Refactoriza por demanda**: cuando tengas que trabajar en la sección de "Partidos" de *Soccer League Elite*, aprovecha para mover sus archivos a `features/matches/`. Con el tiempo, el proyecto se organizará solo.
+Si tu estructura actual es un caos, no intentes mover todo de golpe. **Refactoriza por demanda**: cuando tengas que trabajar en la sección de "Partidos" de tu aplicación, aprovecha para mover sus archivos a `features/matches/`. Con el tiempo, el proyecto se organizará solo.
 :::

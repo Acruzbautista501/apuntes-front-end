@@ -1,4 +1,3 @@
-
 # Módulo 5: Arquitectura, SASS y Ecosistema Profesional
 El **Módulo 5** es el que define si tu proyecto será un éxito mantenible o una pesadilla de código espagueti. Aquí dejamos de escribir CSS "al azar" y empezamos a construir **sistemas de diseño escalables** utilizando metodologías profesionales y herramientas de preprocesamiento.
 
@@ -21,7 +20,35 @@ Escribir CSS sin una convención de nombres hace que, al crecer el proyecto, las
 .producto-card__btn--oferta { background: red; } /* Modificador */
 ```
 
-## 5.2 SASS: El Superpoder de CSS
+## 5.2 ITCSS: Arquitectura por Capas de Especificidad
+
+Mientras **BEM** resuelve *cómo nombras* una clase, **ITCSS** (Inverted Triangle CSS) resuelve *en qué orden* organizas tus archivos para que la especificidad crezca de forma predecible, de principio a fin del proyecto.
+
+### Teoría Explícita
+La metodología ordena el CSS en capas, de la más genérica y de menor especificidad, a la más específica:
+
+1.  **Settings:** Variables globales (colores, tipografía) — nada de estilos reales aún.
+2.  **Tools:** Mixins y funciones (si usas SASS).
+3.  **Generic:** Resets (`box-sizing: border-box`, normalize).
+4.  **Elements:** Estilos para etiquetas HTML puras, sin clases (`h1`, `a`, `body`).
+5.  **Objects:** Patrones de layout reutilizables y sin apariencia visual (`.o-container`, `.o-grid`).
+6.  **Components:** Los componentes visuales reales de tu UI (`.c-boton`, `.c-tarjeta`) — normalmente aquí es donde vive la mayoría de tu BEM.
+7.  **Utilities:** Clases de una sola responsabilidad que sobrescriben todo lo anterior (`.u-text-center`, `.u-hidden`), con `!important` si hace falta.
+
+```text
+styles/
+├── 1-settings/
+├── 2-tools/
+├── 3-generic/
+├── 4-elements/
+├── 5-objects/
+├── 6-components/
+└── 7-utilities/
+```
+
+> **Por qué "triángulo invertido":** de la capa 1 a la 7, la **cantidad de código** disminuye (pocas variables, muchos componentes) mientras la **especificidad** aumenta (un selector de etiqueta pesa menos que una clase de utilidad). Seguir este orden al importar los archivos evita que un componente "gane" por accidente a una utilidad que debía sobrescribirlo — el mismo problema que resuelve `@layer` (Módulo 12) de forma nativa en CSS moderno.
+
+## 5.3 SASS: El Superpoder de CSS
 SASS (Syntactically Awesome Style Sheets) es un preprocesador. Escribes código con esteroides y SASS lo "traduce" a CSS normal que el navegador entiende.
 
 ### Funciones Pro de SASS:
@@ -51,7 +78,7 @@ $primario: #4f46e5;
 }
 ```
 
-## 5.3 Arquitectura de Archivos (El patrón 7-1)
+## 5.4 Arquitectura de Archivos (El patrón 7-1)
 En un proyecto real, no tienes un solo archivo `style.css` de 5000 líneas. Lo divides en carpetas para que sea fácil de navegar.
 
 ### Teoría Explícita
@@ -69,7 +96,7 @@ sass/
 |-- main.scss  <-- Aquí se importa todo
 ```
 
-## 5.4 Tailwind CSS y Frameworks de Utilidad
+## 5.5 Tailwind CSS y Frameworks de Utilidad
 Tailwind ha cambiado la forma de trabajar. En lugar de escribir CSS en archivos separados, aplicas clases directamente en el HTML.
 
 ### Teoría Explícita
@@ -84,7 +111,7 @@ Tailwind ha cambiado la forma de trabajar. En lugar de escribir CSS en archivos 
 </button>
 ```
 
-## 5.5 Optimización y Rendimiento (Performance)
+## 5.6 Optimización y Rendimiento (Performance)
 El CSS pesado ralentiza la carga. Un profesional debe saber limpiar su código antes de subirlo a producción.
 
 ### Teoría Explícita

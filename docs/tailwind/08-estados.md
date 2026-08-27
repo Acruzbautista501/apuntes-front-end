@@ -1,10 +1,10 @@
 # MÓDULO 8: Estados y Variantes
 
-Las "Variantes" en Tailwind son la forma en que aplicamos estilos basados en el **estado** de un elemento (interacción) o su relación con otros elementos en el DOM. Esto es lo que convierte una interfaz estática en una experiencia dinámica y profesional para *Soccer League Elite*.
+Las "Variantes" en Tailwind son la forma en que aplicamos estilos basados en el **estado** de un elemento (interacción) o su relación con otros elementos en el DOM. Esto es lo que convierte una interfaz estática en una experiencia dinámica y profesional para tu aplicación.
 
 ## 8.1 Hover (`hover:*`)
 
-El estado `hover` es la forma más directa de comunicación entre tu aplicación y el usuario. Es el feedback visual que ocurre cuando el cursor del ratón (o puntero) se sitúa sobre un elemento. En *Soccer League Elite* o cualquier dashboard, es lo que permite al usuario entender qué elementos son interactivos y cuáles son estáticos.
+El estado `hover` es la forma más directa de comunicación entre tu aplicación y el usuario. Es el feedback visual que ocurre cuando el cursor del ratón (o puntero) se sitúa sobre un elemento. En tu aplicación o cualquier dashboard, es lo que permite al usuario entender qué elementos son interactivos y cuáles son estáticos.
 
 ### ¿Cómo funciona la variante `hover:`?
 
@@ -52,7 +52,7 @@ Este es un patrón de diseño muy popular en interfaces modernas (como las que e
 | `hover:shadow-*` | Efecto de elevación | Tarjetas, contenedores principales. |
 
 ::: tip 💡 Consejo del Diseñador Frontend:
-En tu proyecto *Soccer League Elite*, intenta aplicar `hover:scale-105` a los escudos de los equipos cuando los muestres en una galería. Esa pequeña animación le dará un acabado profesional y pulido que distinguirá tu app de una simple lista de datos.
+En tu proyecto, intenta aplicar `hover:scale-105` a los escudos de los equipos cuando los muestres en una galería. Esa pequeña animación le dará un acabado profesional y pulido que distinguirá tu app de una simple lista de datos.
 :::
 
 ## 8.2 Focus (`focus:*`)
@@ -70,7 +70,7 @@ Tailwind facilita enormemente la creación de indicadores de foco personalizados
 * **`focus:border-*`**: Cambia el color del borde del input.
 * **`focus:bg-*`**: Cambia ligeramente el color de fondo para indicar selección.
 
-### Ejemplo Práctico: Campo de búsqueda para *Soccer League Elite*
+### Ejemplo Práctico: Campo de búsqueda para tu aplicación
 
 En este ejemplo, crearemos un buscador que se vuelve "brillante" cuando el usuario lo selecciona, ayudándole a concentrarse en esa tarea.
 
@@ -118,7 +118,7 @@ Al igual que con `hover` o `focus`, simplemente prefijas la clase. El estado `ac
 * **`active:scale-*`**: Reduce ligeramente el tamaño, simulando un "hundimiento" físico.
 * **`active:shadow-none`**: Elimina la sombra para que el botón parezca "planear" sobre la superficie al ser presionado.
 
-### Ejemplo Práctico: Botón de "Acción Táctil" para *Soccer League Elite*
+### Ejemplo Práctico: Botón de "Acción Táctil" para tu aplicación
 Para tus botones de gestión (como "Registrar Gol" o "Aceptar Cambio"), un efecto de escala sutil da una sensación de calidad premium.
 
 ```html
@@ -160,7 +160,7 @@ Es vital entender algo: Tailwind no "deshabilita" el elemento por sí solo. El e
 
 La variante `disabled:` de Tailwind simplemente le dice al navegador: *"Si este elemento tiene el atributo `disabled`, aplícale estos estilos visuales extra"*.
 
-### ¿Por qué usarlo en *Soccer League Elite*?
+### ¿Por qué usarlo en tu aplicación?
 Imagina que un usuario está registrando un equipo nuevo. Mientras el formulario se envía al servidor (Firebase), es una buena práctica deshabilitar el botón de "Guardar". Esto evita:
 1.  **Doble envío de datos:** Que el usuario haga clic 5 veces y cree 5 equipos idénticos.
 2.  **Confusión:** El usuario sabe que el proceso está "en curso" porque el botón cambió de color y se ve inactivo.
@@ -219,7 +219,7 @@ Esta variante funciona bajo una relación de dos pasos:
 </div>
 ```
 
-### Ejemplo Práctico: Tarjeta de Jugador en "Soccer League Elite"
+### Ejemplo Práctico: Tarjeta de Jugador
 
 Imagina una tarjeta de un jugador. Quieres que, al pasar el mouse por encima de la tarjeta, el nombre del jugador se vuelva azul y un icono de "ver perfil" pase de ser gris a ser de color activo.
 
@@ -303,7 +303,7 @@ Es normal confundir estas variantes al principio. Esta tabla te ayudará a decid
 | **`group`** | Padre -> Hijo (Nesting) | El padre controla a sus descendientes. |
 | **`peer`** | Hermano -> Hermano (Sibling) | Un elemento controla a los que vienen después. |
 
-### Casos de uso avanzados para *Soccer League Elite*
+### Casos de uso avanzados para tu aplicación
 
 * **Checkboxes Personalizados:** Puedes tener un `<input type="checkbox" class="peer hidden" />` y un `<div>` inmediatamente después que use `peer-checked:bg-green-500` para cambiar de color solo cuando el checkbox está marcado. Esto te permite crear checkboxes visualmente increíbles que el usuario puede estilizar a su gusto.
 * **Mensajes de ayuda dinámicos:** Puedes ocultar un mensaje de ayuda y mostrarlo únicamente cuando el usuario hace `focus` en el campo correspondiente usando `peer-focus`.
@@ -325,5 +325,5 @@ El `peer` es tu mejor aliado para mantener tu HTML limpio. Recuerda que no tiene
 | `peer-*: ` | El hermano anterior cambia | Validaciones de formulario (error/success). |
 
 ::: tip 💡 Consejo del Diseñador Frontend:
-Para tu aplicación *Soccer League Elite*, utiliza `group-hover` siempre que tengas una **"Tarjeta de Jugador"**. Si quieres que la foto del jugador haga un ligero *zoom* cuando el usuario pase el mouse por toda la tarjeta, aplica `group` al contenedor principal y `group-hover:scale-105` a la imagen. Es el detalle que hace que una web se sienta "Premium".mento reaccione solo si su "peer" está marcado **y** está recibiendo un hover. ¡Experimenta con estas combinaciones para dar vida a tus formularios!
+Para tu aplicación, utiliza `group-hover` siempre que tengas una **"Tarjeta de Jugador"**. Si quieres que la foto del jugador haga un ligero *zoom* cuando el usuario pase el mouse por toda la tarjeta, aplica `group` al contenedor principal y `group-hover:scale-105` a la imagen. Es el detalle que hace que una web se sienta "Premium".
 :::

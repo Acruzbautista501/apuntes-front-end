@@ -1,6 +1,6 @@
 # MÓDULO 5: Flexbox con Tailwind CSS
 
-Flexbox es el motor de diseño más importante en el desarrollo frontend moderno. Permite alinear, distribuir y reorganizar elementos dentro de un contenedor de manera fluida y responsiva. En *Soccer League Elite*, lo usarás para todo: desde las filas de la tabla de posiciones hasta la cabecera de los perfiles de los jugadores.
+Flexbox es el motor de diseño más importante en el desarrollo frontend moderno. Permite alinear, distribuir y reorganizar elementos dentro de un contenedor de manera fluida y responsiva. En tu aplicación, lo usarás para todo: desde las filas de la tabla de posiciones hasta la cabecera de los perfiles de los jugadores.
 
 ## 5.1 Flex Container (Profundización)
 
@@ -44,9 +44,9 @@ Es el equivalente a `display: inline-flex`. El contenedor se comporta como un el
 | **Comportamiento en página** | Ocupa toda la línea (bloque) | Se ajusta al contenido (inline) |
 | **¿Permite vecinos a los lados?** | No | Sí |
 | **¿Controla alineación Flex?** | Sí | Sí |
-| **Uso principal en Soccer League Elite** | Estructura de filas/columnas | Etiquetas, botones, estados de texto |
+| **Uso principal en tu aplicación** | Estructura de filas/columnas | Etiquetas, botones, estados de texto |
 
-### ¿Por qué esto es vital para *Soccer League Elite*?
+### ¿Por qué esto es vital para tu aplicación?
 Si estás diseñando la **cabecera de un equipo** donde quieres el logo a la izquierda y el nombre a la derecha en la misma línea, usarás `flex`. Pero si dentro del nombre del equipo quieres poner un pequeño icono de "verificado" o "campeón" justo al lado del texto sin que se baje a la siguiente línea, `inline-flex` es tu mejor aliado.
 
 ::: tip 💡 Consejo del Diseñador Frontend:
@@ -77,7 +77,7 @@ Los elementos se apilan de abajo hacia arriba.
 
 
 ### Ejemplo de código: Sistema Responsivo de Liga
-En *Soccer League Elite*, tus tarjetas de equipo deben cambiar de orientación según el tamaño de pantalla:
+En tu aplicación, tus tarjetas de equipo deben cambiar de orientación según el tamaño de pantalla:
 
 ```html
 <div class="flex flex-col md:flex-row gap-4 p-4">
@@ -96,7 +96,7 @@ En *Soccer League Elite*, tus tarjetas de equipo deben cambiar de orientación s
 | **`flex-row-reverse`**| Horizontal | Derecha a izquierda |
 | **`flex-col-reverse`**| Vertical | Abajo a arriba |
 
-### ¿Por qué esto es vital para *Soccer League Elite*?
+### ¿Por qué esto es vital para tu aplicación?
 Imagínate la tarjeta de un partido:
 * En una **pantalla de escritorio**, quieres mostrar: `[Escudo Local] [Marcador] [Escudo Visitante]` (`flex-row`).
 * En un **celular**, quieres: `[Escudo Local vs Visitante]` arriba y el `[Marcador]` debajo (`flex-col`). 
@@ -109,7 +109,7 @@ Ten cuidado con los valores `-reverse`. Aunque visualmente funcionan, pueden con
 ## 5.3 Justify Content (Alineación en el Eje Principal)
 La propiedad `justify-content` define cómo se distribuyen los elementos y el espacio sobrante a lo largo del **eje principal** del contenedor. Si tu dirección es `flex-row`, controlas la alineación horizontal; si es `flex-col`, controlas la vertical.
 
-En tu sistema **Soccer League Elite**, esta propiedad es la que determina si un botón se queda pegado a la derecha, si el marcador del partido queda centrado o si los elementos del menú se reparten equitativamente.
+En tu sistema, esta propiedad es la que determina si un botón se queda pegado a la derecha, si el marcador del partido queda centrado o si los elementos del menú se reparten equitativamente.
 
 ### Los Modos de Distribución
 

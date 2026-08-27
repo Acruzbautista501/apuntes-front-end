@@ -24,7 +24,7 @@ Esto crea una **cascada lógica**: el estilo base es la cimentación, y los pref
 
 ### Ejemplo Práctico: Tarjeta de "Estadísticas del Jugador"
 
-Imagina que estás construyendo una ficha técnica para *Soccer League Elite*.
+Imagina que estás construyendo una ficha técnica para tu aplicación.
 
 #### El enfoque "Mobile First" (Correcto y profesional)
 Primero definimos cómo se ve en el celular (simple, vertical). Luego, usamos `md:` para mejorar el layout en escritorio.
@@ -91,7 +91,7 @@ Si escribes `md:text-lg`, no significa que el texto sea grande *solo* en tablets
 
 > **Regla de oro:** Piensa en las clases sin prefijo como el diseño para "todo" (móvil hacia arriba). Los prefijos son "mejoras" para pantallas que tienen espacio suficiente para mostrar más.
 
-### Ejemplo Práctico: Grid Responsivo para *Soccer League Elite*
+### Ejemplo Práctico: Grid Responsivo para tu aplicación
 
 Imagina el panel de control de tu liga. Quieres mostrar los bloques de información (Estadísticas, Resultados, Próximos Partidos) de forma diferente según el dispositivo del usuario:
 
@@ -180,7 +180,7 @@ Ajustar los márgenes o paddings permite aprovechar el espacio extra.
 </div>
 ```
 
-### Ejemplo Maestro: Tarjeta de "Partido" (Soccer League Elite)
+### Ejemplo Maestro: Tarjeta de "Partido"
 
 Vamos a poner en práctica todo lo anterior. Esta tarjeta cambia totalmente su diseño entre un celular y una computadora.
 
@@ -219,7 +219,7 @@ No intentes aplicar prefijos a *todas* tus clases. Si una propiedad no necesita 
 
 El "Diseño Adaptativo" va más allá de cambiar un par de anchos; se trata de **cambiar la experiencia de usuario** para que cada dispositivo sea funcional y útil. No se trata de "encoger" el escritorio, sino de optimizar la interfaz para el contexto.
 
-En el desarrollo de *Soccer League Elite*, te enfrentarás a problemas comunes que se resuelven con estos 4 patrones de diseño adaptativo probados en la industria.
+En el desarrollo de tu aplicación, te enfrentarás a problemas comunes que se resuelven con estos 4 patrones de diseño adaptativo probados en la industria.
 
 ### 1. Patrón: "Stack-to-Row" (Apilamiento Dinámico)
 Es el patrón más común. En móvil, el usuario necesita ver la información de forma secuencial (uno tras otro). En escritorio, el usuario tiene espacio horizontal para comparar elementos.
@@ -273,7 +273,7 @@ El menú de navegación nunca debe ser el mismo en móvil que en desktop.
 
 ```html
 <nav class="flex justify-between items-center p-4">
-  <div class="logo">SoccerLeagueElite</div>
+  <div class="logo">Mi App</div>
   
   <ul class="hidden md:flex gap-6">
     <li>Inicio</li>

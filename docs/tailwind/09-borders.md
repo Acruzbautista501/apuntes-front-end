@@ -1,6 +1,6 @@
 # MÓDULO 9 — Borders, Radius y Shadows
 
-Si los módulos anteriores fueron los cimientos y las estructuras de tu aplicación *Soccer League Elite*, este módulo es el **acabado de pintura y carpintería**. Un buen diseño visual (UI) no solo se trata de que las cosas funcionen, sino de que se sientan "agradables" y profesionales al tacto. Los bordes, el redondeo y las sombras definen la jerarquía visual de tu web.
+Si los módulos anteriores fueron los cimientos y las estructuras de tu aplicación, este módulo es el **acabado de pintura y carpintería**. Un buen diseño visual (UI) no solo se trata de que las cosas funcionen, sino de que se sientan "agradables" y profesionales al tacto. Los bordes, el redondeo y las sombras definen la jerarquía visual de tu web.
 
 ## 9.1 Borders (Bordes)
 
@@ -32,7 +32,7 @@ Tailwind usa la misma paleta de colores para los bordes que para el texto o el f
 A veces, una línea continua no es lo que necesitas. Los estilos definen la textura del borde.
 
 * **`border-solid`:** El estándar (predeterminado).
-* **`border-dashed`:** Línea de guiones. Excelente para áreas de "drag and drop" o carga de imágenes en tu proyecto *CitaFacil*.
+* **`border-dashed`:** Línea de guiones. Excelente para áreas de "drag and drop" o carga de imágenes en tu proyecto.
 * **`border-dotted`:** Línea de puntos. Útil para diseños muy minimalistas o separadores decorativos.
 * **`border-double`:** Línea doble.
 
@@ -46,7 +46,7 @@ Este es el secreto para un diseño profesional: **no siempre necesitas bordes en
 
 ### Código: Implementación profesional
 
-Para tu proyecto *Soccer League Elite*, imagina una fila de una tabla de posiciones. En lugar de encerrar todo en una caja pesada, usa un borde inferior sutil para separar las filas:
+Para tu proyecto, imagina una fila de una tabla de posiciones. En lugar de encerrar todo en una caja pesada, usa un borde inferior sutil para separar las filas:
 
 ```html
 <div class="p-4 border-b-2 border-gray-100 hover:bg-gray-50 transition-colors">
@@ -76,7 +76,7 @@ Para tu proyecto *Soccer League Elite*, imagina una fila de una tabla de posicio
 El **Border Radius** es la propiedad de CSS que define la curvatura de las esquinas de un elemento. En el diseño de interfaces modernas, el redondeo no es solo un adorno; es un elemento psicológico. Las esquinas redondeadas se perciben como más seguras, amigables y accesibles, mientras que las esquinas perfectamente rectas se sienten más serias, técnicas o "duras".
 
 ### La Escala de Tailwind
-Tailwind simplifica el uso de `border-radius` eliminando los píxeles arbitrarios y ofreciendo una escala lógica y consistente. Esto es vital para que tu aplicación *Soccer League Elite* no parezca un "collage" de estilos distintos.
+Tailwind simplifica el uso de `border-radius` eliminando los píxeles arbitrarios y ofreciendo una escala lógica y consistente. Esto es vital para que tu aplicación no parezca un "collage" de estilos distintos.
 
 | Clase | Radio (aprox) | Uso Recomendado |
 | :--- | :--- | :--- |
@@ -149,7 +149,7 @@ Tailwind permite esto con prefijos de dirección:
 1.  **Consistencia de Radio:** Si decides que tus tarjetas tendrán `rounded-xl`, asegúrate de que **todas** las tarjetas principales de tu app usen `rounded-xl`. No mezcles `lg` con `xl` en elementos del mismo nivel jerárquico.
 2.  **Redondeo Interno:** ¿Sabías que si una tarjeta tiene `rounded-xl` y pones una imagen dentro que toca el borde, la imagen debe tener el mismo redondeo para no "salirse" de la forma?
     * *Truco:* Aplica `rounded-t-xl` a la imagen y `rounded-xl` al contenedor padre.
-3.  **Accesibilidad:** Los botones con esquinas extremadamente redondeadas (`rounded-full` en botones de texto) son muy populares, pero asegúrate de que el texto dentro tenga suficiente margen (padding) para no tocar los bordes curvos, lo cual se ve poco profesional.amativo (como un azul o verde de tu marca) para indicar el "tipo" de noticia o evento. Es una forma muy rápida de añadir jerarquía sin saturar el diseño.
+3.  **Accesibilidad:** Los botones con esquinas extremadamente redondeadas (`rounded-full` en botones de texto) son muy populares, pero asegúrate de que el texto dentro tenga suficiente margen (padding) para no tocar los bordes curvos, lo cual se ve poco profesional.
 :::
 
 ## 9.3 Shadows (Sombras)
@@ -175,7 +175,7 @@ Tailwind no te obliga a definir valores de `box-shadow` complejos. Te ofrece una
 | `shadow-inner` | Inversa | Para campos de texto o cajas que parecen "hundidas". |
 
 ### Código: Implementación Progresiva
-Para tu dashboard de *Soccer League Elite*, la clave no es usar la sombra más grande, sino usar la sombra **correcta** para el componente adecuado. Observa cómo aplicamos niveles de profundidad:
+Para tu dashboard, la clave no es usar la sombra más grande, sino usar la sombra **correcta** para el componente adecuado. Observa cómo aplicamos niveles de profundidad:
 
 ```html
 <div class="space-y-8 p-10 bg-gray-50">

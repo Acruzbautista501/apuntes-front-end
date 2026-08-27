@@ -59,19 +59,49 @@ Son pequeñas burbujas de información que aparecen al pasar el cursor o hacer c
 * **Tooltips:** Texto corto al pasar el mouse (`hover`).
 * **Popovers:** Más grandes, pueden incluir títulos y aparecer al hacer clic.
 
-> **⚠️ NOTA IMPORTANTE:** A diferencia de los otros componentes, los Tooltips y Popovers **no funcionan automáticamente**. Debes activarlos con una pequeña línea de JavaScript que encontrarás en la documentación oficial, ya que por rendimiento vienen desactivados por defecto.
+> **⚠️ NOTA IMPORTANTE:** A diferencia de los otros componentes, los Tooltips y Popovers **no funcionan automáticamente**. Debes activarlos manualmente con JavaScript, ya que por rendimiento vienen desactivados por defecto:
 
-## 5.6 Proyecto Final Sugerido
-Ahora que terminaste los 5 módulos, el siguiente paso lógico es unir todo. Intenta construir una **Landing Page** sencilla que incluya:
+```html
+<button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-title="Información extra">
+  Pasa el mouse aquí
+</button>
+```
+
+```javascript
+// Bootstrap NO activa los tooltips solo — debes inicializarlos así:
+const tooltipTriggers = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+tooltipTriggers.forEach(el => new bootstrap.Tooltip(el));
+```
+
+El Módulo 10, *API de JavaScript Programática*, explica a fondo por qué componentes como este requieren instanciarse manualmente mientras que un Modal o un Acordeón funcionan solo con atributos `data-bs-*`.
+
+## 5.6 Scrollspy: Navegación que se Resalta Sola
+**Scrollspy** vigila el scroll de la página y marca automáticamente como "activo" (`.active`) el ítem del menú que corresponde a la sección visible — muy común en documentaciones de una sola página (de hecho, así funciona el índice lateral de muchos sitios de documentación).
+
+```html
+<body data-bs-spy="scroll" data-bs-target="#navegacion" data-bs-offset="70" tabindex="0">
+
+  <nav id="navegacion" class="navbar">
+    <a class="nav-link" href="#seccion1">Sección 1</a>
+    <a class="nav-link" href="#seccion2">Sección 2</a>
+  </nav>
+
+  <section id="seccion1">...</section>
+  <section id="seccion2">...</section>
+</body>
+```
+
+* **`data-bs-spy="scroll"`**: Va en el contenedor con scroll (normalmente el `<body>`).
+* **`data-bs-target`**: Apunta al `id` del menú de navegación que debe resaltarse.
+* **`data-bs-offset`**: Ajusta cuándo se considera "activa" una sección (útil si tienes un navbar fijo que tapa el inicio de cada sección).
+
+## 5.7 Proyecto Final Sugerido
+
+Con los Módulos 1 al 5 ya tienes lo esencial de Bootstrap. El Módulo 17, *Proyecto Integrador*, retoma esta misma idea de "landing page" pero incorporando también los módulos avanzados (formularios completos, Offcanvas, Sass, modo oscuro) para un proyecto de nivel profesional completo.
+
+Como práctica rápida antes de continuar, intenta construir una **landing page** sencilla que incluya:
 1.  **Navbar** fija arriba.
 2.  **Carrusel** con 2 o 3 fotos de bienvenida.
 3.  **Grid** con 3 columnas que contengan **Cards** de servicios.
 4.  Un **Botón** en cada card que abra un **Modal** con más información.
 5.  Un **Footer** oscuro con clases de **Utilidades** (`bg-dark`, `py-5`, `text-center`).
-
----
-
-### Conclusión del curso rápido
-¡Felicidades! Has pasado de no saber nada de Bootstrap a entender su estructura, diseño y dinamismo. 
-
-Recuerda que Bootstrap es una herramienta de **productividad**. No intentes memorizar cada clase; lo importante es saber que la utilidad existe (ej. "sé que hay algo para márgenes") y luego consultar la documentación oficial para copiar el nombre exacto.

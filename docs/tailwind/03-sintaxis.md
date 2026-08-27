@@ -16,7 +16,7 @@ Las clases se construyen mediante una jerarquía predecible. Imagina que es una 
 
 
 ### Desglose paso a paso: Ejemplo `hover:bg-blue-600`
-Analicemos esta clase común para un botón de tu *Soccer League Elite*:
+Analicemos esta clase común para un botón de tu aplicación:
 
 * **`hover:`**: Es un **modificador**. Le dice a Tailwind: "Solo aplica esto cuando el puntero del mouse esté sobre el elemento".
 * **`bg-`**: Es la **propiedad**. Es el alias abreviado de `background-color`.
@@ -92,7 +92,7 @@ El `margin` crea separación **fuera** del elemento. Se usa para empujar element
     * `-mt-4`: Mueve el elemento hacia arriba 16px, permitiendo "solapamientos" creativos entre elementos.
 
 ### Gap (`gap-*`): La joya de la corona
-Cuando trabajas con `flex` o `grid` (que es el 90% de tus layouts en *Soccer League Elite*), **nunca uses márgenes individuales** en los elementos hijos. Usa `gap`.
+Cuando trabajas con `flex` o `grid` (que es el 90% de tus layouts en tu aplicación), **nunca uses márgenes individuales** en los elementos hijos. Usa `gap`.
 
 ```html
 <div class="flex">
@@ -136,7 +136,7 @@ Si intentas alinear elementos y ves que el espaciado se ve "descuadrado", verifi
 
 ## 3.3 Tamaños (Sizing)
 
-Para construir interfaces profesionales y consistentes en tu sistema **Soccer League Elite**, el control del tamaño es fundamental. Tailwind te ofrece un control granular tanto sobre el **ancho** (*width*) como sobre la **altura** (*height*) de cualquier elemento.
+Para construir interfaces profesionales y consistentes en tu sistema, el control del tamaño es fundamental. Tailwind te ofrece un control granular tanto sobre el **ancho** (*width*) como sobre la **altura** (*height*) de cualquier elemento.
 
 
 ### Width (w-*) y Height (h-*)
@@ -157,18 +157,18 @@ Son herramientas de seguridad para que tus diseños no se rompan en diferentes t
     * `max-w-sm` (640px), `max-w-md` (768px), `max-w-7xl` (1280px).
 * **Min-Width / Min-Height:** Asegura que un elemento siempre tenga al menos un tamaño mínimo, evitando que el contenido interno se desborde o se colapse.
 
-### Ejemplo Práctico: El Layout del "Soccer League Elite"
-Para tu sistema de gestión de liga, imagina que necesitas un contenedor que nunca supere los 1200px de ancho y que tenga una altura mínima para mostrar los partidos:
+### Ejemplo Práctico: Layout de una Ficha de Perfil
+Imagina que necesitas un contenedor que nunca supere los 1200px de ancho y que tenga una altura mínima para mostrar la información:
 
 ```html
 <div class="w-full max-w-6xl min-h-[500px] mx-auto p-4 bg-white shadow-lg">
   
   <div class="w-full md:w-48 h-48 bg-gray-200 overflow-hidden">
-    <img src="logo-equipo.png" class="w-full h-full object-cover" />
+    <img src="avatar.jpg" class="w-full h-full object-cover" />
   </div>
 
   <div class="w-full">
-    <h2 class="text-2xl font-bold">Datos del Club</h2>
+    <h2 class="text-2xl font-bold">Datos del Perfil</h2>
   </div>
 </div>
 ```
@@ -197,9 +197,6 @@ Cada color en Tailwind tiene un nombre base y un peso numérico que va del **50 
     * `500` es el tono "estándar" (saturación media).
     * `950` es el tono más oscuro (casi negro).
 
-¿Quieres que te ayude a definir una paleta completa de 3 colores principales para tu liga (Primario, Secundario y de Error/Alerta) para que la copies en tu CSS?
-
-
 ### Aplicación de Colores
 Las clases de color siguen el mismo patrón de `propiedad-color-peso`:
 
@@ -225,32 +222,32 @@ Las clases de color siguen el mismo patrón de `propiedad-color-peso`:
 ```
 
 ### Personalización del Tema (La forma moderna en Tailwind 4)
-Para tu sistema de **Soccer League Elite**, no debes usar colores genéricos. Debes definir los colores de tu propia marca en tu CSS principal para reutilizarlos como clases (`bg-liga-primary`, `text-liga-accent`).
+No debes usar colores genéricos. Debes definir los colores de tu propia marca en tu CSS principal para reutilizarlos como clases (`bg-brand-primary`, `text-brand-accent`).
 
 **En tu `src/assets/index.css`:**
 ```css
 @import "tailwindcss";
 
 @theme {
-  --color-liga-primary: #1e3a8a; /* Azul de tu liga */
-  --color-liga-accent: #f59e0b;  /* Dorado/Amarillo de detalles */
+  --color-brand-primary: #1e3a8a; /* Azul de tu marca */
+  --color-brand-accent: #f59e0b;  /* Dorado/Amarillo de detalles */
 }
 ```
 
 * **¿Qué logras con esto?** Tailwind generará automáticamente clases para ti:
-    * `bg-liga-primary`
-    * `text-liga-accent`
-    * `border-liga-primary`
+    * `bg-brand-primary`
+    * `text-brand-accent`
+    * `border-brand-primary`
 
 ### Resumen para tu proyecto
-Para un sistema de gestión deportiva:
+Para cualquier sistema profesional:
 1.  **Usa `slate` o `gray`** para textos y fondos de tarjetas (dan un aspecto serio y profesional).
-2.  **Usa tu color `liga-primary`** para elementos interactivos (botones, enlaces).
+2.  **Usa tu color `brand-primary`** para elementos interactivos (botones, enlaces).
 3.  **Usa `border-opacity`** (ej: `border-slate-200/50`) para separar secciones de manera sutil sin saturar la vista con líneas demasiado marcadas.
 
 ## 3.5 Tipografía (Typography)
 
-La tipografía es el pilar que define la "voz" y la legibilidad de tu sistema *Soccer League Elite*. En Tailwind, el control tipográfico va mucho más allá de simplemente cambiar el tamaño de letra; te permite gestionar la jerarquía visual de forma profesional.
+La tipografía es el pilar que define la "voz" y la legibilidad de tu proyecto. En Tailwind, el control tipográfico va mucho más allá de simplemente cambiar el tamaño de letra; te permite gestionar la jerarquía visual de forma profesional.
 
 ### 1. Jerarquía de Tamaño y Peso
 * **`text-*` (Tamaño):** Tailwind escala desde `text-xs` (12px) hasta `text-9xl` (128px). 
@@ -307,5 +304,5 @@ Para un sistema de noticias en tu liga, la tipografía debe guiar al usuario:
 | `truncate` | `overflow: hidden; text-overflow: ellipsis;` | Recortar nombres de equipos largos |
 
 ::: tip 💡 Consejo del Diseñador Frontend:
-En proyectos de gestión de datos como *Soccer League Elite*, usa la utilidad **`font-mono`** para los números en las tablas de posiciones. Los números monoespaciados hacen que las columnas de "Goles a favor" y "Goles en contra" se alineen verticalmente de forma perfecta, facilitando la lectura de un vistazo.
+En proyectos de gestión de datos como tu aplicación, usa la utilidad **`font-mono`** para los números en las tablas de posiciones. Los números monoespaciados hacen que las columnas de "Goles a favor" y "Goles en contra" se alineen verticalmente de forma perfecta, facilitando la lectura de un vistazo.
 :::

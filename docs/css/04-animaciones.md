@@ -1,4 +1,3 @@
-
 # Módulo 4: Animaciones y Experiencia de Usuario (UX)
 El **Módulo 4** es el que separa una web estática de una **experiencia de usuario (UX) profesional**. Las animaciones no son solo "decoración"; sirven para dar *feedback* al usuario (saber si un botón se presionó) y para guiar su atención.
 
@@ -136,5 +135,3 @@ Existe una media query llamada `prefers-reduced-motion`. Si el usuario tiene act
 3. **Keyframes** para bucles infinitos o secuencias complejas.
 4. **Glassmorphism** con `backdrop-filter` para diseños modernos.
 5. **Menos es más:** Una web con demasiadas animaciones marea y distrae. Úsalas con propósito.
-
-¿Estamos listos para el **Módulo 5** donde veremos **Arquitectura y SASS** para organizar todo este código como un profesional?

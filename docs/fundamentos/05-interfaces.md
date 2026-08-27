@@ -1,4 +1,3 @@
-
 # Módulo 5: Interfaces y Tipos Personalizados
 
 En este nivel, aprenderemos a definir "contratos". Una **Interface** o un **Type** le dice a tu programa: "Cualquier objeto que diga ser un *Usuario* DEBE tener estas propiedades específicas".
@@ -7,22 +6,22 @@ En este nivel, aprenderemos a definir "contratos". Una **Interface** o un **Type
 Las interfaces se usan principalmente para definir la estructura de un **objeto**. Son ideales porque son extensibles y fáciles de leer.
 
 ```typescript
-interface Jugador {
+interface Producto {
   id: number;
   nombre: string;
-  posicion: string;
-  goles?: number; // Propiedad opcional
-  readonly equipo: string; // No se puede modificar después de creado
+  categoria: string;
+  descuento?: number; // Propiedad opcional
+  readonly sku: string; // No se puede modificar después de creado
 }
 
-const nuevoJugador: Jugador = {
+const nuevoProducto: Producto = {
   id: 1,
-  nombre: "Aldair",
-  posicion: "Delantero",
-  equipo: "TypeScript FC"
+  nombre: "Auriculares Inalámbricos",
+  categoria: "Audio",
+  sku: "AUD-2024-001"
 };
 
-// nuevoJugador.equipo = "Otro"; <--- Error: Es de solo lectura.
+// nuevoProducto.sku = "OTRO"; <--- Error: Es de solo lectura.
 ```
 
 ## 5.2 Type Aliases (Alias de Tipo)
@@ -32,10 +31,10 @@ A diferencia de las interfaces, los `type` son más versátiles. No solo sirven 
 Esto es extremadamente útil para limitar los valores que puede recibir una variable.
 
 ```typescript
-type EstadoPartido = 'programado' | 'en_curso' | 'finalizado' | 'suspendido';
+type EstadoPedido = 'programado' | 'en_preparacion' | 'enviado' | 'cancelado';
 
-let estadoActual: EstadoPartido = 'en_curso';
-// estadoActual = 'jugando'; <--- Error: No existe en la unión.
+let estadoActual: EstadoPedido = 'en_preparacion';
+// estadoActual = 'enviando'; <--- Error: No existe en la unión.
 ```
 
 ## 5.3 Diferencias: ¿Cuándo usar Interface vs Type?
@@ -61,15 +60,15 @@ interface Ubicacion {
   longitud: number;
 }
 
-interface Estadio {
+interface Sucursal {
   nombre: string;
-  capacidad: number;
+  capacidadClientes: number;
   ubicacion: Ubicacion; // Interfaz anidada
 }
 
-const miEstadio: Estadio = {
-  nombre: "Estadio Azteca",
-  capacidad: 87000,
+const miSucursal: Sucursal = {
+  nombre: "Sucursal Centro",
+  capacidadClientes: 120,
   ubicacion: {
     ciudad: "CDMX",
     latitud: 19.30,
@@ -101,28 +100,28 @@ const programador: Empleado = {
 ```
 
 ## 🛠️ Aplicación Práctica en tu `main.ts`:
-Imagina que estás modelando los datos para tu liga de fútbol. Vamos a crear una estructura limpia para los resultados:
+Imagina que estás modelando los datos de una tienda en línea. Vamos a crear una estructura limpia para los pedidos:
 
 ```typescript
-type Resultado = 'Gana Local' | 'Gana Visitante' | 'Empate';
+type Resultado = 'Aprobado' | 'Rechazado' | 'Pendiente';
 
-interface Partido {
-  local: string;
-  visitante: string;
-  golesLocal: number;
-  golesVisitante: number;
-  finalizado: boolean;
-  veredicto?: Resultado; // Solo aparece si finalizado es true
+interface Pedido {
+  cliente: string;
+  producto: string;
+  cantidad: number;
+  precioTotal: number;
+  procesado: boolean;
+  veredicto?: Resultado; // Solo aparece si procesado es true
 }
 
-const partidoSemana: Partido = {
-  local: "Vite FC",
-  visitante: "Tailwind United",
-  golesLocal: 2,
-  golesVisitante: 1,
-  finalizado: true,
-  veredicto: 'Gana Local'
+const pedidoReciente: Pedido = {
+  cliente: "Laura Gómez",
+  producto: "Monitor 27''",
+  cantidad: 1,
+  precioTotal: 250,
+  procesado: true,
+  veredicto: 'Aprobado'
 };
 
-console.log(`Resultado del partido: ${partidoSemana.veredicto}`);
+console.log(`Resultado del pedido: ${pedidoReciente.veredicto}`);
 ```

@@ -21,16 +21,16 @@ El motor de Tailwind 4 escanea tu bloque `@theme` y mapea las variables CSS dire
 
 ### Implementación Paso a Paso
 
-Para *Soccer League Elite*, vamos a crear un sistema de diseño profesional. Abre tu archivo CSS principal (por ejemplo, `app.css` o `theme.css`) y define el bloque `@theme`.
+Para tu aplicación, vamos a crear un sistema de diseño profesional. Abre tu archivo CSS principal (por ejemplo, `app.css` o `theme.css`) y define el bloque `@theme`.
 
 ```css
 @import "tailwindcss";
 
 @theme {
   /* 1. Colores Personalizados */
-  /* Generará: bg-soccer-green, text-soccer-green, border-soccer-green, etc. */
-  --color-soccer-green: #059669; 
-  --color-soccer-dark: #0f172a;
+  /* Generará: bg-brand-primary, text-brand-primary, border-brand-primary, etc. */
+  --color-brand-primary: #059669; 
+  --color-brand-dark: #0f172a;
   
   /* 2. Spacing (Espaciado) */
   /* Generará: p-sidebar, m-sidebar, gap-sidebar, etc. */
@@ -42,8 +42,8 @@ Para *Soccer League Elite*, vamos a crear un sistema de diseño profesional. Abr
   --font-display: "Montserrat", sans-serif;
   
   /* 4. Sombras (Box Shadows) */
-  /* Generará: shadow-gol */
-  --shadow-gol: 0 10px 15px -3px rgba(5, 150, 105, 0.5);
+  /* Generará: shadow-brand */
+  --shadow-brand: 0 10px 15px -3px rgba(5, 150, 105, 0.5);
 }
 ```
 
@@ -51,23 +51,23 @@ Para *Soccer League Elite*, vamos a crear un sistema de diseño profesional. Abr
 
 1.  **CSS Puro:** Si mañana decides cambiar tu color verde a azul, no necesitas recompilar un archivo JS complejo. Solo cambias el valor en tu archivo CSS y el navegador se encarga.
 2.  **Autocomplete (IntelliSense):** El plugin de Tailwind en VS Code detecta estas variables CSS inmediatamente y te ofrece autocompletado en tu HTML.
-3.  **No hay "Magic Strings":** Al usar variables CSS, si necesitas usar el color en un componente fuera de Tailwind, ya tienes la variable definida (`var(--color-soccer-green)`), no necesitas duplicar valores.
+3.  **No hay "Magic Strings":** Al usar variables CSS, si necesitas usar el color en un componente fuera de Tailwind, ya tienes la variable definida (`var(--color-brand-primary)`), no necesitas duplicar valores.
 
 ### Uso en el HTML
 
 Ahora que has definido tus variables en el `@theme`, Tailwind ha creado automáticamente las clases. Úsalas tal cual lo harías con cualquier utilidad estándar de Tailwind:
 
 ```html
-<aside class="w-sidebar bg-soccer-dark min-h-screen">
+<aside class="w-sidebar bg-brand-dark min-h-screen">
   
   <div class="p-card-padding">
-    <h1 class="font-display text-soccer-green text-2xl">
-      Soccer League Elite
+    <h1 class="font-display text-brand-primary text-2xl">
+      Panel de Control
     </h1>
   </div>
   
-  <button class="shadow-gol bg-soccer-green text-white px-4 py-2 rounded-lg">
-    Nuevo Partido
+  <button class="shadow-brand bg-brand-primary text-white px-4 py-2 rounded-lg">
+    Nueva Acción
   </button>
   
 </aside>
@@ -100,7 +100,7 @@ En **Tailwind CSS 4**, esto desaparece. Al utilizar el bloque `@theme` en tu CSS
 
 ### Código: Cómo extender con precisión
 
-Para "extender" tu tema de *Soccer League Elite* sin perder los colores estándar de Tailwind, simplemente declara tus nuevas variables en el `@theme`.
+Para "extender" tu tema de tu aplicación sin perder los colores estándar de Tailwind, simplemente declara tus nuevas variables en el `@theme`.
 
 #### Tu archivo `theme.css`
 ```css
@@ -108,8 +108,8 @@ Para "extender" tu tema de *Soccer League Elite* sin perder los colores estánda
 
 @theme {
   /* 1. EXTENSIÓN: Añadiendo nuevos colores sin borrar los de Tailwind */
-  --color-soccer-field: #2d6a4f;
-  --color-referee-yellow: #facc15;
+  --color-brand-secondary: #2d6a4f;
+  --color-accent-yellow: #facc15;
   
   /* 2. REFERENCIA SEMÁNTICA: Puedes reutilizar colores de Tailwind */
   /* Aquí creamos un alias: 'primary' será siempre el 'blue-600' de Tailwind */
@@ -159,7 +159,7 @@ Si realmente quieres que el `blue-600` de Tailwind no sea el azul por defecto qu
     @import "tailwindcss";
     @import "./brand-colors.css"; /* Tus variables aquí */
     ```
-3.  **No le temas a los nombres:** Los nombres de las variables en CSS (CSS Custom Properties) son globales. Si usas un nombre muy genérico como `--color-main`, podrías tener colisiones. Intenta usar prefijos si el proyecto es muy grande, como `--soccer-color-main`.
+3.  **No le temas a los nombres:** Los nombres de las variables en CSS (CSS Custom Properties) son globales. Si usas un nombre muy genérico como `--color-main`, podrías tener colisiones. Intenta usar prefijos si el proyecto es muy grande, como `--app-color-main`.
 :::
 
 ## 12.3 Variables CSS en Tailwind 4 (La Estrategia Semántica)
@@ -176,7 +176,7 @@ La **Estrategia Semántica** consiste en usar variables que describan el *propó
 * En lugar de `--color-blue-600`, usa `--color-brand-surface`.
 * En lugar de `--color-white`, usa `--color-bg-primary`.
 
-Si el día de mañana *Soccer League Elite* cambia su identidad visual de "Azul" a "Negro y Dorado", solo cambias el valor hexadecimal en el archivo CSS. **Tu HTML no necesita ni un solo cambio.**
+Si el día de mañana tu aplicación cambia su identidad visual de "Azul" a "Negro y Dorado", solo cambias el valor hexadecimal en el archivo CSS. **Tu HTML no necesita ni un solo cambio.**
 
 ### Código: Implementación Completa (Modo Oscuro Integrado)
 
@@ -199,7 +199,7 @@ En tu archivo de estilos, separa los valores (los colores reales) de las variabl
 :root {
   --bg-primary: #ffffff;
   --text-primary: #0f172a;
-  --brand-accent: #059669; /* Verde de Soccer League */
+  --brand-accent: #059669; /* Verde de marca */
 }
 
 /* Modo Oscuro: El contrato se llena con colores oscuros */
@@ -217,7 +217,7 @@ Ahora, tus clases en HTML son totalmente agnósticas al tema. No necesitas poner
 <body class="bg-bg-primary text-text-primary transition-colors duration-300">
   
   <div class="p-8">
-    <h1 class="text-accent text-3xl font-bold">Soccer League Elite</h1>
+    <h1 class="text-accent text-3xl font-bold">Panel de Control</h1>
     <p>Bienvenido al dashboard. El tema cambia automáticamente.</p>
   </div>
   
@@ -277,7 +277,7 @@ Aquí establecemos que, independientemente de si estamos en modo claro u oscuro,
 :root {
   --bg-surface: #ffffff;
   --text-main: #0f172a;
-  --brand-color: #059669; /* Verde de Soccer League */
+  --brand-color: #059669; /* Verde de marca */
 }
 
 /* Modo Oscuro (Se activa al añadir la clase .dark al HTML) */
@@ -293,8 +293,8 @@ No necesitas `dark:text-white` ni `dark:bg-slate-900`. Al usar tus variables sem
 
 ```html
 <div class="bg-surface text-main p-6 transition-colors duration-300">
-  <h1 class="text-brand">Soccer League Elite</h1>
-  <p>Panel de administración de partidos.</p>
+  <h1 class="text-brand">Panel de Control</h1>
+  <p>Panel de administración general.</p>
 </div>
 ```
 
