@@ -318,6 +318,38 @@ export default defineConfig({
               { text: 'Proyecto Integrador', link:'/node/25-proyecto-integrador'},
             ]
           },
+          {
+            text: 'PHP Puro para APIs',
+            collapsed: true,
+            items: [
+              { text: 'Introducción a PHP y Configuración del Entorno', link:'/php/01-introduccion'},
+              { text: 'Sintaxis Básica, Variables y Tipos de Datos', link:'/php/02-sintaxis-variables'},
+              { text: 'Estructuras de Control y Funciones', link:'/php/03-control-funciones'},
+              { text: 'Arrays y Manipulación de Datos', link:'/php/04-arrays'},
+              { text: 'Programación Orientada a Objetos en PHP', link:'/php/05-poo'},
+              { text: 'Manejo de Errores y Excepciones', link:'/php/06-errores-excepciones'},
+              { text: 'Composer y Gestión de Dependencias', link:'/php/07-composer'},
+              { text: 'Estándares PSR y Buenas Prácticas', link:'/php/08-psr-buenas-practicas'},
+              { text: 'Autoloading, Namespaces y Estructura de Proyectos', link:'/php/09-autoloading-namespaces'},
+              { text: 'Superglobales, HTTP y Petición-Respuesta', link:'/php/10-superglobales-http'},
+              { text: 'Enrutamiento y Arquitectura en Capas sin Framework', link:'/php/11-enrutamiento-arquitectura'},
+              { text: 'PDO y Bases de Datos Relacionales', link:'/php/12-pdo-bases-datos'},
+              { text: 'Construir una API REST Completa con PHP Puro', link:'/php/13-api-rest'},
+              { text: 'Validación de Datos y Manejo de Errores Centralizado', link:'/php/14-validacion-errores'},
+              { text: 'Autenticación con JWT en PHP Puro', link:'/php/15-jwt-autenticacion'},
+              { text: 'Autorización y Control de Acceso', link:'/php/16-autorizacion'},
+              { text: 'Una Capa de Acceso a Datos Propia', link:'/php/17-capa-acceso-datos'},
+              { text: 'Middleware y el Patrón PSR-15', link:'/php/18-middleware-psr15'},
+              { text: 'Seguridad en APIs PHP', link:'/php/19-seguridad'},
+              { text: 'Testing con PHPUnit', link:'/php/20-testing-phpunit'},
+              { text: 'Documentación de API con OpenAPI/Swagger', link:'/php/21-openapi-docs'},
+              { text: 'Caché con Redis en PHP', link:'/php/22-cache-redis'},
+              { text: 'Colas de Trabajo en PHP', link:'/php/23-colas-trabajo'},
+              { text: 'Docker para Aplicaciones PHP', link:'/php/24-docker'},
+              { text: 'CI/CD y Despliegue en Producción', link:'/php/25-cicd-despliegue'},
+              { text: 'Proyecto Integrador: API REST Completa en PHP Puro', link:'/php/26-proyecto-integrador'},
+            ]
+          },
         ]
       }
     ],
