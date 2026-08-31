@@ -29,6 +29,8 @@ Bootstrap utiliza una notación abreviada para asignar `margin` (espacio exterio
 * `m-0`: Quita todos los márgenes.
 * `mx-auto`: Centra un bloque horizontalmente (si tiene un ancho definido).
 
+**También son responsivas:** puedes insertar un breakpoint entre el lado y el tamaño con la fórmula `{propiedad}{lado}-{breakpoint}-{tamaño}` — por ejemplo `mt-md-3` (solo aplica el margen arriba desde pantallas medianas) o `px-lg-5` (padding lateral grande solo en pantallas grandes). Es el mismo sistema de prefijos `sm|md|lg|xl|xxl` que ya viste en el Grid.
+
 ## 4.2 Bordes y Sombras
 Ya no necesitas pelear con `border-radius` o `box-shadow` en CSS.
 
@@ -36,6 +38,7 @@ Ya no necesitas pelear con `border-radius` o `box-shadow` en CSS.
     * `.border`: Añade un borde gris suave.
     * `.border-top`, `.border-end`, etc.: Añade borde solo a un lado.
     * `.border-primary`: Cambia el color del borde.
+    * `.border-0` (o `.border-top-0`, etc.): Quita el borde de ese lado — el complemento natural de `.border`.
 * **Redondeado (Rounded):**
     * `.rounded`: Esquinas ligeramente curvas.
     * `.rounded-circle`: Crea un círculo perfecto (útil para fotos de perfil).
@@ -44,13 +47,15 @@ Ya no necesitas pelear con `border-radius` o `box-shadow` en CSS.
     * `.shadow-sm`: Sombra sutil.
     * `.shadow`: Sombra normal.
     * `.shadow-lg`: Sombra profunda para dar mucha elevación.
+    * `.shadow-none`: Quita cualquier sombra.
 
 ## 4.3 Dimensiones (Ancho y Alto)
 Para controlar el tamaño de una imagen o un div rápidamente:
 
-* **Ancho (Width):** `.w-25`, `.w-50`, `.w-75`, `.w-100` (representan porcentajes).
-* **Alto (Height):** `.h-25`, `.h-50`, `.h-75`, `.h-100`.
-* **Ancho de pantalla:** `.vw-100` (ocupa todo el ancho visible del navegador).
+* **Ancho (Width):** `.w-25`, `.w-50`, `.w-75`, `.w-100` (representan porcentajes), o `.w-auto` (vuelve al ancho natural del elemento).
+* **Alto (Height):** `.h-25`, `.h-50`, `.h-75`, `.h-100`, o `.h-auto`.
+* **Ancho/alto máximo:** `.mw-100` (`max-width: 100%`) y `.mh-100` (`max-height: 100%`) — el patrón estándar para que una imagen nunca se desborde de su contenedor, sin importar su tamaño original.
+* **Relativo al viewport:** `.vw-100` (100% del ancho visible del navegador) y `.vh-100` (100% del alto visible) — muy usado para secciones de pantalla completa (`hero`). También existen `.min-vw-100` y `.min-vh-100` para fijar solo un mínimo sin impedir que crezca más.
 
 ## 4.4 Utilidades de Display (Visibilidad)
 Esta es una de las herramientas más potentes para el diseño responsivo. Te permite mostrar u ocultar elementos según el dispositivo.
@@ -70,6 +75,7 @@ Esta es una de las herramientas más potentes para el diseño responsivo. Te per
 * `.text-center`: Centrado.
 * `.text-end`: Alineado a la derecha.
 * `.text-lowercase / .text-uppercase / .text-capitalize`: Cambia el formato de las letras.
+* También son responsivas: `.text-md-center`, `.text-lg-start`, etc. — igual que `d-` y el espaciado, aceptan un breakpoint en medio (`text-{breakpoint}-{valor}`).
 
 > **Resumen del Módulo 4:**
 > Las utilidades son como "clases quirúrgicas". En lugar de crear una clase `.mi-boton-separado { margin-top: 20px; }`, simplemente le añades `mt-4` a tu botón de Bootstrap y listo. 

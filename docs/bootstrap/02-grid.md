@@ -8,6 +8,8 @@ Existen dos tipos principales:
 * **.container**: Tiene un ancho fijo que cambia según el tamaño de la pantalla (deja espacios en blanco a los lados en pantallas grandes).
 * **.container-fluid**: Ocupa el **100% del ancho** de la pantalla siempre, sin importar el dispositivo.
 
+También existen **contenedores responsivos por breakpoint** — `.container-sm`, `.container-md`, `.container-lg`, `.container-xl`, `.container-xxl` —, que son 100% fluidos hasta el breakpoint indicado y a partir de ahí se comportan como `.container` (ancho fijo). Por ejemplo, `.container-md` es fluido en móvil y tablet, pero se fija en pantallas medianas en adelante.
+
 ## 2.2 La Anatomía del Grid (Filas y Columnas)
 Bootstrap utiliza un sistema de **12 columnas imaginarias**. Para usarlas, debes seguir esta jerarquía obligatoria:
 1.  **Contenedor** (`.container`)
@@ -20,6 +22,8 @@ Dentro de una `.row`, puedes dividir el espacio como quieras, siempre que los n�
 * Si quieres tres partes iguales: `.col-4`, `.col-4` y `.col-4`.
 * Si quieres una barra lateral pequeña y un contenido ancho: `.col-3` y `.col-9`.
 :::
+
+También existe la clase **`.col`**, sin número: si pones varias `<div class="col">` dentro de una `.row`, Bootstrap reparte el ancho **automáticamente en partes iguales** entre ellas, sin que tengas que calcular fracciones de 12 a mano — muy útil cuando no sabes de antemano cuántas columnas habrá.
 
 ## 2.3 Breakpoints: El Secreto de la Responsividad
 Aquí es donde ocurre la "magia". Queremos que en una PC se vean 3 columnas, pero en un celular se vea solo 1 (una encima de otra). Para eso usamos los prefijos de tamaño:
@@ -64,3 +68,4 @@ Si tus columnas tienen diferentes alturas, puedes alinearlas así:
 El **Gutter** es el espacio (hueco) que hay entre las columnas para que el contenido no quede pegado.
 * Bootstrap lo gestiona automáticamente, pero puedes cambiarlo con la clase `g-`.
 * Ejemplo: `<div class="row g-3">` añade un espacio moderado. `<div class="row g-0">` elimina todo el espacio entre columnas.
+* Si solo quieres controlar un eje, usa **`.gx-*`** (gutter horizontal, entre columnas de una misma fila) o **`.gy-*`** (gutter vertical, entre filas que se apilan) por separado — `g-*` cambia ambos ejes a la vez.

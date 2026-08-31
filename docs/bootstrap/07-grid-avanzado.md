@@ -82,6 +82,8 @@ A veces necesitas que ciertos elementos "corten" la fila en un punto específico
 
 Desde la versión 5.2, Bootstrap añadió un segundo sistema de rejilla, **basado en CSS Grid real** (no en Flexbox como el sistema de `.row`/`.col`), pensado para layouts más simples y de dos dimensiones.
 
+> **Importante:** este sistema está **deshabilitado por defecto** en el `.css` compilado que se descarga del CDN o de npm (el mismo que usas desde el Módulo 1). Para usar `.grid`/`.g-col-*` necesitas compilar Bootstrap desde su código fuente en Sass con la variable `$enable-cssgrid: true` activada (ver Módulo 12, *Personalización con Sass*) — típicamente también desactivando el sistema clásico con `$enable-grid-classes: false` si no lo vas a usar en el mismo proyecto.
+
 ```html
 <div class="grid">
   <div class="g-col-6">Ocupa 6 de 12 columnas</div>

@@ -23,18 +23,14 @@ $primary: #7c3aed;        // Tu morado de marca, reemplaza el azul por defecto
 $border-radius: 0.75rem;  // Esquinas más redondeadas en TODOS los componentes
 $font-family-base: "Sora", sans-serif;
 
-// 3. Las variables por defecto de Bootstrap (solo llenan lo que TÚ no definiste)
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/variables-dark";
-
-// 4. El resto del framework, ya usando tus valores
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/root";
+// 3. El resto del framework completo — sus propias variables (con !default)
+//    solo llenan lo que TÚ no definiste arriba
 @import "bootstrap/scss/bootstrap";
 ```
 
-> **La regla de oro:** tus variables (`$primary`, `$border-radius`...) se declaran **entre** `functions` y `variables`. Bootstrap usa `!default` en todas sus variables internamente, lo que significa "usa este valor solo si nadie lo definió antes". Si tu variable aparece antes, gana la tuya; si aparece después, ya es demasiado tarde.
+> **La regla de oro:** tus variables (`$primary`, `$border-radius`...) se declaran **entre** `functions` y el `@import` de `bootstrap` completo. Bootstrap usa `!default` en todas sus variables internamente, lo que significa "usa este valor solo si nadie lo definió antes". Si tu variable aparece antes, gana la tuya; si aparece después, ya es demasiado tarde.
+>
+> **No importes `variables`, `maps`, `mixins` o `root` por separado si al final vas a importar `bootstrap/scss/bootstrap` completo** — ese archivo ya los incluye todos internamente, y hacerlo dos veces solo duplica CSS en tu bundle final (sobre todo el bloque `:root { --bs-*: ...; }` que genera `root.scss`). Esos imports sueltos solo tienen sentido cuando compilas partiales a mano, sin la línea final de `bootstrap` completo (ver 12.5, *Compilar Solo lo que Necesitas*).
 
 ## 12.3 Variables Más Usadas para Personalizar
 
@@ -67,6 +63,17 @@ $grid-breakpoints: (
 );
 ```
 
+Además de variables de valor (colores, tamaños), Bootstrap expone variables `$enable-*` que **activan o desactivan** características enteras del framework (no cambian un valor, sino que encienden/apagan un `@if` dentro del propio Sass de Bootstrap):
+
+```scss
+$enable-rounded: true;    // Esquinas redondeadas en general (poner en false = todo con esquinas rectas)
+$enable-shadows: false;   // Sombras sutiles en botones/inputs al enfocar
+$enable-gradients: false; // Gradientes sutiles en algunos componentes
+$enable-rfs: true;        // Escalado fluido de tamaños de fuente según el viewport
+$enable-dark-mode: true;  // Genera el CSS de `data-bs-theme="dark"` (Módulo 13)
+$enable-negative-margins: false; // Utilidades m-n1, m-n2... (márgenes negativos)
+```
+
 ## 12.4 Mapas de Sass: Agregar Colores Nuevos al Sistema de Temas
 
 Los colores de Bootstrap (`primary`, `success`, `danger`...) viven en un **mapa** de Sass. Puedes agregar tus propios colores personalizados a ese mismo mapa, y Bootstrap generará automáticamente **todas** las clases relacionadas (`.btn-marca`, `.text-marca`, `.bg-marca`, `.border-marca`...) sin que tengas que escribirlas a mano.
@@ -76,17 +83,18 @@ Los colores de Bootstrap (`primary`, `success`, `danger`...) viven en un **mapa*
 
 $marca: #f97316; // Tu color de marca, que no existe por defecto
 
+// Necesitas "variables" (y "variables-dark") importadas ANTES del merge,
+// porque ahí es donde vive el mapa $theme-colors que vas a extender
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/variables-dark";
-@import "bootstrap/scss/maps";
 
 // Fusionamos tu color nuevo con el mapa de colores existente
 $theme-colors: map-merge($theme-colors, (
   "marca": $marca
 ));
 
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/root";
+// El resto del framework completo, ya con tu color incluido en el mapa
+// (no importes "maps"/"mixins"/"root" por separado: bootstrap.scss ya los trae)
 @import "bootstrap/scss/bootstrap";
 ```
 

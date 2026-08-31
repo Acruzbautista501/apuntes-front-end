@@ -10,7 +10,7 @@ Bootstrap es un **framework CSS** (un marco de trabajo) de código abierto. Imag
 Hay varias formas de incluir Bootstrap en tu proyecto. Para empezar, estas son las dos principales:
 
 ### A. Vía CDN (Content Delivery Network) - **La más fácil**
-No necesitas descargar nada. Solo copias y pegas unos enlaces en tu HTML. Los archivos se cargan desde los servidores de Google o Bootstrap.
+No necesitas descargar nada. Solo copias y pegas unos enlaces en tu HTML. Los archivos se cargan desde un CDN como **jsDelivr**, que es el que recomienda la documentación oficial de Bootstrap.
 
 * **Pros:** Es instantáneo y mejora la velocidad de carga si el usuario ya visitó otro sitio que usaba el mismo enlace (caché).
 * **Contras:** Si no tienes internet mientras programas, los estilos no se verán.

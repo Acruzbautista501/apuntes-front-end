@@ -7,14 +7,14 @@ Dos componentes de interfaz muy usados en aplicaciones modernas (menús laterale
 Un **Offcanvas** es un panel que se desliza desde un borde de la pantalla (izquierda, derecha, arriba o abajo), típicamente usado para menús de navegación en móvil, carritos de compra o filtros.
 
 ```html
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#miOffcanvas">
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#miOffcanvas" aria-controls="miOffcanvas">
   Abrir Menú
 </button>
 
-<div class="offcanvas offcanvas-start" tabindex="-1" id="miOffcanvas">
+<div class="offcanvas offcanvas-start" tabindex="-1" id="miOffcanvas" aria-labelledby="miOffcanvasTitulo">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title">Menú</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    <h5 class="offcanvas-title" id="miOffcanvasTitulo">Menú</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
   </div>
   <div class="offcanvas-body">
     <ul class="list-group list-group-flush">
@@ -25,6 +25,11 @@ Un **Offcanvas** es un panel que se desliza desde un borde de la pantalla (izqui
   </div>
 </div>
 ```
+
+* **`aria-controls`** (en el disparador) y **`aria-labelledby`** (en el offcanvas, apuntando al `id` de su título): conectan ambos elementos para lectores de pantalla — sin ellos, el offcanvas se anuncia sin contexto de qué es o quién lo abrió.
+* **`aria-label="Cerrar"`** en el botón `.btn-close`: es un botón de solo ícono (sin texto visible), así que necesita esta etiqueta para ser comprensible por lectores de pantalla.
+* **`data-bs-backdrop="static"`**: igual que en el Modal, impide que un clic fuera del offcanvas lo cierre.
+* **`data-bs-scroll="true"`**: permite hacer scroll en el `<body>` de fondo mientras el offcanvas sigue abierto (por defecto el scroll del fondo queda bloqueado).
 
 ### Dirección del Deslizamiento
 | Clase | Desde dónde aparece |
@@ -66,6 +71,10 @@ toast.show();
 ```
 
 Esto se relaciona directamente con el Módulo 10, *API de JavaScript Programática*: los Toasts son el ejemplo más común de un componente de Bootstrap que necesitas controlar 100% desde tu propio código, no desde atributos HTML estáticos.
+
+**Configurar el auto-ocultado sin JS extra:** aunque mostrarlo requiere JavaScript, el *comportamiento* de auto-ocultado sí se configura declarativamente con atributos en el propio `.toast`:
+* **`data-bs-autohide="false"`**: desactiva el ocultado automático (el toast se queda visible hasta que el usuario lo cierra).
+* **`data-bs-delay="5000"`**: cambia el tiempo antes de ocultarse, en milisegundos (por defecto son 5000 = 5 segundos).
 
 ## 9.3 Tabla de Referencia Rápida
 

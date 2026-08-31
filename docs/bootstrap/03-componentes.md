@@ -37,7 +37,7 @@ Bootstrap no incluye iconos en su paquete principal, pero mantiene una librería
 </button>
 ```
 
-> **Nota:** al ser SVG controlados por CSS, heredan `color` con `text-*` y su tamaño escala con `font-size`, igual que cualquier texto — no necesitas configurar ancho/alto por separado.
+> **Nota:** el método de la CDN de arriba usa una **fuente web** (webfont), no SVG insertados en el DOM — por eso cada ícono se comporta como un carácter de texto: hereda `color` con `text-*` y su tamaño escala con `font-size`, igual que cualquier texto, sin configurar ancho/alto por separado. Bootstrap Icons también ofrece un método basado en SVG real (sprite `.svg` o `<svg>` inline) para cuando necesitas manipular el ícono como vector, pero es una instalación distinta a la de este ejemplo.
 
 ## 3.2 Botones (`.btn`)
 Un botón en HTML puro es muy básico. Con Bootstrap, se transforma completamente.
@@ -45,6 +45,8 @@ Un botón en HTML puro es muy básico. Con Bootstrap, se transforma completament
 * **Clase base:** Siempre debes usar `.btn`.
 * **Clase de estilo:** Debes combinarla con un color, como `.btn-primary` o `.btn-outline-success` (para botones con borde y sin fondo sólido).
 * **Tamaños:** Puedes usar `.btn-lg` (grande) o `.btn-sm` (pequeño).
+* **`.btn-link`**: Un botón que se ve como un enlace de texto pero mantiene el mismo padding y comportamiento que el resto de botones — útil para acciones secundarias dentro de un grupo de botones.
+* **`disabled`**: El atributo HTML nativo (no una clase) desactiva un `<button>`; en un `<a class="btn">` (que no soporta `disabled`) se simula agregando la clase `.disabled` y `aria-disabled="true"`.
 
 **Ejemplo:**
 ```html
@@ -67,15 +69,25 @@ Es el componente más versátil para mostrar contenido (artículos, productos, p
 </div>
 ```
 
+La tarjeta también admite `.card-header` (una franja superior, ej. para un título de sección o pestañas) y `.card-footer` (una franja inferior, ej. para metadatos o acciones), ambos hermanos de `.card-body` dentro del mismo `.card`:
+
+```html
+<div class="card">
+  <div class="card-header">Encabezado</div>
+  <div class="card-body">...</div>
+  <div class="card-footer text-body-secondary">Pie de tarjeta</div>
+</div>
+```
+
 ## 3.4 Barras de Navegación (`.navbar`)
 Es el componente más complejo pero el más necesario. Bootstrap lo hace responsivo automáticamente (crea el menú "hamburguesa" en móviles).
 
 * **`.navbar-expand-lg`**: Define en qué tamaño de pantalla el menú deja de estar colapsado (hamburguesa) y se muestra completo. Puedes usar cualquier breakpoint: `.navbar-expand-md`, `.navbar-expand-sm`, etc.
-* **`.navbar-light` / `.navbar-dark`**: Ajusta el color del texto para que contraste con el fondo. Desde Bootstrap 5.3, también puedes usar `data-bs-theme="dark"` directamente en el `.navbar` (ver Módulo 13, *Modo Oscuro*).
+* **`data-bs-theme="dark"` / `data-bs-theme="light"`**: Ajusta el color del texto para que contraste con el fondo, colocado directamente en el `.navbar` (ver Módulo 13, *Modo Oscuro*). Es la forma **recomendada actualmente**: las clases `.navbar-light`/`.navbar-dark` que se veían en tutoriales antiguos están **deprecadas desde Bootstrap 5.2** en favor de este atributo.
 
 **Estructura completa:**
 ```html
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
   <div class="container">
     <a class="navbar-brand" href="#">Mi Marca</a>
 
@@ -100,7 +112,7 @@ Es el componente más complejo pero el más necesario. Bootstrap lo hace respons
 </nav>
 ```
 
-**Tip:** Siempre es recomendable copiar la estructura base de la documentación oficial y luego personalizarla, ya que requiere muchas clases específicas para que el botón de menú funcione correctamente. Fíjate que el `.navbar-toggler` usa `data-bs-toggle="collapse"` — el mismo componente **Collapse** de JavaScript que usan los acordeones (Módulo 14).
+**Tip:** Siempre es recomendable copiar la estructura base de la documentación oficial y luego personalizarla, ya que requiere muchas clases específicas para que el botón de menú funcione correctamente. Fíjate que el `.navbar-toggler` usa `data-bs-toggle="collapse"` — el mismo componente **Collapse** de JavaScript que usan los acordeones (Módulo 5).
 
 ## 3.5 Tablas Responsivas (`.table`)
 Las tablas HTML nativas se ven anticuadas y, en móvil, se desbordan de la pantalla. Bootstrap las resuelve con dos capas de clases:
@@ -139,7 +151,10 @@ Las tablas HTML nativas se ven anticuadas y, en móvil, se desbordan de la panta
 | `.table-bordered` | Agrega bordes a todas las celdas |
 | `.table-dark` | Versión de fondo oscuro |
 | `.table-sm` | Reduce el padding, tabla más compacta |
+| `.table-borderless` | Quita todos los bordes de la tabla |
+| `.table-primary`, `.table-success`, `.table-danger`... | Colorea una fila o celda específica según su significado (ej. una fila de "cancelado" en `.table-danger`) — se aplican al `<tr>` o `<td>`, no a la `<table>` |
 | `.table-responsive` | Envuelve la tabla; agrega scroll horizontal solo si es necesario |
+| `.table-responsive-{sm\|md\|lg\|xl\|xxl}` | Igual que `.table-responsive`, pero el scroll solo se activa **por debajo** del breakpoint indicado — arriba de él la tabla se muestra normal |
 
 > **`table-responsive` va en un `<div>` que envuelve la tabla, no en el `<table>` mismo.** Es un error común olvidarlo y preguntarse por qué la tabla sigue rompiendo el layout en móvil.
 
@@ -162,7 +177,27 @@ Bootstrap limpia el estilo anticuado de los formularios del navegador y les da u
 
 ## 3.7 Alertas y Badges
 * **Alertas (`.alert`)**: Mensajes de retroalimentación (ej. "¡Registro exitoso!"). Se usan como `.alert .alert-success`.
-* **Badges (`.badge`)**: Pequeñas etiquetas o contadores (ej. el número de notificaciones). Se usan como `.badge .bg-secondary`.
+* **Badges (`.badge`)**: Pequeñas etiquetas o contadores (ej. el número de notificaciones). Se usan como `.badge .text-bg-secondary` — el prefijo `text-bg-*` (en vez de solo `bg-*`) ajusta automáticamente el color del texto para mantener buen contraste sobre ese fondo.
+
+**Alertas descartables:** el patrón más común en producción no es una alerta estática, sino una que el usuario puede cerrar. Se arma con `.alert-dismissible` en el contenedor y un botón `.btn-close` con `data-bs-dismiss="alert"` (el mismo componente **Dismiss** que también usan los toasts, Módulo 9):
+
+```html
+<div class="alert alert-success alert-dismissible" role="alert">
+  ¡Registro exitoso!
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+```
+
+**Badges con forma de píldora y sobre un botón:** `.rounded-pill` redondea completamente las esquinas del badge (ej. para contadores tipo "3"). Combinado con `.position-absolute`/`.translate-middle` sobre un elemento con `.position-relative`, es el patrón estándar para notificaciones sobre un ícono o botón:
+
+```html
+<button type="button" class="btn btn-primary position-relative">
+  Notificaciones
+  <span class="badge rounded-pill text-bg-danger position-absolute top-0 start-100 translate-middle">
+    9+
+  </span>
+</button>
+```
 
 > **Resumen del Módulo 3:**
 > Ya sabes cómo crear la estructura con el Grid (Módulo 2) y ahora sabes cómo rellenarla con componentes visuales (Módulo 3). 

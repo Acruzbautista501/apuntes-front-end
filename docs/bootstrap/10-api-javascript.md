@@ -45,7 +45,9 @@ document.getElementById('formGuardar').addEventListener('submit', async (evento)
 });
 ```
 
-> **`bootstrap.Modal.getInstance()`** recupera una instancia que ya fue creada (por ejemplo, automáticamente al hacer clic en un `data-bs-toggle="modal"`), en lugar de crear una nueva. Crear una segunda instancia sobre el mismo elemento puede causar comportamientos duplicados o inesperados.
+> **`bootstrap.Modal.getInstance()`** recupera una instancia que ya fue creada (por ejemplo, automáticamente al hacer clic en un `data-bs-toggle="modal"`), en lugar de crear una nueva. Crear una segunda instancia sobre el mismo elemento puede causar comportamientos duplicados o inesperados. Ojo: si nadie creó la instancia todavía, `getInstance()` devuelve `null`.
+>
+> Cuando no sabes con certeza si la instancia ya existe, usa **`bootstrap.Modal.getOrCreateInstance(elemento)`** en su lugar: devuelve la instancia existente si la hay, o crea una nueva si no — evitando el `null` inesperado de `getInstance()` sin arriesgarte a crear una instancia duplicada.
 
 ## 10.4 Eventos de Ciclo de Vida
 
@@ -74,6 +76,16 @@ modalElemento.addEventListener('hidden.bs.modal', () => {
 | `shown.bs.*` | Cuando la animación de apertura terminó |
 | `hide.bs.*` | Justo al iniciar la animación de cierre |
 | `hidden.bs.*` | Cuando la animación de cierre terminó |
+
+**Cancelar la acción antes de que ocurra:** los eventos en infinitivo (`show.bs.*`, `hide.bs.*`) son *cancelables* — llamar a `event.preventDefault()` dentro de su listener impide que el componente llegue a abrirse o cerrarse. Por ejemplo, para evitar que un modal se abra si un formulario tiene cambios sin guardar:
+
+```javascript
+modalElemento.addEventListener('show.bs.modal', (event) => {
+  if (hayLogicaQueLoImpide()) {
+    event.preventDefault();
+  }
+});
+```
 
 ## 10.5 Los Componentes que SIEMPRE Necesitan JavaScript
 

@@ -16,6 +16,16 @@ Cada entrada del mapa `$utilities` describe una "familia" completa de clases. Es
 
 Esa sola entrada es responsable de generar `m-0`, `m-1`, `m-2`... `m-5` y `m-auto` — Bootstrap itera automáticamente sobre `values` y genera una clase por cada una.
 
+Además de `property`, `class`, `values` y `responsive` (las que ya usarás en los ejemplos de este módulo), cada entrada del mapa admite otras claves de configuración:
+
+| Clave | Qué controla |
+| :--- | :--- |
+| `rfs` | Si `true`, aplica escalado fluido (RFS) al valor — útil en utilidades de tamaño de fuente o espaciado que deben achicarse en pantallas pequeñas |
+| `print` | Si `true`, además de las clases normales genera variantes `.d-print-*` para hojas de estilo de impresión |
+| `state` | Genera variantes por pseudo-clase, ej. `state: hover` produce también `.cursor-pointer-hover` |
+| `css-var` / `css-variable-name` | En vez de (o además de) una clase, genera una variable CSS por cada valor (ej. `--bs-cursor-pointer`) en lugar de una clase `.cursor-pointer` |
+| `rtl` | Si `false`, la utilidad no se genera en modo RTL (texto de derecha a izquierda) |
+
 ## 14.2 Agregar una Utilidad Nueva
 
 Supongamos que necesitas una utilidad para `cursor: pointer` que Bootstrap no incluye por defecto.
@@ -23,8 +33,10 @@ Supongamos que necesitas una utilidad para `cursor: pointer` que Bootstrap no in
 ```scss
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
 @import "bootstrap/scss/maps";
 @import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities"; // Aquí vive el mapa $utilities que vas a extender
 
 $utilities: map-merge($utilities, (
   "cursor": (
@@ -35,8 +47,9 @@ $utilities: map-merge($utilities, (
 ));
 
 @import "bootstrap/scss/utilities/api"; // Genera las clases a partir del mapa
-@import "bootstrap/scss/bootstrap";
 ```
+
+> Fíjate que este patrón importa **archivos individuales**, no el `bootstrap/scss/bootstrap` completo. Si además importaras el bundle completo, `utilities/api` se ejecutaría dos veces (una vez aquí, otra dentro de `bootstrap.scss`) y duplicarías la generación de **todas** las clases de utilidad, no solo la tuya. Si necesitas el resto del framework (botones, cards, grid...), impórtalo también como archivos individuales después de esta línea — nunca el bundle completo junto con este patrón.
 
 ```html
 <!-- Generadas automáticamente: -->
@@ -64,8 +77,10 @@ $utilities: map-merge($utilities, (
 Si tu proyecto nunca necesita, por ejemplo, las utilidades de `float` (`.float-start`, `.float-end`), puedes eliminarlas del mapa para que Bootstrap ni siquiera genere ese CSS — reduciendo el peso final del archivo.
 
 ```scss
-$utilities: map-remove($utilities, "float", "float-sm", "float-md", "float-lg", "float-xl");
+$utilities: map-remove($utilities, "width", "float");
 ```
+
+`"float"` es una sola entrada del mapa (con `responsive: true` internamente) que ya genera `.float-start`, `.float-end` y todas sus variantes por breakpoint — no existen claves separadas como `"float-sm"` o `"float-md"` en `$utilities`; eliminar `"float"` una vez basta para quitarlas todas.
 
 ## 14.5 Modificar una Utilidad Existente
 

@@ -22,6 +22,8 @@ Ya apareció en el Módulo 8 (spinners) y en el Módulo 9 — es la utilidad má
 <a class="visually-hidden-focusable" href="#contenido-principal">Saltar al contenido principal</a>
 ```
 
+> **No combines `.visually-hidden-focusable` con `.visually-hidden` en el mismo elemento.** A diferencia de Bootstrap 4 (donde `.sr-only`/`.sr-only-focusable` sí se usaban juntas), en Bootstrap 5 `.visually-hidden-focusable` ya funciona por sí sola — es un error común al migrar código antiguo y termina anulando el efecto.
+
 ## 11.2 `aria-*` que Bootstrap Ya Espera que Agregues
 
 Bootstrap construye el comportamiento de sus componentes, pero **no puede adivinar** las etiquetas descriptivas — esas siguen siendo tu responsabilidad.
@@ -59,7 +61,7 @@ Bootstrap ya maneja automáticamente el **atrapado de foco** (*focus trap*) dent
 
 ## 11.4 Contraste de Color en el Sistema de Temas
 
-Los colores por defecto de Bootstrap (`primary`, `danger`, etc.) están calibrados para cumplir un contraste mínimo razonable contra blanco y negro, pero **si personalizas la paleta** (Módulo 12, *Personalización con Sass*), esa garantía desaparece — es tu responsabilidad volver a verificarlo.
+La propia documentación oficial de Bootstrap advierte que **algunas combinaciones de su paleta por defecto** (`primary`, `danger`, etc.) pueden quedar por debajo del contraste mínimo exigido por WCAG 2.2 — **4.5:1** para texto normal y **3:1** para elementos no textuales —, especialmente sobre fondos claros. No es un riesgo que aparezca solo al personalizar la paleta (Módulo 12, *Personalización con Sass*): es tu responsabilidad verificar el contraste incluso usando los colores de Bootstrap tal como vienen, y con más razón después de personalizarlos.
 
 ```scss
 // Si cambias $primary por un color más claro, revisa el contraste del texto blanco encima
@@ -68,7 +70,17 @@ $primary: #93c5fd; // Un azul muy claro — "primary" con texto blanco podría f
 
 > Usa el inspector de accesibilidad de Chrome/Firefox DevTools para verificar cualquier combinación de `bg-primary` + `text-white` después de personalizar el tema.
 
-## 11.5 Componentes que Requieren Atención Extra
+## 11.5 `prefers-reduced-motion`: Respetar la Preferencia de Movimiento Reducido
+
+Bootstrap tiene soporte nativo para la preferencia de sistema operativo `prefers-reduced-motion` — no es algo que tengas que implementar tú mismo:
+
+* Las transiciones de Modales, Offcanvas y Collapse (`.fade`) se desactivan automáticamente si el usuario activó "reducir movimiento" en su sistema.
+* Los Spinners siguen girando, pero a una velocidad de animación más lenta.
+* La clase `.smooth-scroll` (o la propiedad CSS `scroll-behavior: smooth` que Bootstrap aplica) solo se activa cuando el usuario **no** pidió movimiento reducido.
+
+No necesitas agregar nada para que esto funcione — es el comportamiento por defecto del CSS de Bootstrap. Sí es tu responsabilidad respetar la misma preferencia en cualquier animación **propia** que agregues (ej. con `@media (prefers-reduced-motion: reduce)` en tu CSS).
+
+## 11.6 Componentes que Requieren Atención Extra
 
 | Componente | Riesgo de accesibilidad | Solución |
 | :--- | :--- | :--- |
@@ -77,7 +89,7 @@ $primary: #93c5fd; // Un azul muy claro — "primary" con texto blanco podría f
 | Dropdowns con solo íconos | Sin texto, el propósito no es claro para un lector de pantalla | Agrega `aria-label` descriptivo al botón disparador |
 | Botones deshabilitados (`disabled`) | Se ignoran por completo en la navegación por `Tab` | Considera `aria-disabled="true"` en vez de `disabled` si el usuario debe poder enfocarlo para leer por qué está desactivado |
 
-## 11.6 Tabla de Referencia Rápida
+## 11.7 Tabla de Referencia Rápida
 
 | Necesitas... | Usa... |
 | :--- | :--- |
@@ -85,3 +97,4 @@ $primary: #93c5fd; // Un azul muy claro — "primary" con texto blanco podría f
 | Un "skip link" que solo aparece al navegar con teclado | `.visually-hidden-focusable` |
 | Que un lector de pantalla anuncie el estado actual de un componente | `aria-current`, `aria-valuenow`, `aria-live` |
 | Que el foco no se "escape" de un modal abierto | Usar `<button>` reales como disparadores (Bootstrap hace el resto) |
+| Respetar la preferencia de movimiento reducido del usuario | Ya viene por defecto en las transiciones de Bootstrap |

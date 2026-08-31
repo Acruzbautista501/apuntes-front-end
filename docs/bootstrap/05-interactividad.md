@@ -39,12 +39,16 @@ Un modal es una caja que aparece sobre el contenido principal, bloqueando el res
 </div>
 ```
 
+**Evitar que se cierre por accidente:** agrega `data-bs-backdrop="static"` (el clic fuera del modal ya no lo cierra) y/o `data-bs-keyboard="false"` (la tecla Esc ya no lo cierra) en el `<div class="modal">` — útil para formularios largos donde perder el contenido sería frustrante.
+
 ## 5.3 Acordeones (`.accordion`)
 Perfectos para secciones de "Preguntas Frecuentes" (FAQ) o cuando tienes mucho texto y quieres ahorrar espacio. Permiten expandir y colapsar secciones de contenido.
 
 * Usa la clase `.accordion` para el contenedor padre.
 * Cada sección es un `.accordion-item`.
 * El botón disparador debe tener `data-bs-toggle="collapse"`.
+* **`data-bs-parent="#idDelAcordeon"`** en cada `.accordion-collapse`: es lo que hace que al abrir un panel se cierren automáticamente los demás — el comportamiento "acordeón" real. Sin este atributo, cada panel se comporta como un `.collapse` independiente y pueden quedar varios abiertos a la vez (útil si eso es justo lo que quieres, ej. un modo "siempre abierto").
+* **`.accordion-flush`** en el contenedor `.accordion`: quita los bordes y esquinas redondeadas, para que el acordeón se vea integrado al ancho completo de su contenedor padre (común dentro de un `.card` o un sidebar).
 
 ## 5.4 Carrusel de Imágenes (`.carousel`)
 Es el clásico "slider" o deslizador de imágenes que suele ir en la parte superior de las páginas (Hero Section).
@@ -52,6 +56,8 @@ Es el clásico "slider" o deslizador de imágenes que suele ir en la parte super
 * **`.carousel-inner`**: Contiene las imágenes.
 * **`.carousel-item`**: Cada diapositiva (una debe tener la clase `.active` para mostrarse al inicio).
 * **`.carousel-control-prev/next`**: Los botones de flechas para navegar.
+* **`data-bs-ride="carousel"`** en el contenedor `.carousel`: hace que el deslizador avance automáticamente al cargar la página. Sin este atributo, el carrusel solo avanza cuando el usuario hace clic en las flechas.
+* **`.carousel-indicators`**: los puntitos de navegación en la parte inferior; cada uno usa `data-bs-slide-to="N"` (el índice de la diapositiva, empezando en 0) para saltar directamente a ella.
 
 ## 5.5 Tooltips y Popovers
 Son pequeñas burbujas de información que aparecen al pasar el cursor o hacer clic.
@@ -73,13 +79,29 @@ const tooltipTriggers = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 tooltipTriggers.forEach(el => new bootstrap.Tooltip(el));
 ```
 
+**Dependen de Popper.js:** tanto los tooltips como los popovers (y los dropdowns) usan la librería **Popper** por debajo para calcular dónde posicionarse sin salirse de la pantalla. Si usas `bootstrap.bundle.min.js` (el archivo que se usa en todo este curso) ya viene incluido; si en cambio cargas `bootstrap.min.js` "a secas", debes agregar `popper.min.js` aparte **antes** de él, o los tooltips/popovers simplemente no aparecerán.
+
+**Popovers con contenido, no solo tooltips:** lo que distingue a un popover de un tooltip es el atributo `data-bs-content` (el cuerpo, más largo) además de `data-bs-title` (el título):
+
+```html
+<button type="button" class="btn btn-secondary" data-bs-toggle="popover"
+        data-bs-title="Título" data-bs-content="Contenido más largo del popover.">
+  Haz clic aquí
+</button>
+```
+
+```javascript
+const popoverTriggers = document.querySelectorAll('[data-bs-toggle="popover"]');
+popoverTriggers.forEach(el => new bootstrap.Popover(el));
+```
+
 El Módulo 10, *API de JavaScript Programática*, explica a fondo por qué componentes como este requieren instanciarse manualmente mientras que un Modal o un Acordeón funcionan solo con atributos `data-bs-*`.
 
 ## 5.6 Scrollspy: Navegación que se Resalta Sola
 **Scrollspy** vigila el scroll de la página y marca automáticamente como "activo" (`.active`) el ítem del menú que corresponde a la sección visible — muy común en documentaciones de una sola página (de hecho, así funciona el índice lateral de muchos sitios de documentación).
 
 ```html
-<body data-bs-spy="scroll" data-bs-target="#navegacion" data-bs-offset="70" tabindex="0">
+<body data-bs-spy="scroll" data-bs-target="#navegacion" data-bs-root-margin="0px 0px -70%" tabindex="0">
 
   <nav id="navegacion" class="navbar">
     <a class="nav-link" href="#seccion1">Sección 1</a>
@@ -93,7 +115,7 @@ El Módulo 10, *API de JavaScript Programática*, explica a fondo por qué compo
 
 * **`data-bs-spy="scroll"`**: Va en el contenedor con scroll (normalmente el `<body>`).
 * **`data-bs-target`**: Apunta al `id` del menú de navegación que debe resaltarse.
-* **`data-bs-offset`**: Ajusta cuándo se considera "activa" una sección (útil si tienes un navbar fijo que tapa el inicio de cada sección).
+* **`data-bs-root-margin`**: Ajusta cuándo se considera "activa" una sección (útil si tienes un navbar fijo que tapa el inicio de cada sección), ej. `data-bs-root-margin="0px 0px -40%"`. Reemplaza a `data-bs-offset`, que sigue funcionando por compatibilidad pero está **deprecado desde Bootstrap 5.1.3** y se eliminará en la versión 6.
 
 ## 5.7 Proyecto Final Sugerido
 

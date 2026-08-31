@@ -6,7 +6,7 @@ El Módulo 3 cubrió los componentes más usados (botones, tarjetas, navbar, for
 
 ```html
 <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     Opciones
   </button>
   <ul class="dropdown-menu">
@@ -20,7 +20,10 @@ El Módulo 3 cubrió los componentes más usados (botones, tarjetas, navbar, for
 
 * **`.dropdown-toggle`**: Agrega automáticamente la flechita indicadora al botón.
 * **`data-bs-toggle="dropdown"`**: Es lo único necesario para que el menú funcione — no requiere JavaScript adicional.
+* **`aria-expanded="false"`**: Bootstrap lo actualiza a `"true"` automáticamente al abrir el menú; inclúyelo desde el HTML con `"false"` para que el estado inicial también sea correcto para lectores de pantalla.
 * **`.dropdown-divider`**: Una línea separadora entre grupos de opciones.
+* **Dirección de apertura**: por defecto el menú se abre hacia abajo. Cambia el contenedor de `.dropdown` a `.dropup`, `.dropend` o `.dropstart` para abrirlo hacia arriba, derecha o izquierda. `.dropdown-menu-end` alinea el menú a la derecha del botón en vez de a la izquierda.
+* **Botón dividido**: `.dropdown-toggle-split` separa la flechita en un segundo `<button>`, para que el botón principal dispare una acción directa y solo la flecha abra el menú.
 
 ## 8.2 Pagination (Paginación)
 
@@ -30,7 +33,7 @@ El Módulo 3 cubrió los componentes más usados (botones, tarjetas, navbar, for
     <li class="page-item disabled">
       <a class="page-link" href="#">Anterior</a>
     </li>
-    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+    <li class="page-item active"><a class="page-link" href="#" aria-current="page">1</a></li>
     <li class="page-item"><a class="page-link" href="#">2</a></li>
     <li class="page-item"><a class="page-link" href="#">3</a></li>
     <li class="page-item">
@@ -42,6 +45,7 @@ El Módulo 3 cubrió los componentes más usados (botones, tarjetas, navbar, for
 
 * **`.active`**: Marca la página actual.
 * **`.disabled`**: Deshabilita visualmente un botón (ej. "Anterior" en la primera página).
+* **`aria-current="page"`**: Va en el enlace de la página activa (junto con `.active` en el `<li>`), para que un lector de pantalla anuncie cuál es la página actual — `.active` por sí sola es solo visual.
 
 ## 8.3 Breadcrumbs (Migas de Pan)
 
@@ -67,7 +71,7 @@ Ideal para bandejas de notificaciones, listas de configuración o menús lateral
 <ul class="list-group">
   <li class="list-group-item d-flex justify-content-between align-items-center">
     Mensajes nuevos
-    <span class="badge bg-primary rounded-pill">14</span>
+    <span class="badge text-bg-primary rounded-pill">14</span>
   </li>
   <li class="list-group-item active">Configuración de cuenta</li>
   <li class="list-group-item disabled">Facturación (próximamente)</li>
@@ -79,6 +83,10 @@ Ideal para bandejas de notificaciones, listas de configuración o menús lateral
   <a href="#" class="list-group-item list-group-item-action">Seguridad</a>
 </div>
 ```
+
+* **`.list-group-numbered`** (en el `<ol>` o `<ul>` contenedor): agrega numeración automática delante de cada ítem, sin escribirla a mano.
+* **`.list-group-horizontal`** (o `.list-group-horizontal-{bp}` para que solo sea horizontal desde cierto breakpoint): pone los ítems en fila en vez de apilados.
+* **Variantes contextuales**: `.list-group-item-success`, `.list-group-item-danger`, etc. — igual que las alertas, colorean un ítem específico según su significado (ej. una tarea vencida en `.list-group-item-danger`).
 
 ## 8.5 Progress Bars (Barras de Progreso)
 
@@ -109,11 +117,13 @@ Ideal para bandejas de notificaciones, listas de configuración o menús lateral
 </div>
 
 <!-- Dentro de un botón, mientras se procesa una acción -->
-<button class="btn btn-primary" disabled>
-  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-  Guardando...
+<button class="btn btn-primary" type="button" disabled>
+  <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+  <span role="status">Guardando...</span>
 </button>
 ```
+
+> `role="status"` y `aria-hidden="true"` no deben ir en el mismo elemento — son contradictorios (uno anuncia el elemento a lectores de pantalla, el otro lo oculta de ellos). El spinner lleva `aria-hidden="true"` porque es solo decorativo, y el texto de estado va aparte con `role="status"`, como en el ejemplo de arriba.
 
 > **`.visually-hidden`** oculta el texto visualmente pero lo mantiene disponible para lectores de pantalla — sin él, un usuario con lector de pantalla solo escucharía silencio mientras algo carga. Se profundiza en el Módulo 11, *Accesibilidad*.
 

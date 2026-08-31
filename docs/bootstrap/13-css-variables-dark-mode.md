@@ -52,6 +52,8 @@ Al cambiar `data-bs-theme`, Bootstrap redefine automáticamente **todas** sus va
 
 ## 13.3 Toggle de Tema Controlado por JavaScript
 
+> **Dónde colocar el script que lee el tema guardado:** ejecútalo en el `<head>`, en un `<script>` normal (no `defer`/`module`), **antes** de que el `<body>` se pinte. Si lo dejas para el final del documento, el usuario verá primero el tema por defecto (claro) y luego un salto brusco al tema guardado — el típico "flash" de tema incorrecto (*FOUC*). El código de abajo que lee `localStorage`/`prefers-color-scheme` es justamente el que debe ir ahí; el listener del botón sí puede quedarse donde esté el resto de tu JavaScript.
+
 ```html
 <button id="toggleTema" class="btn btn-outline-secondary">
   <i class="bi bi-moon-stars"></i> Cambiar tema
@@ -85,8 +87,9 @@ Para que tus propios componentes personalizados respeten el modo oscuro automát
 <!-- BIEN: usa la variable del tema activo, cambia solo con data-bs-theme -->
 <div class="bg-body text-body p-4">Contenido</div>
 
-<!-- También existe una variante para "superficies secundarias" -->
+<!-- También existen variantes para "superficies" secundarias y terciarias -->
 <div class="bg-body-secondary p-4">Panel secundario</div>
+<div class="bg-body-tertiary p-4">Panel terciario (opacidad aún más sutil)</div>
 ```
 
 ## 13.5 Combinar `data-bs-theme` con Sass Personalizado
@@ -104,13 +107,31 @@ $primary: #7c3aed;
 $primary-text-emphasis-dark: #c4b5fd; // Un morado más claro, para que resalte sobre fondo oscuro
 
 @import "bootstrap/scss/variables-dark";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/root";
+
+// El resto del framework completo, ya con tus valores de claro y oscuro incluidos
+// (no importes "maps"/"mixins"/"root" por separado: bootstrap.scss ya los trae)
 @import "bootstrap/scss/bootstrap";
 ```
 
-## 13.6 Tabla de Referencia Rápida
+## 13.6 Más Allá de Claro/Oscuro: Temas Personalizados
+
+`data-bs-theme` no está limitado a `"light"`/`"dark"` — puedes definir tus propios nombres de tema, redefiniendo las variables `--bs-*` que quieras dentro de un selector `[data-bs-theme="..."]`:
+
+```css
+[data-bs-theme="azul-corporativo"] {
+  --bs-body-bg: #0a2540;
+  --bs-body-color: #e0e7ff;
+  --bs-primary: #38bdf8;
+}
+```
+
+```html
+<div data-bs-theme="azul-corporativo" class="p-4 bg-body text-body">
+  Un tercer tema, más allá de "light" y "dark"
+</div>
+```
+
+## 13.7 Tabla de Referencia Rápida
 
 | Necesitas... | Usa... |
 | :--- | :--- |

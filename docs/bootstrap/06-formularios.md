@@ -23,15 +23,36 @@ Bootstrap puede pintar un campo de verde o rojo según sea válido o inválido, 
 * **`.is-valid` / `.is-invalid`**: Se añaden manualmente (por ti o por JavaScript) para forzar el estado visual.
 * **`.valid-feedback` / `.invalid-feedback`**: Están ocultos por defecto; Bootstrap los muestra automáticamente **solo** cuando el input hermano tiene la clase `.is-valid` o `.is-invalid`.
 
-### Validación Nativa del Navegador (`.was-validated`)
-Si prefieres usar la validación nativa de HTML (`required`, `type="email"`, `pattern`) en lugar de marcar clases a mano, agrega `.was-validated` al `<form>` después de que el usuario intente enviarlo (normalmente vía JavaScript al capturar el evento `submit`):
+### Validación con Estilos Personalizados (`.was-validated`)
+Si prefieres apoyarte en los atributos nativos de HTML (`required`, `type="email"`, `pattern`) en lugar de marcar clases `.is-valid`/`.is-invalid` a mano, Bootstrap ofrece un segundo enfoque: sus propios estilos sobre las pseudo-clases `:valid`/`:invalid` del navegador, activados con `.was-validated`.
+
+Para que funcione de verdad hacen falta tres piezas: el atributo `novalidate` en el `<form>` (para desactivar la burbuja de validación nativa del navegador, que si no compite con los mensajes de Bootstrap), la clase `.needs-validation`, y el JavaScript que agrega `.was-validated` recién al intentar enviar:
 
 ```html
-<form class="was-validated">
-  <input type="email" class="form-control" required>
-  <div class="invalid-feedback">Este campo es obligatorio y debe ser un correo válido.</div>
+<form class="needs-validation" novalidate>
+  <div class="mb-3">
+    <input type="email" class="form-control" required>
+    <div class="invalid-feedback">Este campo es obligatorio y debe ser un correo válido.</div>
+  </div>
+  <button class="btn btn-primary" type="submit">Enviar</button>
 </form>
 ```
+
+```javascript
+document.querySelectorAll('.needs-validation').forEach((form) => {
+  form.addEventListener('submit', (event) => {
+    if (!form.checkValidity()) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+    form.classList.add('was-validated')
+  })
+})
+```
+
+Sin `novalidate` + `.needs-validation` + este JS, agregar `.was-validated` directamente al `<form>` no dispara nada por sí solo — es el patrón completo el que hace que la validación visual aparezca al enviar.
+
+**Tooltips en vez de texto en bloque:** si `.valid-feedback`/`.invalid-feedback` ocupan demasiado espacio en un formulario compacto, `.valid-tooltip`/`.invalid-tooltip` muestran el mismo mensaje como una burbuja posicionada junto al campo en vez de empujar el contenido de abajo. Requieren que el contenedor tenga `position: relative` (agrega `.position-relative` si no lo tiene ya).
 
 ## 6.2 `input-group`: Agrupar Texto o Botones con un Input
 
@@ -51,6 +72,8 @@ Perfecto para símbolos de moneda, unidades de medida, o un botón de acción pe
   </button>
 </div>
 ```
+
+> Si combinas un `input-group` con los estados de validación de la sección anterior (ej. un `.is-invalid` dentro del grupo), agrega la clase `.has-validation` al `.input-group` — sin ella, el `border-radius` de las esquinas del grupo queda mal aplicado cuando aparece el mensaje de error.
 
 ## 6.3 Labels Flotantes (`.form-floating`)
 
@@ -86,6 +109,16 @@ Un patrón moderno donde el `label` empieza superpuesto sobre el input y "flota"
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" role="switch" id="notificaciones">
   <label class="form-check-label" for="notificaciones">Activar notificaciones</label>
+</div>
+
+<!-- En línea: agrega .form-check-inline junto a .form-check para ponerlos en fila -->
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="talla" id="tallaM" checked>
+  <label class="form-check-label" for="tallaM">M</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="talla" id="tallaL">
+  <label class="form-check-label" for="tallaL">L</label>
 </div>
 ```
 
