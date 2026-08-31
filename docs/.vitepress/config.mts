@@ -67,6 +67,7 @@ export default defineConfig({
               { text: 'POO Avanzada', link: '/fundamentos/06-poo' },
               { text: 'Asincronismo y API Rest', link: '/fundamentos/07-asincronismo' },
               { text: 'Vite y Despliegue', link: '/fundamentos/08-vite' },
+              { text: 'Ejercicios de Práctica', link: '/fundamentos/09-ejercicios-practica' },
             ]
           },          
           { 
@@ -81,6 +82,7 @@ export default defineConfig({
               { text: 'Genéricos', link: '/typescript/06-genericos' },
               { text: 'APIs y el DOM', link: '/typescript/07-apis' },
               { text: 'Frameworks Modernos', link: '/typescript/08-frameworks' },
+              { text: 'Ejercicios de Práctica', link: '/typescript/09-ejercicios-practica' },
             ]
           },
         ]
@@ -111,7 +113,8 @@ export default defineConfig({
               { text: 'Layouts Avanzados', link:'/css/16-layouts-avanzados'},
               { text: 'Accesibilidad en CSS', link:'/css/17-accesibilidad'},
               { text: 'Novedades de CSS (2024+)', link:'/css/18-novedades-2024'},
-              { text: 'Proyecto Integrador', link:'/css/19-proyecto-integrador'},
+              { text: 'Ejercicios de Práctica', link:'/css/19-ejercicios-practica'},
+              { text: 'Proyecto Integrador', link:'/css/20-proyecto-integrador'},
             ]
           },
           {
@@ -134,7 +137,8 @@ export default defineConfig({
               { text: 'Utility API', link:'/bootstrap/14-utility-api'},
               { text: 'Integración con Vue y React', link:'/bootstrap/15-integracion-frameworks'},
               { text: 'Rendimiento y Build para Producción', link:'/bootstrap/16-rendimiento'},
-              { text: 'Proyecto Integrador', link:'/bootstrap/17-proyecto-integrador'},
+              { text: 'Ejercicios de Práctica', link:'/bootstrap/17-ejercicios-practica'},
+              { text: 'Proyecto Integrador', link:'/bootstrap/18-proyecto-integrador'},
             ]
           },
           { 
@@ -160,7 +164,8 @@ export default defineConfig({
               { text: 'Buenas Prácticas con Tailwind', link:'/tailwind/14-practicas'},
               { text: 'Migración v3→v4 e Integración con Frameworks', link:'/tailwind/18-migracion-arquitectura'},
               { text: 'Sistemas de Diseño, Rendimiento y Accesibilidad', link:'/tailwind/19-diseno-rendimiento-a11y'},
-              { text: 'Proyecto Integrador', link:'/tailwind/20-proyecto-integrador'},
+              { text: 'Ejercicios de Práctica', link:'/tailwind/20-ejercicios-practica'},
+              { text: 'Proyecto Integrador', link:'/tailwind/21-proyecto-integrador'},
             ]
           },
           {
@@ -186,7 +191,8 @@ export default defineConfig({
               { text: 'Internacionalización (i18n) en Maquetación', link:'/maquetacion-web/17-internacionalizacion'},
               { text: 'Fundamentos de Maquetación para PWA', link:'/maquetacion-web/18-fundamentos-pwa'},
               { text: 'Documentación y Handoff a Desarrollo', link:'/maquetacion-web/19-documentacion-handoff'},
-              { text: 'Proyecto Integrador', link:'/maquetacion-web/20-proyecto-integrador'},
+              { text: 'Ejercicios de Práctica', link:'/maquetacion-web/20-ejercicios-practica'},
+              { text: 'Proyecto Integrador', link:'/maquetacion-web/21-proyecto-integrador'},
             ]
           },
           {
@@ -212,7 +218,8 @@ export default defineConfig({
               { text: 'Integración con ESPs', link:'/email/17-integracion-esps'},
               { text: 'Deliverability Básica para Maquetadores', link:'/email/18-deliverability'},
               { text: 'Checklist de QA y Buenas Prácticas', link:'/email/19-checklist-buenas-practicas'},
-              { text: 'Proyecto Integrador', link:'/email/20-proyecto-integrador'},
+              { text: 'Ejercicios de Práctica', link:'/email/20-ejercicios-practica'},
+              { text: 'Proyecto Integrador', link:'/email/21-proyecto-integrador'},
             ]
           },
         ]
@@ -246,7 +253,8 @@ export default defineConfig({
               { text: 'Arquitectura de Proyectos Grandes', link:'/vue/19-arquitectura'},
               { text: 'Plugins y Configuración Global', link:'/vue/20-plugins'},
               { text: 'Accesibilidad en Aplicaciones Vue', link:'/vue/21-accesibilidad'},
-              { text: 'Proyecto Integrador', link:'/vue/22-proyecto-integrador'},
+              { text: 'Ejercicios de Práctica', link:'/vue/22-ejercicios-practica'},
+              { text: 'Proyecto Integrador', link:'/vue/23-proyecto-integrador'},
             ]
           },
           {
@@ -276,7 +284,9 @@ export default defineConfig({
               { text: 'Testing con Vitest y RTL', link:'/react/21-testing'},
               { text: 'Accesibilidad en React', link:'/react/22-accesibilidad'},
               { text: 'Introducción a Next.js', link:'/react/23-nextjs'},
-              { text: 'Arquitectura y Proyecto Integrador', link:'/react/24-proyecto-integrador'},
+              { text: 'Arquitectura de Proyectos', link:'/react/24-arquitectura-proyectos'},
+              { text: 'Ejercicios de Práctica', link:'/react/25-ejercicios-practica'},
+              { text: 'Proyecto Integrador', link:'/react/26-proyecto-integrador'},
             ]
           },
           // { text: 'Nuxt (SSR/Static)', link: '/frameworks/nuxt' },
@@ -315,7 +325,8 @@ export default defineConfig({
               { text: 'Docker para Aplicaciones Node.js', link:'/node/22-docker'},
               { text: 'CI/CD y Despliegue en Producción', link:'/node/23-cicd-despliegue'},
               { text: 'Logging, Monitoreo y Observabilidad', link:'/node/24-logging-monitoreo'},
-              { text: 'Proyecto Integrador', link:'/node/25-proyecto-integrador'},
+              { text: 'Ejercicios de Práctica', link:'/node/25-ejercicios-practica'},
+              { text: 'Proyecto Integrador', link:'/node/26-proyecto-integrador'},
             ]
           },
           {
@@ -347,7 +358,84 @@ export default defineConfig({
               { text: 'Colas de Trabajo en PHP', link:'/php/23-colas-trabajo'},
               { text: 'Docker para Aplicaciones PHP', link:'/php/24-docker'},
               { text: 'CI/CD y Despliegue en Producción', link:'/php/25-cicd-despliegue'},
-              { text: 'Proyecto Integrador: API REST Completa en PHP Puro', link:'/php/26-proyecto-integrador'},
+              { text: 'Ejercicios de Práctica', link:'/php/26-ejercicios-practica'},
+              { text: 'Proyecto Integrador: API REST Completa en PHP Puro', link:'/php/27-proyecto-integrador'},
+            ]
+          },
+        ]
+      },
+      {
+        text: '🛠️ Herramientas y Flujo de Trabajo',
+        collapsed: true,
+        items: [
+          {
+            text: 'Git',
+            collapsed: true,
+            items: [
+              { text: 'Introducción a Git y Control de Versiones', link:'/git/01-introduccion'},
+              { text: 'Instalación y Configuración Inicial', link:'/git/02-instalacion-configuracion'},
+              { text: 'El Flujo Básico: init, add, commit', link:'/git/03-flujo-basico'},
+              { text: 'Historial y Diferencias (log, diff, show)', link:'/git/04-historial-diferencias'},
+              { text: 'Ramas (Branches): Crear, Cambiar, Eliminar', link:'/git/05-ramas'},
+              { text: 'Fusionar Ramas (Merge)', link:'/git/06-merge'},
+              { text: 'Repositorios Remotos: GitHub/GitLab/Bitbucket', link:'/git/07-repositorios-remotos'},
+              { text: 'Clonar, Fetch, Pull y Push', link:'/git/08-clonar-fetch-pull-push'},
+              { text: 'Pull Requests / Merge Requests', link:'/git/09-pull-requests'},
+              { text: 'Forks y Contribución a Proyectos de Terceros', link:'/git/10-forks-contribucion'},
+              { text: 'Deshacer Cambios: checkout, restore, reset y revert', link:'/git/11-deshacer-cambios'},
+              { text: 'Stash: Guardar Cambios Temporalmente', link:'/git/12-stash'},
+              { text: '.gitignore y Archivos Ignorados', link:'/git/13-gitignore'},
+              { text: 'Tags y Versionado Semántico', link:'/git/14-tags-versionado'},
+              { text: 'Resolución de Conflictos de Merge', link:'/git/15-resolucion-conflictos'},
+              { text: 'Rebase: Reescribir Historial', link:'/git/16-rebase'},
+              { text: 'Rebase Interactivo (squash, fixup, reorder)', link:'/git/17-rebase-interactivo'},
+              { text: 'Cherry-pick', link:'/git/18-cherry-pick'},
+              { text: 'Reflog y Recuperación de Commits Perdidos', link:'/git/19-reflog'},
+              { text: 'Git Bisect: Depuración por Bisección', link:'/git/20-bisect'},
+              { text: 'Submódulos y Subtrees', link:'/git/21-submodulos-subtrees'},
+              { text: 'Estrategias de Branching (Git Flow, GitHub Flow, Trunk-Based)', link:'/git/22-estrategias-branching'},
+              { text: 'Conventional Commits y Buenas Prácticas de Mensajes', link:'/git/23-conventional-commits'},
+              { text: 'Git Hooks', link:'/git/24-git-hooks'},
+              { text: 'Protección de Ramas, CODEOWNERS y Revisión de Código', link:'/git/25-proteccion-ramas-codeowners'},
+              { text: 'Cómo Funciona Git Internamente', link:'/git/26-git-interno'},
+              { text: 'Rendimiento en Repositorios Grandes', link:'/git/27-rendimiento-repos-grandes'},
+              { text: 'Firmas GPG/SSH y Seguridad en Commits', link:'/git/28-firmas-gpg-ssh'},
+              { text: 'Proyecto Integrador: Flujo de Trabajo Git Completo en Equipo', link:'/git/29-proyecto-integrador'},
+            ]
+          },
+          {
+            text: 'Vite',
+            collapsed: true,
+            items: [
+              { text: 'Introducción a Vite: Qué es y Por Qué Existe', link:'/vite/01-introduccion'},
+              { text: 'Instalación y Primer Proyecto', link:'/vite/02-instalacion-primer-proyecto'},
+              { text: 'Estructura de un Proyecto Vite', link:'/vite/03-estructura-proyecto'},
+              { text: 'El Servidor de Desarrollo y HMR', link:'/vite/04-servidor-desarrollo-hmr'},
+              { text: 'Módulos ES Nativos, esbuild y Rollup', link:'/vite/05-esbuild-rollup'},
+              { text: 'El Archivo de Configuración vite.config', link:'/vite/06-vite-config'},
+              { text: 'Variables de Entorno y Modos (.env)', link:'/vite/07-variables-entorno-modos'},
+              { text: 'Manejo de Assets Estáticos', link:'/vite/08-assets-estaticos'},
+              { text: 'CSS en Vite: Módulos, Preprocesadores y PostCSS', link:'/vite/09-css-en-vite'},
+              { text: 'Resolución de Módulos y Alias de Rutas', link:'/vite/10-resolucion-modulos-alias'},
+              { text: 'Vite con TypeScript', link:'/vite/11-vite-typescript'},
+              { text: 'Vite con Vue', link:'/vite/12-vite-vue'},
+              { text: 'Vite con React', link:'/vite/13-vite-react'},
+              { text: 'Vite con Otros Frameworks (Svelte, Solid, Preact)', link:'/vite/14-vite-otros-frameworks'},
+              { text: 'El Proceso de Build con Rollup', link:'/vite/15-build-rollup'},
+              { text: 'Code Splitting y Carga Diferida', link:'/vite/16-code-splitting-lazy-loading'},
+              { text: 'Optimización de Dependencias (Pre-Bundling)', link:'/vite/17-optimizacion-dependencias'},
+              { text: 'Análisis y Optimización del Bundle Final', link:'/vite/18-analisis-bundle'},
+              { text: 'Aplicaciones Multi-Página (MPA) con Vite', link:'/vite/19-multi-page-apps'},
+              { text: 'Modo Librería: Publicar un Paquete con Vite', link:'/vite/20-modo-libreria'},
+              { text: 'El Sistema de Plugins de Vite', link:'/vite/21-sistema-plugins'},
+              { text: 'Crear un Plugin Propio', link:'/vite/22-crear-plugin-propio'},
+              { text: 'Vite en Modo Middleware y su API Programática', link:'/vite/23-modo-middleware-api-programatica'},
+              { text: 'Renderizado del Lado del Servidor (SSR) con Vite', link:'/vite/24-ssr'},
+              { text: 'Testing con Vitest', link:'/vite/25-testing-vitest'},
+              { text: 'Vite en Monorepos', link:'/vite/26-monorepos'},
+              { text: 'CI/CD y Despliegue de Proyectos Vite', link:'/vite/27-cicd-despliegue'},
+              { text: 'Vite vs Webpack/Otros Bundlers', link:'/vite/28-vite-vs-webpack'},
+              { text: 'Proyecto Integrador: Configuración Vite Completa', link:'/vite/29-proyecto-integrador'},
             ]
           },
         ]

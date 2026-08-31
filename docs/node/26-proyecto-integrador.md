@@ -1,8 +1,8 @@
-# Módulo 25: Proyecto Integrador — API REST Completa
+# Módulo 26: Proyecto Integrador — API REST Completa
 
 Has recorrido el camino completo: desde el Event Loop hasta Docker, CI/CD y observabilidad. Este módulo no enseña conceptos nuevos; es un **plano de construcción** para aplicar todo lo anterior en un solo proyecto coherente y de nivel profesional.
 
-## 25.1 El Encargo
+## 26.1 El Encargo
 
 Vas a construir una **API de Gestión de Tareas Colaborativo** completa — el mismo dominio funcional de los proyectos integradores de Vue.js y React de este sitio, ahora desde el lado del backend que los alimentaría:
 
@@ -17,7 +17,7 @@ Vas a construir una **API de Gestión de Tareas Colaborativo** completa — el m
 9. Contenerizado con Docker Compose (API + MongoDB + Redis).
 10. Pipeline de CI que corre lint, build y tests en cada Pull Request.
 
-## 25.2 Checklist de Requisitos Técnicos
+## 26.2 Checklist de Requisitos Técnicos
 
 Cada punto remite al módulo donde se explicó la técnica. Autoevalúate antes de dar el proyecto por terminado.
 
@@ -61,7 +61,7 @@ Cada punto remite al módulo donde se explicó la técnica. Autoevalúate antes 
 - [ ] La API expone un endpoint `/health` (Módulo 24).
 - [ ] Los logs usan Pino de forma estructurada, sin datos sensibles (Módulo 24).
 
-## 25.3 Estructura de Archivos Sugerida
+## 26.3 Estructura de Archivos Sugerida
 
 ```text
 api-gestion-tareas/
@@ -102,7 +102,7 @@ api-gestion-tareas/
 └── package.json
 ```
 
-## 25.4 Criterios de "Terminado" (Definition of Done)
+## 26.4 Criterios de "Terminado" (Definition of Done)
 
 1. **¿Un usuario solo puede ver y modificar sus propios proyectos y tareas, verificado explícitamente en cada endpoint?**
 2. **¿El registro responde inmediatamente, sin esperar al envío real del correo de bienvenida?**
@@ -110,7 +110,7 @@ api-gestion-tareas/
 4. **¿El pipeline de CI falla correctamente si se introduce un error de tipos o un test roto?**
 5. **¿Los logs en producción están estructurados y no contienen contraseñas ni tokens completos?**
 
-## 25.5 Siguientes Pasos
+## 26.5 Siguientes Pasos
 
 Con este proyecto terminado, ya tienes el criterio para:
 

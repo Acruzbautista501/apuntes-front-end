@@ -1,8 +1,8 @@
-# MÓDULO 20 — Proyecto Integrador: Dashboard de Gestión
+# MÓDULO 21 — Proyecto Integrador: Dashboard de Gestión
 
 Has recorrido el camino completo: desde `¿Qué es Tailwind?` hasta el motor Oxide y la accesibilidad. Este módulo final no enseña conceptos nuevos; es un **plano de construcción** para que apliques todo lo anterior en un solo proyecto coherente, tal como lo harías en un entorno profesional real.
 
-## 20.1 El Encargo
+## 21.1 El Encargo
 
 Vas a construir el **Dashboard Principal** de tu aplicación: la pantalla que un administrador ve al iniciar sesión. Debe incluir:
 
@@ -14,7 +14,7 @@ Vas a construir el **Dashboard Principal** de tu aplicación: la pantalla que un
 6. Modo oscuro funcional con persistencia (Módulo 12.4).
 7. Al menos un componente diseñado con **Container Queries** para que se adapte tanto al sidebar como al área principal (Módulo 15).
 
-## 20.2 Checklist de Requisitos Técnicos
+## 21.2 Checklist de Requisitos Técnicos
 
 Usa esta lista para autoevaluar tu implementación antes de darla por terminada. Cada punto remite al módulo donde se explicó la técnica.
 
@@ -55,7 +55,7 @@ Usa esta lista para autoevaluar tu implementación antes de darla por terminada.
 - [ ] `prettier-plugin-tailwindcss` está instalado y las clases están ordenadas automáticamente (Módulo 14.1).
 - [ ] Ningún elemento tiene más de ~20 clases sin haber sido evaluado para extracción a componente (Módulo 14.2, 14.3).
 
-## 20.3 Estructura de Archivos Sugerida
+## 21.3 Estructura de Archivos Sugerida
 
 ```text
 src/
@@ -78,7 +78,7 @@ src/
     └── DashboardView.vue
 ```
 
-## 20.4 Criterios de "Terminado" (Definition of Done)
+## 21.4 Criterios de "Terminado" (Definition of Done)
 
 No consideres el proyecto completo hasta poder responder "sí" a estas cuatro preguntas:
 
@@ -91,7 +91,7 @@ No consideres el proyecto completo hasta poder responder "sí" a estas cuatro pr
 Este proyecto integrador no tiene una única solución "correcta". Su valor está en obligarte a **tomar decisiones** con las herramientas de los 19 módulos anteriores en lugar de seguir instrucciones paso a paso. Si te atoras en una parte específica, vuelve al módulo correspondiente en lugar de improvisar una solución que ignore lo ya aprendido — es la mejor forma de consolidar el conocimiento a largo plazo.
 :::
 
-## 20.5 Siguientes Pasos Después de Este Temario
+## 21.5 Siguientes Pasos Después de Este Temario
 
 Una vez completado este proyecto, ya tienes el criterio necesario para:
 

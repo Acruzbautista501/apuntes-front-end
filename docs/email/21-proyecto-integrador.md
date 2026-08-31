@@ -1,8 +1,8 @@
-# Módulo 20: Proyecto Integrador — Newsletter Responsiva Completa
+# Módulo 21: Proyecto Integrador — Newsletter Responsiva Completa
 
 Has recorrido el camino completo: desde la estructura base de tablas hasta la integración con ESPs y la entregabilidad. Este módulo no enseña conceptos nuevos; es un **plano de construcción** para aplicar todo lo anterior en un solo proyecto coherente y de nivel profesional.
 
-## 20.1 El Encargo
+## 21.1 El Encargo
 
 Vas a construir una **Newsletter Mensual** completa para una marca ficticia:
 
@@ -16,7 +16,7 @@ Vas a construir una **Newsletter Mensual** completa para una marca ficticia:
 8. Soporte completo de modo oscuro.
 9. Compatibilidad validada en Outlook, Gmail y Apple Mail.
 
-## 20.2 Checklist de Requisitos Técnicos
+## 21.2 Checklist de Requisitos Técnicos
 
 Cada punto remite al módulo donde se explicó la técnica. Autoevalúate antes de dar el proyecto por terminado.
 
@@ -58,7 +58,7 @@ Cada punto remite al módulo donde se explicó la técnica. Autoevalúate antes 
 - [ ] Se revisaron capturas en Outlook, Gmail y Apple Mail como mínimo (Módulo 14).
 - [ ] El email pasó un test de spam con puntaje aceptable (Módulo 18).
 
-## 20.3 Estructura de Archivos Sugerida
+## 21.3 Estructura de Archivos Sugerida
 
 ```text
 newsletter-mensual/
@@ -74,7 +74,7 @@ newsletter-mensual/
 └── package.json
 ```
 
-## 20.4 Criterios de "Terminado" (Definition of Done)
+## 21.4 Criterios de "Terminado" (Definition of Done)
 
 1. **¿El email se ve correctamente en Outlook de escritorio, Gmail (web) y Apple Mail (iOS/macOS)?**
 2. **¿El email comunica su mensaje principal incluso con las imágenes bloqueadas?**
@@ -82,7 +82,7 @@ newsletter-mensual/
 4. **¿El enlace de baja funciona y es claramente visible?**
 5. **¿El email pasa un test de spam (Mail Tester o equivalente) con un puntaje aceptable?**
 
-## 20.5 Siguientes Pasos
+## 21.5 Siguientes Pasos
 
 Con este proyecto terminado, ya tienes el criterio para:
 

@@ -1,8 +1,8 @@
-# Módulo 26: Proyecto Integrador — API REST Completa en PHP Puro
+# Módulo 27: Proyecto Integrador — API REST Completa en PHP Puro
 
 Has recorrido el camino completo: desde `$nombre` hasta Docker y CI/CD, sin depender de ningún framework. Este módulo no enseña conceptos nuevos; es un **plano de construcción** para aplicar todo lo anterior en un solo proyecto coherente y de nivel profesional.
 
-## 26.1 El Encargo
+## 27.1 El Encargo
 
 Vas a construir una **API de Gestión de Tareas Colaborativo** en PHP puro — el mismo dominio funcional de los proyectos integradores de Vue.js, React y Node.js de este sitio, ahora implementado sin ningún framework:
 
@@ -16,7 +16,7 @@ Vas a construir una **API de Gestión de Tareas Colaborativo** en PHP puro — e
 8. Contenerizado con Docker Compose (Nginx + PHP-FPM + MySQL + Redis + worker).
 9. Pipeline de CI que corre análisis estático, estilo de código y tests en cada Pull Request.
 
-## 26.2 Checklist de Requisitos Técnicos
+## 27.2 Checklist de Requisitos Técnicos
 
 Cada punto remite al módulo donde se explicó la técnica. Autoevalúate antes de dar el proyecto por terminado.
 
@@ -59,7 +59,7 @@ Cada punto remite al módulo donde se explicó la técnica. Autoevalúate antes 
 - [ ] `docker-compose.yml` levanta Nginx + PHP-FPM + MySQL + Redis + worker juntos (Módulo 24).
 - [ ] Existe un pipeline de CI que corre lint, análisis estático y tests en cada PR (Módulo 25).
 
-## 26.3 Estructura de Archivos Sugerida
+## 27.3 Estructura de Archivos Sugerida
 
 ```text
 api-gestion-tareas-php/
@@ -90,7 +90,7 @@ api-gestion-tareas-php/
 └── phpunit.xml
 ```
 
-## 26.4 Criterios de "Terminado" (Definition of Done)
+## 27.4 Criterios de "Terminado" (Definition of Done)
 
 1. **¿Un usuario solo puede ver y modificar sus propios proyectos y tareas, verificado explícitamente en cada endpoint?**
 2. **¿El registro responde inmediatamente, sin esperar al envío real del correo de bienvenida?**
@@ -98,7 +98,7 @@ api-gestion-tareas-php/
 4. **¿El pipeline de CI falla correctamente si se introduce un error de tipos o un test roto?**
 5. **¿Ninguna consulta SQL en todo el proyecto interpola valores directamente sin parámetros vinculados?**
 
-## 26.5 Siguientes Pasos
+## 27.5 Siguientes Pasos
 
 Con este proyecto terminado, ya tienes el criterio para:
 

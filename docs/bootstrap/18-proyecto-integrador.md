@@ -1,4 +1,4 @@
-# Módulo 17: Proyecto Integrador — Panel de Administración
+# Módulo 18: Proyecto Integrador — Panel de Administración
 
 Has recorrido el camino completo: desde `.container` y `.row` hasta la Utility API y la integración con Vue/React. Este módulo no enseña conceptos nuevos; es un **plano de construcción** para aplicar todo lo anterior en un solo proyecto coherente y de nivel profesional.
 

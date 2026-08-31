@@ -1,8 +1,8 @@
-# Módulo 19: Proyecto Integrador — Landing Page Completa
+# Módulo 20: Proyecto Integrador — Landing Page Completa
 
 Has recorrido el camino completo: desde el modelo de caja hasta Anchor Positioning. Este módulo no enseña conceptos nuevos; es un **plano de construcción** para aplicar todo lo anterior en un solo proyecto coherente.
 
-## 19.1 El Encargo
+## 20.1 El Encargo
 
 Vas a construir una **landing page de producto** completa, de una sola página, con las siguientes secciones:
 
@@ -13,7 +13,7 @@ Vas a construir una **landing page de producto** completa, de una sola página, 
 5. Un *footer* con enlaces organizados en columnas.
 6. Modo oscuro funcional, basado en variables CSS y `prefers-color-scheme`.
 
-## 19.2 Checklist de Requisitos Técnicos
+## 20.2 Checklist de Requisitos Técnicos
 
 Cada punto remite al módulo donde se explicó la técnica. Autoevalúate antes de dar el proyecto por terminado.
 
@@ -51,7 +51,7 @@ Cada punto remite al módulo donde se explicó la técnica. Autoevalúate antes 
 - [ ] Los estilos están organizados con `@layer` (reset, base, componentes, utilidades) (Módulo 12).
 - [ ] Una característica reciente (`:has()`, `subgrid`, `@starting-style`) está envuelta en `@supports` con un respaldo funcional (Módulo 12, Módulo 18).
 
-## 19.3 Estructura de Archivos Sugerida
+## 20.3 Estructura de Archivos Sugerida
 
 ```text
 proyecto/
@@ -78,7 +78,7 @@ proyecto/
 @import url("utilidades.css") layer(utilidades);
 ```
 
-## 19.4 Criterios de "Terminado" (Definition of Done)
+## 20.4 Criterios de "Terminado" (Definition of Done)
 
 No consideres el proyecto completo hasta poder responder "sí" a estas preguntas:
 
@@ -87,7 +87,7 @@ No consideres el proyecto completo hasta poder responder "sí" a estas preguntas
 3. **¿El modo oscuro se ve intencional, con buen contraste en ambos modos, no solo "colores invertidos"?**
 4. **¿Si duplicas la tarjeta de *feature* y la mueves a un sidebar angosto, se sigue viendo bien sin tocar su CSS?** (Esto valida que entendiste el layout responsivo real, no solo breakpoints fijos.)
 
-## 19.5 Siguientes Pasos
+## 20.5 Siguientes Pasos
 
 Con este proyecto terminado, ya tienes el criterio para:
 

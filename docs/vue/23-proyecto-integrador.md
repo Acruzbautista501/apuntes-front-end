@@ -1,8 +1,8 @@
-# Módulo 22: Proyecto Integrador
+# Módulo 23: Proyecto Integrador
 
 Has recorrido el camino completo: desde `ref`/`reactive` hasta Pinia, Vue Router, testing y accesibilidad. Este módulo no enseña conceptos nuevos; es un **plano de construcción** para aplicar todo lo anterior en un solo proyecto coherente y de nivel profesional.
 
-## 22.1 El Encargo
+## 23.1 El Encargo
 
 Vas a construir un **Gestor de Tareas Colaborativo** completo:
 
@@ -16,7 +16,7 @@ Vas a construir un **Gestor de Tareas Colaborativo** completo:
 8. Transiciones al agregar/eliminar tareas de la lista.
 9. Tests para al menos un componente, un composable y un store.
 
-## 22.2 Checklist de Requisitos Técnicos
+## 23.2 Checklist de Requisitos Técnicos
 
 Cada punto remite al módulo donde se explicó la técnica. Autoevalúate antes de dar el proyecto por terminado.
 
@@ -60,7 +60,7 @@ Cada punto remite al módulo donde se explicó la técnica. Autoevalúate antes 
 - [ ] Al menos un composable tiene un test aislado (Módulo 17).
 - [ ] Al menos un store de Pinia tiene un test con `setActivePinia` (Módulo 17).
 
-## 22.3 Estructura de Archivos Sugerida
+## 23.3 Estructura de Archivos Sugerida
 
 ```text
 src/
@@ -98,7 +98,7 @@ src/
 └── main.ts
 ```
 
-## 22.4 Criterios de "Terminado" (Definition of Done)
+## 23.4 Criterios de "Terminado" (Definition of Done)
 
 1. **¿Un usuario que navega solo con teclado puede crear, editar y eliminar una tarea sin perder el foco en ningún punto?**
 2. **¿El estado de autenticación persiste tras recargar la página (F5)?**
@@ -106,7 +106,7 @@ src/
 4. **¿`npm run build` genera un bundle sin errores de TypeScript?**
 5. **¿Las vistas de proyectos y tareas cargan de forma diferida (visible en la pestaña Network del navegador, como archivos separados)?**
 
-## 22.5 Siguientes Pasos
+## 23.5 Siguientes Pasos
 
 Con este proyecto terminado, ya tienes el criterio para:
 

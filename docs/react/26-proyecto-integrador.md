@@ -1,111 +1,8 @@
-# Módulo 24: Arquitectura de Proyectos y Proyecto Integrador
+# Módulo 26: Proyecto Integrador
 
-Has recorrido el camino completo: desde JSX y `useState` hasta TanStack Query, testing y Next.js. Este módulo cubre cómo organizar un proyecto React grande, y cierra con un plano de construcción para aplicar todo lo anterior en un solo proyecto coherente.
+Con los fundamentos y la arquitectura de proyectos ya cubiertos, este módulo final no enseña conceptos nuevos: es un **plano de construcción** para aplicar todo lo anterior en un solo proyecto coherente.
 
-## 24.1 Estructura de Carpetas por Tipo (Proyectos Pequeños)
-
-```text
-src/
-├── assets/
-├── components/         # Componentes reutilizables (Boton, Tarjeta...)
-├── hooks/               # useFetch, useLocalStorage, useAuth...
-├── pages/                # Un componente por ruta
-├── contexts/
-├── stores/               # Stores de Zustand
-├── schemas/              # Esquemas de Zod
-├── types/
-├── utils/                # Funciones puras sin estado (formatDate, slugify...)
-├── App.tsx
-└── main.tsx
-```
-
-## 24.2 Estructura por Dominio/Feature (Proyectos Grandes)
-
-```text
-src/
-├── features/
-│   ├── auth/
-│   │   ├── components/FormularioLogin.tsx
-│   │   ├── hooks/useAuth.ts
-│   │   ├── stores/useAuthStore.ts
-│   │   └── types/usuario.types.ts
-│   ├── productos/
-│   │   ├── components/
-│   │   ├── hooks/
-│   │   └── pages/
-│   └── carrito/
-│       ├── components/
-│       ├── hooks/
-│       └── stores/
-├── shared/               # Solo lo que un SEGUNDO feature realmente necesita
-│   ├── components/       # Boton, Modal, Input...
-│   ├── hooks/
-│   └── utils/
-├── router/
-└── main.tsx
-```
-
-La misma regla práctica que en Vue: si un componente, hook o tipo solo lo usa un feature, vive dentro de ese feature; solo sube a `shared/` cuando un **segundo** feature lo necesita realmente.
-
-## 24.3 Separar Presentación de Lógica
-
-```tsx
-// features/productos/pages/ProductosPage.tsx — "inteligente"
-import { useProductos } from '../hooks/useProductos'
-import TarjetaProducto from '../components/TarjetaProducto'
-
-export default function ProductosPage() {
-  const { data: productos } = useProductos()
-
-  return (
-    <div>
-      {productos?.map((producto) => (
-        <TarjetaProducto key={producto.id} producto={producto} onAgregar={agregarAlCarrito} />
-      ))}
-    </div>
-  )
-}
-```
-
-```tsx
-// features/productos/components/TarjetaProducto.tsx — "tonto": solo props
-interface Props {
-  producto: Producto
-  onAgregar: (id: number) => void
-}
-
-export default function TarjetaProducto({ producto, onAgregar }: Props) {
-  return (
-    <div>
-      <h3>{producto.nombre}</h3>
-      <button onClick={() => onAgregar(producto.id)}>Agregar</button>
-    </div>
-  )
-}
-```
-
-`TarjetaProducto` puede probarse (Módulo 21) y reutilizarse sin depender de TanStack Query ni de ninguna API — solo necesita las props que se le pasen.
-
-## 24.4 Alias de Importación
-
-```typescript
-// vite.config.ts
-import { fileURLToPath, URL } from 'node:url'
-
-export default defineConfig({
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  }
-})
-```
-
-```typescript
-import { useAuth } from '@/features/auth/hooks/useAuth' // En vez de '../../../hooks/useAuth'
-```
-
-## 24.5 El Encargo del Proyecto Integrador
+## 26.1 El Encargo
 
 Vas a construir un **Gestor de Tareas Colaborativo** completo — el mismo alcance funcional del proyecto integrador de Vue.js, para comparar directamente ambos ecosistemas:
 
@@ -120,7 +17,7 @@ Vas a construir un **Gestor de Tareas Colaborativo** completo — el mismo alcan
 9. Code splitting por ruta con `lazy` + `Suspense`.
 10. Tests para al menos un componente, un custom hook y una mutación.
 
-## 24.6 Checklist de Requisitos Técnicos
+## 26.2 Checklist de Requisitos Técnicos
 
 ### Fundamentos y Hooks
 - [ ] Los componentes están tipados con interfaces claras para props (Módulo 3).
@@ -155,7 +52,7 @@ Vas a construir un **Gestor de Tareas Colaborativo** completo — el mismo alcan
 - [ ] Al menos un custom hook tiene un test con `renderHook` (Módulo 21).
 - [ ] Al menos una mutación de TanStack Query tiene un test con `fetch` simulado (Módulo 21).
 
-## 24.7 Estructura de Archivos Sugerida
+## 26.3 Estructura de Archivos Sugerida
 
 ```text
 src/
@@ -184,7 +81,7 @@ src/
 └── main.tsx
 ```
 
-## 24.8 Criterios de "Terminado" (Definition of Done)
+## 26.4 Criterios de "Terminado" (Definition of Done)
 
 1. **¿Un usuario que navega solo con teclado puede crear, editar y eliminar una tarea sin perder el foco en ningún punto?**
 2. **¿El estado de sesión persiste tras recargar la página (F5)?**
@@ -192,7 +89,7 @@ src/
 4. **¿`npm run build` genera un bundle sin errores de TypeScript?**
 5. **¿Las páginas de proyectos y tareas cargan de forma diferida (visible en la pestaña Network del navegador)?**
 
-## 24.9 Siguientes Pasos
+## 26.5 Siguientes Pasos
 
 Con este proyecto terminado, ya tienes el criterio para:
 

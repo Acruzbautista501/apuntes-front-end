@@ -97,7 +97,7 @@ El Módulo 10, *API de JavaScript Programática*, explica a fondo por qué compo
 
 ## 5.7 Proyecto Final Sugerido
 
-Con los Módulos 1 al 5 ya tienes lo esencial de Bootstrap. El Módulo 17, *Proyecto Integrador*, retoma esta misma idea de "landing page" pero incorporando también los módulos avanzados (formularios completos, Offcanvas, Sass, modo oscuro) para un proyecto de nivel profesional completo.
+Con los Módulos 1 al 5 ya tienes lo esencial de Bootstrap. El Módulo 18, *Proyecto Integrador*, retoma esta misma idea de "landing page" pero incorporando también los módulos avanzados (formularios completos, Offcanvas, Sass, modo oscuro) para un proyecto de nivel profesional completo.
 
 Como práctica rápida antes de continuar, intenta construir una **landing page** sencilla que incluya:
 1.  **Navbar** fija arriba.

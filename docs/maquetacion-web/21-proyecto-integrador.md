@@ -1,8 +1,8 @@
-# Módulo 20: Proyecto Integrador — Landing Page de Nivel Producción
+# Módulo 21: Proyecto Integrador — Landing Page de Nivel Producción
 
 Has recorrido el camino completo: desde HTML semántico hasta sistemas de diseño, rendimiento, accesibilidad y handoff a desarrollo. Este módulo no enseña conceptos nuevos; es un **plano de construcción** para aplicar todo lo anterior en un solo proyecto coherente y de nivel profesional.
 
-## 20.1 El Encargo
+## 21.1 El Encargo
 
 Vas a construir una **Landing Page de Producto** completa, lista para producción real:
 
@@ -16,7 +16,7 @@ Vas a construir una **Landing Page de Producto** completa, lista para producció
 8. Soporte de modo oscuro.
 9. Web App Manifest básico (instalable como PWA).
 
-## 20.2 Checklist de Requisitos Técnicos
+## 21.2 Checklist de Requisitos Técnicos
 
 Cada punto remite al módulo donde se explicó la técnica. Autoevalúate antes de dar el proyecto por terminado.
 
@@ -62,7 +62,7 @@ Cada punto remite al módulo donde se explicó la técnica. Autoevalúate antes 
 - [ ] README con stack, estructura y convenciones del proyecto (Módulo 19).
 - [ ] Comentarios documentando decisiones no evidentes (Módulo 19).
 
-## 20.3 Estructura de Archivos Sugerida
+## 21.3 Estructura de Archivos Sugerida
 
 ```text
 landing-producto/
@@ -91,7 +91,7 @@ landing-producto/
 └── README.md
 ```
 
-## 20.4 Criterios de "Terminado" (Definition of Done)
+## 21.4 Criterios de "Terminado" (Definition of Done)
 
 1. **¿Un usuario que navega solo con teclado puede completar el formulario de contacto sin perder el foco en ningún punto?**
 2. **¿Lighthouse reporta un puntaje de 90+ en Rendimiento, Accesibilidad y SEO?**
@@ -99,7 +99,7 @@ landing-producto/
 4. **¿El sitio es instalable como PWA y muestra una página offline propia sin conexión?**
 5. **¿La vista previa al compartir el enlace en redes sociales muestra la imagen y descripción correctas?**
 
-## 20.5 Siguientes Pasos
+## 21.5 Siguientes Pasos
 
 Con este proyecto terminado, ya tienes el criterio para:
 
