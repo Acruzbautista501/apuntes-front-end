@@ -68,7 +68,7 @@ Antes de abordar el Proyecto Integrador, conviene practicar cada bloque de conce
 ## 20.14 Sistemas de Diseño, Rendimiento y Accesibilidad (Módulo 19)
 
 25. **Mini design system.** Publica tokens semánticos con `@theme` (por ejemplo `--color-surface`, `--color-text`) reutilizados en 3 componentes, y agrega un segundo tema que los sobrescriba.
-26. **Auditoría de accesibilidad.** Revisa un componente interactivo (por ejemplo un menú desplegable) con el checklist del módulo: `sr-only` en íconos sin texto, `focus-visible:` en vez de `focus:`, y verifica que respete `prefers-reduced-motion`.
+26. **Auditoría de accesibilidad.** Revisa un componente interactivo (por ejemplo un menú desplegable) con el checklist del módulo: `sr-only` en íconos sin texto, `focus-visible:` en vez de `focus:`, y verifica que respete `motion-reduce:*`.
 
 ## 20.15 Cómo Usar Esta Lista
 
