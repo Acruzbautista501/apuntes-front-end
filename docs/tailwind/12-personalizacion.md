@@ -73,6 +73,26 @@ Ahora que has definido tus variables en el `@theme`, Tailwind ha creado automát
 </aside>
 ```
 
+### La variable base `--spacing`: reescala tu sistema completo en una línea
+
+Como viste en el Módulo 3 (Sintaxis), cada utilidad numérica de espaciado (`p-4`, `gap-8`, `w-64`...) no guarda su valor en una tabla fija: Tailwind lo calcula en tiempo real con la fórmula `calc(var(--spacing) * número)`, apoyándose en una única variable base, `--spacing`, que por defecto vale `0.25rem`.
+
+Esto tiene una consecuencia muy potente para la personalización: no necesitas redefinir docenas de variables `--spacing-1`, `--spacing-2`, `--spacing-4`... una por una. Si sobrescribes `--spacing` dentro de tu `@theme`, **todo** el sistema de espaciado del proyecto (paddings, márgenes, gaps, anchos, altos...) se reescala proporcionalmente con una sola línea.
+
+```css
+@theme {
+  /* Reduce la densidad de toda la interfaz:
+     ahora un "4" equivale a 3.2px en vez de 16px */
+  --spacing: 0.2rem;
+}
+```
+
+Esto es especialmente útil cuando construyes un panel con mucha densidad de información (por ejemplo, la tabla de posiciones de una liga con decenas de filas, o el marcador en vivo de un partido con muchas estadísticas) y necesitas un espaciado más compacto que el que trae Tailwind por defecto, sin tener que ir clase por clase ajustando cada `p-*`, `m-*` y `gap-*` del proyecto.
+
+::: tip 💡 Consejo del Diseñador Frontend:
+Además del `@theme` estándar que acabas de aprender, Tailwind 4 incluye dos variantes pensadas para casos más avanzados: `@theme inline` (útil cuando una variable de tu tema referencia a otra variable, por ejemplo una fuente inyectada por un framework como Next.js) y `@theme static` (fuerza a que todas las variables CSS del bloque se emitan siempre en el CSS final, se usen o no, para que código externo pueda leerlas con `var()`). Como es un tema que merece una explicación detallada con ejemplos, lo cubrimos a fondo en el **Módulo 19.1 (Sistemas de Diseño con Tailwind CSS 4)** — por ahora, quédate con el `@theme` estándar, que es lo que necesitas en el 95% de los casos.
+:::
+
 ::: tip 💡 Consejos del Diseñador Frontend:
 * **Agrupación Semántica:** No nombres tus colores por el color visual, sino por su **función**. 
     * *Mal:* `--color-light-gray: #ccc`
@@ -234,16 +254,16 @@ Ahora, tus clases en HTML son totalmente agnósticas al tema. No necesitas poner
 | **Rendimiento** | Las variables CSS se procesan a nivel de motor de renderizado del navegador, evitando el costo de recompilar estilos. |
 
 ::: tip 💡 Consejos del Diseñador Frontend:
-1.  **CSS `has()` y preferencias del sistema:** Puedes hacer que tu app detecte automáticamente si el usuario prefiere el modo oscuro sin necesidad de JS:
+1.  **Preferencias del sistema, con posibilidad de que el usuario la anule:** Puedes hacer que tu app detecte automáticamente si el usuario prefiere el modo oscuro sin necesidad de JS, dejando además la puerta abierta a que una clase `.light` forzada por el usuario tenga prioridad:
     ```css
     @media (prefers-color-scheme: dark) {
-      :root:has(:not(.light)) {
+      :root:not(.light) {
         --bg-primary: #0f172a;
         --text-primary: #f8fafc;
       }
     }
     ```
-    *Nota: Esta configuración hace que tu sitio sea "nativo" al OS del usuario.*
+    *Nota: Esta configuración hace que tu sitio sea "nativo" al OS del usuario, salvo que el propio usuario haya forzado el modo claro agregando `.light` al `<html>`.*
 
 2.  **Transiciones suaves:** Nunca olvides añadir `transition-colors duration-300` al `body` o a los contenedores principales. Esto evita que el cambio de tema se sienta como un "parpadeo" y lo convierte en una transición elegante.
 
@@ -257,6 +277,12 @@ En **Tailwind CSS 4**, el *Dark Mode* deja de ser una batalla de clases utilitar
 ### El Cambio de Paradigma: De "Clases" a "Estado"
 
 En versiones antiguas, tenías que añadir el prefijo `dark:` a cada elemento. Si se te olvidaba uno, el diseño se rompía. En Tailwind 4, definimos **Contratos de Diseño** que cambian de valor cuando la clase `.dark` está presente en el elemento `<html>` o `<body>`.
+
+> **Importante:** por defecto, el variant `dark:` de Tailwind 4 responde a la preferencia del sistema operativo (`prefers-color-scheme`), **no** a una clase `.dark`. Si en algún punto además de tus variables semánticas necesitas usar una utilidad `dark:` directamente (ej. `dark:bg-slate-900` para un caso puntual), primero debes registrar el variant basado en clase en tu CSS:
+> ```css
+> @custom-variant dark (&:where(.dark, .dark *));
+> ```
+> Sin esta línea, `dark:*` seguirá mirando `prefers-color-scheme` y lo ignorará por completo aunque agregues `.dark` al HTML con JavaScript.
 
 ### Implementación Paso a Paso
 

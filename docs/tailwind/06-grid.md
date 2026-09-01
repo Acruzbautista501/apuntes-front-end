@@ -103,6 +103,12 @@ Vamos a construir la vista principal de un torneo. Usaremos **3 columnas** para 
 No te compliques intentando definir las filas (`grid-rows`) a menos que sea estrictamente necesario. Deja que Grid cree las filas automáticamente basándose en la cantidad de contenido; es la forma más limpia de mantener tu código mantenible y libre de errores. ¿Cuántas columnas crees que necesitarías para mostrar los escudos de 10 equipos en una sola sección?
 :::
 
+### Nota rápida: Grids anidados con `grid-cols-subgrid`
+
+Cuando tienes una rejilla **dentro** de otra rejilla (por ejemplo, una tarjeta de partido con su propia distribución interna de columnas), lo normal es que esa rejilla hija defina sus propias columnas desde cero, sin relación alguna con las columnas de su padre. Tailwind también soporta `grid-cols-subgrid` y `grid-rows-subgrid`, que le permiten a una rejilla hija **heredar las líneas de la rejilla de su contenedor padre**, para que ambos niveles queden perfectamente alineados entre sí.
+
+Es un tema algo más avanzado, así que se cubre a fondo (con ejemplos completos) en el **Módulo 16.4** (`16-css-moderno.md`). Por ahora, solo queríamos que supieras que la utilidad existe antes de seguir avanzando.
+
 ## 6.3 Span (Control de expansión de celdas)
 
 El `span` es el "superpoder" de CSS Grid. Mientras que `grid-cols` y `grid-rows` definen la estructura general (el esqueleto), las clases `span` permiten que elementos individuales **se expandan** para ocupar más de una celda.
@@ -164,6 +170,45 @@ Al usar `span`, **no estás cambiando el tamaño del contenedor, sino la cantida
   * `col-span-1 md:col-span-2`: En móvil ocupa 1 columna, pero en escritorio se expande a 2.
 :::
 
+### Posicionamiento preciso: `col-start-*`, `col-end-*`, `row-start-*` y `row-end-*`
+
+Las clases `span` son perfectas cuando quieres que un elemento **crezca** desde su posición natural, pero a veces necesitas algo más quirúrgico: decirle a un elemento exactamente **en qué línea de la rejilla empieza y en cuál termina**, sin importar en qué orden aparezca en el HTML.
+
+Aquí es donde entran en juego las líneas de la rejilla (*grid lines*). Si tienes `grid-cols-4`, en realidad tienes **5 líneas verticales** numeradas del 1 al 5 (el borde izquierdo es la línea 1, el borde derecho es la línea 5).
+
+* **`col-start-N`**: El elemento comienza en la línea de columna `N`.
+* **`col-end-N`**: El elemento termina en la línea de columna `N`.
+* **`row-start-N`**: El elemento comienza en la línea de fila `N`.
+* **`row-end-N`**: El elemento termina en la línea de fila `N`.
+
+También existen `col-start-auto`, `col-end-auto`, `row-start-auto` y `row-end-auto` para devolverle el control al algoritmo automático cuando lo necesites.
+
+### Ejemplo de código: Ubicar el marcador del partido en una posición exacta
+
+Imagina un grid de 4 columnas donde necesitas que el marcador salte a una posición muy específica, sin depender del orden en que aparece en el HTML:
+
+```html
+<div class="grid grid-cols-4 grid-rows-3 gap-4">
+
+  <div class="col-start-2 col-end-4 row-start-1 bg-emerald-600 text-white p-4 rounded-lg">
+    Marcador: Águilas 2 - 1 Panteras
+  </div>
+
+  <div class="col-start-1 row-start-2 row-end-4 bg-slate-800 text-white p-4 rounded-lg">
+    Alineación Titular
+  </div>
+
+</div>
+```
+
+| Clase | Acción |
+| :--- | :--- |
+| **`col-start-N` / `col-end-N`** | Fija el inicio y el fin exactos del elemento en el eje horizontal. |
+| **`row-start-N` / `row-end-N`** | Fija el inicio y el fin exactos del elemento en el eje vertical. |
+
+::: tip 💡 Consejo del Diseñador Frontend:
+Piensa en `col-span-2` como "crece 2 columnas **desde aquí**", mientras que `col-start-2 col-end-4` significa "no me importa desde dónde partes en el HTML, **quiero que ocupes exactamente de la línea 2 a la línea 4**". Usa `span` para el 90% de los casos, ya que es más fácil de leer; reserva `start`/`end` para layouts irregulares donde necesitas control absoluto, como un tablero de resultados con posiciones fijas.
+:::
 
 ## 6.4 Gap (Separación entre elementos)
 

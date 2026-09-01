@@ -191,6 +191,10 @@ Centra los elementos verticalmente dentro del contenedor.
 Alinea los elementos al borde inferior del contenedor.
 * **Uso:** Elementos de pie de página o acciones que deben alinearse con la base de un contenedor grande.
 
+#### `items-baseline`
+Alinea los elementos según la línea base (baseline) de su texto, en lugar de centrarlos o estirarlos según su altura total.
+* **Uso:** Perfecto cuando mezclas textos de distintos tamaños en una misma fila, como el nombre de un jugador en letra grande junto a su dorsal en letra pequeña: con `items-baseline` ambos textos "se asientan" sobre la misma línea en vez de quedar descentrados verticalmente.
+
 ### Ejemplo de código: Perfil de Jugador con Iconos
 En tu proyecto, necesitarás esto para que el texto de la posición del jugador esté perfectamente centrado junto al icono:
 
@@ -218,6 +222,7 @@ En tu proyecto, necesitarás esto para que el texto de la posición del jugador 
 | **`items-center`** | Centro vertical | Botones con iconos, logos con texto. |
 | **`items-start`** | Arriba | Listas de tarjetas con alturas variables. |
 | **`items-end`** | Abajo | Alinear etiquetas de fecha al final de una tarjeta. |
+| **`items-baseline`** | Alineado por texto | Mezclar textos de distinto tamaño en una misma fila (nombre + dorsal). |
 | **`items-stretch`**| Estirado | Crear filas de tabla uniformes. |
 
 ::: tip 💡 Consejo del Diseñador Frontend:

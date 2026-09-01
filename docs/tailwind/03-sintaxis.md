@@ -64,16 +64,41 @@ Una **Utility Class** es "atómica" porque solo modifica un aspecto. Si un eleme
 
 Al combinar `class="bg-blue-500 w-full text-center"`, estás creando un componente personalizado sin haber escrito ni una línea de CSS en un archivo externo.
 
+### Valores Arbitrarios: la "válvula de escape" con corchetes `[ ]`
+No todos los valores encajan en la escala predefinida de Tailwind. Cuando necesitas un valor exacto y puntual que no existe en el sistema de diseño (una posición calculada por un diseñador, el color exacto de un patrocinador, una combinación de columnas muy específica), Tailwind te permite escribirlo directamente entre corchetes, justo después del prefijo de la propiedad:
+
+```html
+<div class="top-[117px]">...</div>
+<div class="bg-[#1da1f2]">...</div>
+<div class="grid grid-cols-[1fr_500px_2fr]">...</div>
+```
+
+* **`top-[117px]`**: Un valor de longitud exacto que no existe como utilidad predefinida (`top-4`, `top-8`...).
+* **`bg-[#1da1f2]`**: Un color hexadecimal exacto, útil cuando necesitas replicar el color de un patrocinador o de una marca que no forma parte de tu paleta.
+* **`grid-cols-[1fr_500px_2fr]`**: Una plantilla de grid totalmente personalizada, imposible de lograr con las utilidades `grid-cols-1` a `grid-cols-12`.
+
+**Espacios dentro de los corchetes:** un espacio real rompería la clase HTML, ya que el navegador interpretaría que ahí termina esa clase y empieza otra. Por eso, cuando el valor arbitrario necesita un espacio (como en una lista de columnas de grid), Tailwind usa el **guion bajo (`_`)** como sustituto. Así, `grid-cols-[1fr_500px_2fr]` se traduce internamente a `grid-template-columns: 1fr 500px 2fr;`.
+
+::: tip 💡 Consejo del Diseñador Frontend:
+Usa los valores arbitrarios como excepción, no como regla. Si te descubres escribiendo `top-[117px]` una y otra vez en distintos componentes, probablemente ese valor merece convertirse en una utilidad reutilizable definida en tu tema (con `@theme`), en lugar de repetir el mismo corchete por todo el proyecto.
+:::
+
 ## 3.2 Sistema de Espaciado (Spacing Scale)
 
 El espaciado es la herramienta más importante para lograr interfaces con un aspecto profesional y equilibrado. Tailwind utiliza una **escala de espaciado** consistente que garantiza que tus elementos mantengan proporciones armoniosas.
 
 ### La Escala Base (La Regla del 4)
-Tailwind trabaja por defecto con una escala de **4 píxeles por unidad**. 
-* **Cálculo:** `número * 4 = píxeles`.
-* Ejemplo: `p-2` es `2 * 4px = 8px`. `p-4` es `4 * 4px = 16px`.
+En Tailwind 4, el espaciado no es una tabla fija de valores — cada utilidad numérica se calcula con la fórmula `calc(var(--spacing) * número)`, donde `--spacing` es una variable de tema que por defecto vale `0.25rem` (4px).
+* **Cálculo:** `número × 4px` (con el valor por defecto de `--spacing`).
+* Ejemplo: `p-2` es `2 × 4px = 8px`. `p-4` es `4 × 4px = 16px`.
 
-Esta escala cubre desde el `0` hasta el `96` (384px), permitiendo precisión absoluta sin tener que definir valores manuales constantemente.
+Al ser una multiplicación y no una lista cerrada, **cualquier número funciona** (`p-13`, `p-100`...) — no hay un tope real en 96. Y como todo depende de una sola variable, puedes reescalar *todo* el sistema de espaciado del proyecto redefiniendo `--spacing` en tu `@theme`:
+
+```css
+@theme {
+  --spacing: 0.3rem; /* Todas las utilidades p-*, m-*, gap-*, w-*, etc. se recalculan */
+}
+```
 
 ### Padding (`p-*`): Espacio Interno
 El `padding` se aplica dentro del borde del elemento. Es fundamental para dar "aire" a los botones, tarjetas o contenedores.
@@ -105,6 +130,22 @@ Cuando trabajas con `flex` o `grid` (que es el 90% de tus layouts en tu aplicaci
   <div>Jugador 2</div>
 </div>
 ```
+
+### Gap por Eje (`gap-x-*` / `gap-y-*`)
+A veces el espacio horizontal y vertical de tu `grid` o `flex` no deben ser iguales — por ejemplo, una grilla de tarjetas de jugadores donde quieres más aire entre columnas que entre filas. Para eso, `gap-*` se puede dividir por eje:
+
+* **`gap-x-*`**: Controla únicamente el `column-gap` (el espacio horizontal, entre columnas).
+* **`gap-y-*`**: Controla únicamente el `row-gap` (el espacio vertical, entre filas).
+
+```html
+<div class="grid grid-cols-3 gap-x-8 gap-y-4">
+  <div class="bg-slate-100 p-2">Delantero</div>
+  <div class="bg-slate-100 p-2">Mediocampista</div>
+  <div class="bg-slate-100 p-2">Defensa</div>
+</div>
+```
+
+Aquí `gap-x-8` separa las columnas 32px, mientras que `gap-y-4` separa las filas solo 16px — control independiente sobre cada eje, sin tener que tocar el otro.
 
 ### Resumen de la escala de valores
 Para que tengas una guía rápida de implementación en tu proyecto:
@@ -154,7 +195,7 @@ El control de dimensiones se divide en dos enfoques principales: valores basados
 Son herramientas de seguridad para que tus diseños no se rompan en diferentes tamaños de pantalla (ej. de celular a monitor de escritorio).
 
 * **Max-Width (`max-w-*`):** Define el límite máximo. Es vital para que un contenedor no se estire demasiado en pantallas grandes.
-    * `max-w-sm` (640px), `max-w-md` (768px), `max-w-7xl` (1280px).
+    * `max-w-sm` (384px), `max-w-md` (448px), `max-w-7xl` (1280px). Ojo: estos valores de `max-w-*` son propios de esa escala y **no coinciden** con los breakpoints `sm`/`md` de responsive design (que son 640px/768px) — son dos escalas distintas que comparten nombre por convención.
 * **Min-Width / Min-Height:** Asegura que un elemento siempre tenga al menos un tamaño mínimo, evitando que el contenido interno se desborde o se colapse.
 
 ### Ejemplo Práctico: Layout de una Ficha de Perfil
@@ -213,7 +254,7 @@ Las clases de color siguen el mismo patrón de `propiedad-color-peso`:
 ¿Necesitas un color semitransparente? No necesitas calcular el canal alfa (`rgba`). Tailwind permite añadir un modificador de opacidad directamente a la clase con una barra `/`.
 
 * **Ejemplo:** `bg-blue-500/50` crea un fondo azul al 50% de opacidad.
-* **Escala:** Funciona en incrementos de 5 (`/0`, `/5`, `/10`... `/100`).
+* **Escala:** Acepta cualquier valor, no solo múltiplos de 5 — incluyendo decimales con sintaxis arbitraria: `bg-blue-500/70`, `bg-pink-500/[71.37%]`.
 
 ```html
 <div class="bg-blue-500/20 border border-blue-500/50 p-6 rounded-xl">
@@ -243,7 +284,7 @@ No debes usar colores genéricos. Debes definir los colores de tu propia marca e
 Para cualquier sistema profesional:
 1.  **Usa `slate` o `gray`** para textos y fondos de tarjetas (dan un aspecto serio y profesional).
 2.  **Usa tu color `brand-primary`** para elementos interactivos (botones, enlaces).
-3.  **Usa `border-opacity`** (ej: `border-slate-200/50`) para separar secciones de manera sutil sin saturar la vista con líneas demasiado marcadas.
+3.  **Usa el modificador de opacidad en el color del borde** (ej: `border-slate-200/50`) para separar secciones de manera sutil sin saturar la vista con líneas demasiado marcadas — no existe una utilidad `border-opacity-*` separada, la opacidad va directamente sobre el color con `/`.
 
 ## 3.5 Tipografía (Typography)
 

@@ -26,7 +26,7 @@ El grosor del borde establece la "fuerza" del elemento. Un borde fino es sutil; 
 Tailwind usa la misma paleta de colores para los bordes que para el texto o el fondo. La sintaxis es `border-{color}-{intensidad}`.
 
 * **Ejemplo:** `border-blue-500`
-* **Transparencia:** Puedes ajustar la opacidad del borde con `border-opacity-{valor}`, útil para bordes que deben integrarse suavemente con fondos de colores.
+* **Transparencia:** Puedes ajustar la opacidad del borde con el modificador `/` sobre el color, ej. `border-blue-500/50` — no existe una utilidad `border-opacity-*` separada (se eliminó desde Tailwind 3), la opacidad va directo en el color.
 
 ### Border Style
 A veces, una línea continua no es lo que necesitas. Los estilos definen la textura del borde.
@@ -81,14 +81,17 @@ Tailwind simplifica el uso de `border-radius` eliminando los píxeles arbitrario
 | Clase | Radio (aprox) | Uso Recomendado |
 | :--- | :--- | :--- |
 | `rounded-none` | 0px | Elementos rectos (barras de progreso, bordes de página). |
-| `rounded-sm` | 2px | Elementos pequeños (inputs, tags). |
-| `rounded` | 4px | El estándar por defecto. Botones, inputs. |
-| `rounded-md` | 6px | Ligeramente más suave. Ideal para botones llamativos. |
+| `rounded-xs` | 2px | Detalles muy sutiles. |
+| `rounded-sm` | 4px | Elementos pequeños (inputs, tags). |
+| `rounded-md` | 6px | El estándar por defecto para botones e inputs. |
 | `rounded-lg` | 8px | Estándar para **Tarjetas (Cards)**. |
 | `rounded-xl` | 12px | Tarjetas modernas con más "aire". |
 | `rounded-2xl` | 16px | Contenedores grandes o modales (Pop-ups). |
 | `rounded-3xl` | 24px | Diseños muy orgánicos o tarjetas tipo "hero". |
+| `rounded-4xl` | 32px | Contenedores decorativos muy redondeados. |
 | `rounded-full` | 9999px | **Círculo perfecto**. Esencial para avatares y badges. |
+
+> **No existe una clase `rounded` sin sufijo en Tailwind 4** (a diferencia de v3, donde `rounded` a secas equivalía a `rounded-sm`). Siempre hay que indicar un tamaño: `rounded-sm`, `rounded-md`, etc.
 
 ### Codificando con Redondeo Profesional
 
@@ -102,7 +105,7 @@ Para elementos interactivos, usa redondeo pequeño a medio. Si el botón es muy 
   Guardar
 </button>
 
-<input class="border rounded px-3 py-2" placeholder="Nombre..." />
+<input class="border rounded-md px-3 py-2" placeholder="Nombre..." />
 ```
 
 #### Tarjetas de Contenido (Cards)
@@ -133,6 +136,21 @@ Tailwind permite esto con prefijos de dirección:
 * `rounded-l-*`: Redondea a la izquierda (left).
 * `rounded-r-*`: Redondea a la derecha (right).
 
+Ten en cuenta que cada uno de estos prefijos redondea **dos esquinas a la vez** (por ejemplo, `rounded-t-*` afecta tanto a la esquina superior izquierda como a la superior derecha). Cuando necesitas controlar **una sola esquina** de forma completamente independiente, Tailwind ofrece los prefijos de esquina individual:
+
+* `rounded-tl-*`: Solo la esquina superior izquierda (top-left).
+* `rounded-tr-*`: Solo la esquina superior derecha (top-right).
+* `rounded-br-*`: Solo la esquina inferior derecha (bottom-right).
+* `rounded-bl-*`: Solo la esquina inferior izquierda (bottom-left).
+
+Esto es muy útil para detalles finos, como una insignia con forma de "bocadillo" de chat, donde tres esquinas están redondeadas y una queda recta apuntando hacia el elemento que la generó:
+
+```html
+<div class="bg-gray-800 text-white px-4 py-2 max-w-xs rounded-tl-xl rounded-tr-xl rounded-br-xl">
+  ¡Gol de Martínez al minuto 78! ⚽
+</div>
+```
+
 **Ejemplo: Cabecera de Tarjeta**
 ```html
 <div class="w-full">
@@ -152,6 +170,46 @@ Tailwind permite esto con prefijos de dirección:
 3.  **Accesibilidad:** Los botones con esquinas extremadamente redondeadas (`rounded-full` en botones de texto) son muy populares, pero asegúrate de que el texto dentro tenga suficiente margen (padding) para no tocar los bordes curvos, lo cual se ve poco profesional.
 :::
 
+### Soporte Multi-idioma: Redondeo con Propiedades Lógicas
+
+Hasta ahora hemos usado "izquierda" (`l`) y "derecha" (`r`), pero estos conceptos son ambiguos si tu proyecto necesita soportar idiomas que se leen de derecha a izquierda (RTL), como el árabe o el hebreo. En un layout RTL, lo que visualmente es "el lado izquierdo" ya no es el inicio del contenido, así que un `rounded-l-xl` fijo puede terminar redondeando la esquina equivocada.
+
+En lugar de duplicar clases con variantes como `dir-rtl:rounded-r-xl`, Tailwind ofrece utilidades basadas en **propiedades lógicas de CSS**, que razonan en términos de "inicio" (*start*) y "final" (*end*) del flujo de texto en lugar de lados físicos. Así, el mismo HTML se adapta automáticamente sin escribir una sola clase condicional:
+
+* `rounded-s-*`: Redondea el lado de **inicio** (start) — la izquierda en español/inglés (LTR), la derecha en árabe/hebreo (RTL).
+* `rounded-e-*`: Redondea el lado de **final** (end) — lo opuesto a `rounded-s-*`.
+
+Y también existen sus variantes de esquina individual, para cuando necesitas precisión total:
+
+* `rounded-ss-*`: Esquina inicio-inicio (*start-start*).
+* `rounded-se-*`: Esquina inicio-final (*start-end*).
+* `rounded-es-*`: Esquina final-inicio (*end-start*).
+* `rounded-ee-*`: Esquina final-final (*end-end*).
+
+| Clase lógica | Equivale en LTR (español) | Equivale en RTL (árabe) |
+| :--- | :--- | :--- |
+| `rounded-s-*` | `rounded-l-*` | `rounded-r-*` |
+| `rounded-e-*` | `rounded-r-*` | `rounded-l-*` |
+| `rounded-ss-*` | `rounded-tl-*` | `rounded-tr-*` |
+| `rounded-se-*` | `rounded-tr-*` | `rounded-tl-*` |
+| `rounded-es-*` | `rounded-bl-*` | `rounded-br-*` |
+| `rounded-ee-*` | `rounded-br-*` | `rounded-bl-*` |
+
+**Ejemplo: Tarjeta de próximo partido**
+
+```html
+<div class="border rounded-s-xl p-4 bg-white">
+  <p class="font-bold">Próximo Partido</p>
+  <p class="text-gray-500 text-sm">Local vs Visitante — Sábado 20:00</p>
+</div>
+```
+
+Con `rounded-s-xl`, esta tarjeta redondeará su lado izquierdo si el sitio está en español, pero si el mismo componente se renderiza en una versión en árabe de tu aplicación (con `dir="rtl"`), redondeará automáticamente el lado derecho — sin tocar una sola línea de HTML.
+
+::: tip 💡 Consejo del Diseñador Frontend:
+No necesitas usar propiedades lógicas si tu proyecto nunca va a soportar idiomas RTL — usar `rounded-l-*` / `rounded-r-*` directamente es perfectamente válido y un poco más explícito de leer. Pero si estás construyendo un sistema de diseño o una librería de componentes reutilizable, adoptar `rounded-s-*` / `rounded-e-*` desde el principio te ahorra una refactorización dolorosa el día que el proyecto necesite internacionalización.
+:::
+
 ## 9.3 Shadows (Sombras)
 Las sombras son el lenguaje del **espacio y la profundidad** en el diseño digital. En un mundo bidimensional como una pantalla, la única forma que tiene el usuario de entender la jerarquía visual —qué está "encima" de qué— es mediante la luz y la sombra. Una buena sombra no debe parecer una mancha negra, sino una elevación sutil que hace que un elemento "flote" sobre el fondo.
 
@@ -166,13 +224,15 @@ Tailwind no te obliga a definir valores de `box-shadow` complejos. Te ofrece una
 | Clase | Nivel de Elevación | Uso Recomendado |
 | :--- | :--- | :--- |
 | `shadow-none` | Ninguna | Elementos planos (fondos, texto). |
-| `shadow-sm` | Sutil | Detalles mínimos, listas de datos sutiles. |
-| `shadow` | Estándar | Tarjetas (Cards) básicas. |
+| `shadow-2xs` / `shadow-xs` | Casi imperceptible | Detalles mínimos, listas de datos sutiles. |
+| `shadow-sm` | Estándar | Tarjetas (Cards) básicas. |
 | `shadow-md` | Media | Componentes con un poco más de relevancia. |
 | `shadow-lg` | Alta | Modales, menús desplegables. |
 | `shadow-xl` | Muy alta | Elementos flotantes importantes o ventanas emergentes. |
 | `shadow-2xl` | Máxima | Componentes "Hero" o tarjetas de impacto visual. |
-| `shadow-inner` | Inversa | Para campos de texto o cajas que parecen "hundidas". |
+| `inset-shadow-sm` | Inversa | Para campos de texto o cajas que parecen "hundidas". |
+
+> **No existe una clase `shadow` sin sufijo en Tailwind 4** — siempre hay que indicar un tamaño (`shadow-sm`, `shadow-md`...). Y `shadow-inner` ya no existe: se reemplazó por la familia `inset-shadow-*` (`inset-shadow-2xs`, `inset-shadow-xs`, `inset-shadow-sm`).
 
 ### Código: Implementación Progresiva
 Para tu dashboard, la clave no es usar la sombra más grande, sino usar la sombra **correcta** para el componente adecuado. Observa cómo aplicamos niveles de profundidad:
@@ -180,8 +240,8 @@ Para tu dashboard, la clave no es usar la sombra más grande, sino usar la sombr
 ```html
 <div class="space-y-8 p-10 bg-gray-50">
   
-  <div class="bg-white p-6 rounded-lg shadow">
-    <h3 class="font-bold">Tarjeta Estándar (shadow)</h3>
+  <div class="bg-white p-6 rounded-lg shadow-sm">
+    <h3 class="font-bold">Tarjeta Estándar (shadow-sm)</h3>
     <p>Ideal para elementos de lista o datos secundarios.</p>
   </div>
 
@@ -190,8 +250,8 @@ Para tu dashboard, la clave no es usar la sombra más grande, sino usar la sombr
     <p>Úsala para tarjetas de perfil de equipo o reportes de liga.</p>
   </div>
 
-  <div class="p-6 bg-gray-200 rounded-lg shadow-inner">
-    <h3 class="font-bold">Contenedor Hundido (shadow-inner)</h3>
+  <div class="p-6 bg-gray-200 rounded-lg inset-shadow-sm">
+    <h3 class="font-bold">Contenedor Hundido (inset-shadow-sm)</h3>
     <p>Útil para mostrar áreas de código o logs de sistema.</p>
   </div>
 

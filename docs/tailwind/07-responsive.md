@@ -30,7 +30,7 @@ Imagina que estás construyendo una ficha técnica para tu aplicación.
 Primero definimos cómo se ve en el celular (simple, vertical). Luego, usamos `md:` para mejorar el layout en escritorio.
 
 ```html
-<div class="p-4 bg-white shadow rounded-lg flex flex-col gap-4">
+<div class="card p-4 bg-white shadow rounded-lg flex flex-col gap-4">
   
   <div class="w-full h-48 bg-gray-200 rounded"></div>
   

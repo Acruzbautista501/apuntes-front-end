@@ -85,6 +85,35 @@ Ejemplo:
 Tailwind CSS 4 es extremadamente rápido, pero la **limpieza de tu DOM** también importa. Al usar componentes, generas un HTML más limpio y semántico. Si te preocupa el rendimiento, recuerda que los componentes de Vue se compilan y no tienen costo de "estilo" en tiempo de ejecución. 
 :::
 
+### `@reference`: Cuando tu CSS con `@apply` queda aislado del `@theme`
+
+Si de todas formas necesitas usar `@apply` (o la función `theme()`) fuera del HTML —por ejemplo en un archivo `.css` independiente—, hay una regla que debes entender en Tailwind 4: **`@apply` solo puede resolver tus utilidades personalizadas si el motor "ve" el `@theme` donde las definiste.**
+
+En un proyecto normal, tu hoja de entrada (ej. `app.css`) importa `tailwindcss` y define tu `@theme` en el mismo archivo (o en uno importado desde ahí). Como todo pasa por la misma cascada, `@apply` y `theme()` funcionan sin configuración extra.
+
+El problema aparece cuando ese bloque de CSS queda **aislado de esa cascada**, es decir, se procesa como una unidad separada que no importa tu hoja de tema. Esto ocurre típicamente en:
+
+* Bloques `<style scoped>` de componentes de un solo archivo (Vue, Svelte).
+* **CSS Modules** (`*.module.css`), que por diseño se compilan de forma independiente.
+* Cualquier hoja de estilos suelta que no tenga una cadena de `@import` hasta tu `theme.css`.
+
+En esos casos, Tailwind no tiene forma de saber que `bg-brand-accent` o `text-surface` existen, porque nunca "vio" el `@theme` que los declaró. La solución es la directiva `@reference`: le indica al compilador dónde está el archivo de tema, sin volver a emitir ese CSS en la salida final (solo aporta el contexto necesario para resolver `@apply`/`theme()`).
+
+```css
+/* marcador.module.css — CSS Module: se compila aislado, no importa tu theme.css */
+@reference "../theme.css"; /* Si no personalizaste el tema, usa: @reference "tailwindcss"; */
+
+.badge {
+  @apply bg-brand-accent text-white text-xs font-bold px-2 py-1 rounded-full;
+}
+```
+
+Sin esa línea, `.badge` compilaría sin aplicar `bg-brand-accent` (o Tailwind marcaría la clase como desconocida), porque `brand-accent` es un color que solo existe dentro de tu `@theme`, y este archivo nunca tuvo acceso a él.
+
+::: tip 💡 Consejo del Diseñador Frontend:
+Una forma simple de recordarlo: si tu CSS **no** importa (directa o indirectamente) el archivo donde declaras `@theme`, y usas `@apply` o `theme()` ahí, necesitas `@reference`. Verás el caso específico y más común de esto —los `<style scoped>` de Vue— desarrollado con un ejemplo completo en el **Módulo 18.4**.
+:::
+
 ## 13.2 Extraer Componentes: El Arte del Encapsulamiento
 
 Extraer componentes no significa simplemente "cortar y pegar" código para acortar un archivo. **Extraer es crear un contrato de diseño.** Cuando extraes un componente, estás definiendo una API (interfaz) para ese elemento: qué datos recibe (props), qué eventos emite y qué contenido puede proyectar (slots).

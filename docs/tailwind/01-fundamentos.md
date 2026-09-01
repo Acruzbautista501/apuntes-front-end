@@ -35,7 +35,15 @@ La filosofía *Utility-First* consiste en construir interfaces componiendo peque
 Tailwind no es solo una hoja de estilos que descargas; es una herramienta que **escanea** tus archivos para generar CSS.
 
 ### Generación de clases utilitarias
-Tailwind pre-genera miles de clases basadas en tu configuración. Si defines un color primario, Tailwind crea automáticamente variantes como `bg-primary`, `hover:bg-primary-dark`, `border-primary`, etc.
+Tailwind pre-genera miles de clases basadas en tu configuración. Por ejemplo, a partir de un color de tu paleta como `emerald`, genera utilidades para distintas propiedades y tonalidades: `bg-emerald-600`, `border-emerald-600`, `text-emerald-600`, etc. Cualquiera de esas clases, a su vez, puede combinarse con un **prefijo condicional** como `hover:` o `md:` para indicar en qué situación debe aplicarse: `hover:bg-emerald-700`.
+
+::: tip 💡 Consejo del Diseñador Frontend:
+No confundas estos dos conceptos, aunque a veces aparezcan juntos en la misma clase:
+* **Escala de color** (`slate`, `red`, `emerald`... del `50` al `950`): define **qué valor** tiene un estilo. `bg-red-500` es un rojo medio; `bg-red-900` es un rojo casi negro.
+* **Variante** (`hover:`, `md:`, `dark:`, `focus:`...): define **cuándo o dónde** se aplica ese estilo. `hover:bg-red-500` solo pinta de rojo al pasar el ratón por encima; no cambia el rojo en sí.
+
+Son dos sistemas independientes que se combinan libremente: `dark:hover:bg-red-900` usa la variante `dark:hover:` (cuándo) junto con el valor de color `red-900` (qué), pero podrías cambiar cualquiera de los dos sin afectar al otro.
+:::
 
 ### Motor JIT (Just-In-Time)
 A diferencia de versiones muy antiguas, el motor JIT compila tu CSS **bajo demanda**. En lugar de generar todo el CSS posible al inicio, Tailwind escanea tus archivos (`.html`, `.vue`, `.js`) y genera únicamente las clases que realmente estás usando en tu proyecto.

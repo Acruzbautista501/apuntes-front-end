@@ -74,7 +74,7 @@ Los degradados son el lenguaje del **diseño UI moderno**. A diferencia de los c
 
 En CSS tradicional, los gradientes son complejos de escribir. En Tailwind, se descomponen en cuatro clases utilitarias que funcionan como un "lenguaje" de diseño:
 
-1.  **La Dirección (`bg-gradient-to-{dir}`):** Define de dónde a dónde fluye el color (ej. `to-r` de izquierda a derecha, `to-br` de esquina superior izquierda a inferior derecha).
+1.  **La Dirección (`bg-linear-to-{dir}`):** Define de dónde a dónde fluye el color (ej. `to-r` de izquierda a derecha, `to-br` de esquina superior izquierda a inferior derecha). En Tailwind 3 esta utilidad se llamaba `bg-gradient-to-{dir}`; en Tailwind 4 se renombró a `bg-linear-to-{dir}` (junto con las nuevas `bg-radial-*` y `bg-conic-*` para otros tipos de gradiente).
 2.  **El Punto de Partida (`from-{color}`):** Define el color inicial.
 3.  **El Punto Medio Opcional (`via-{color}`):** Permite añadir un tercer color en el camino. Es el secreto para degradados más complejos y naturales.
 4.  **El Punto Final (`to-{color}`):** Define el color de destino.
@@ -83,7 +83,7 @@ En CSS tradicional, los gradientes son complejos de escribir. En Tailwind, se de
 Para botones, lo ideal es usar gradientes sutiles. Evita colores demasiado opuestos (como rojo y azul) para no saturar la vista.
 
 ```html
-<button class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+<button class="bg-linear-to-r from-blue-500 to-indigo-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
   Registrar Equipo
 </button>
 ```
@@ -92,22 +92,51 @@ Para botones, lo ideal es usar gradientes sutiles. Evita colores demasiado opues
 Si necesitas un diseño más sofisticado, utiliza la clase `via`. Esto añade una parada intermedia que hace que la transición sea más suave y profesional.
 
 ```html
-<div class="p-8 rounded-2xl bg-gradient-to-br from-pink-500 via-purple-600 to-blue-700 text-white shadow-xl">
+<div class="p-8 rounded-2xl bg-linear-to-br from-pink-500 via-purple-600 to-blue-700 text-white shadow-xl">
   <h2 class="text-2xl font-bold">Resumen de Jornada</h2>
   <p class="opacity-80">Partidos ganados: 12</p>
   <p class="opacity-80">Goles a favor: 45</p>
 </div>
 ```
 
+### Controlando la Posición de las Paradas de Color
+
+`from-{color}`, `via-{color}` y `to-{color}` deciden **qué color** aparece en cada parada, pero no **dónde** ocurre esa transición dentro del gradiente. Para eso, Tailwind permite añadir un porcentaje justo después del color: `from-10%`, `via-30%`, `to-90%`. Esto empuja o comprime la parada a lo largo del recorrido del gradiente, en vez de repartirlo siempre en partes iguales.
+
+```html
+<!-- El color parte de un punto fijo (10%) y el naranja domina la mayor parte del degradado -->
+<div class="h-24 rounded-lg bg-linear-to-r from-yellow-300 from-10% via-orange-500 via-30% to-red-600 to-90%"></div>
+```
+
+Esto es especialmente útil cuando quieres que un color "domine" más espacio que otro (por ejemplo, un fondo casi sólido que solo se degrada en el último 10%), en vez del reparto uniforme que obtienes por defecto.
+
+::: tip 💡 Consejo del Diseñador Frontend:
+Combina esta técnica con `from-transparent` o `to-transparent` para controlar exactamente en qué punto empieza a desvanecerse una imagen (por ejemplo, `to-transparent to-70%` hace que el fundido a transparente comience más tarde, dejando más espacio de color sólido antes del final).
+:::
+
 ### Guía Rápida de Direcciones
 Tailwind cubre todas las combinaciones posibles. Estas son las más utilizadas en interfaces SaaS:
 
 | Clase | Dirección del Gradiente | Uso Ideal |
 | :--- | :--- | :--- |
-| `bg-gradient-to-t` | De abajo hacia arriba | Botones de acción, indicadores de progreso. |
-| `bg-gradient-to-r` | De izquierda a derecha | Barras laterales, encabezados de tarjetas. |
-| `bg-gradient-to-br`| De esquina sup. izq. a inf. der. | Fondos de secciones (Heroes), tarjetas grandes. |
-| `bg-gradient-to-bl`| De esquina sup. der. a inf. izq. | Diseños abstractos o decorativos. |
+| `bg-linear-to-t` | De abajo hacia arriba | Botones de acción, indicadores de progreso. |
+| `bg-linear-to-r` | De izquierda a derecha | Barras laterales, encabezados de tarjetas. |
+| `bg-linear-to-br`| De esquina sup. izq. a inf. der. | Fondos de secciones (Heroes), tarjetas grandes. |
+| `bg-linear-to-bl`| De esquina sup. der. a inf. izq. | Diseños abstractos o decorativos. |
+
+### Más allá de lo lineal: `bg-radial-*` y `bg-conic-*`
+
+`bg-linear-to-{dir}` cubre el caso más común (una transición en línea recta), pero no es la única forma de gradiente que existe. Tailwind 4 añade dos familias más a la misma "gramática" de `from-*` / `via-*` / `to-*`:
+
+* **`bg-radial`**: el color se expande desde un punto central hacia afuera, como un foco de luz.
+* **`bg-conic-{ángulo}`**: el color gira alrededor de un punto, como las agujas de un reloj — perfecto para gráficos circulares de progreso.
+
+```html
+<div class="bg-radial from-yellow-300 to-transparent h-40 rounded-xl"></div>
+<div class="size-24 rounded-full bg-conic-180 from-emerald-500 to-slate-200"></div>
+```
+
+Por ahora quédate con la idea de que existen: los usarás con más frecuencia a medida que construyas interfaces más ricas. La receta completa, con ejemplos trabajados de un efecto *spotlight* y un anillo de progreso circular, la encontrarás en el **Módulo 16.5 (Gradientes Avanzados)**.
 
 ::: tip 💡 Consejos del Diseñador Frontend:
 1.  **No rompas el contraste:** Un error común es poner texto oscuro sobre un gradiente oscuro. Si usas gradientes, asegúrate de que el texto tenga suficiente contraste (usa siempre `text-white` o `text-black` dependiendo de la luminosidad del gradiente).
@@ -115,7 +144,7 @@ Tailwind cubre todas las combinaciones posibles. Estas son las más utilizadas e
 3.  **Degradados de transparencia:** Puedes hacer gradientes que desaparecen. Usa colores con opacidad, por ejemplo: `from-blue-500 to-transparent`. Esto es excelente para efectos de "desvanecimiento" en fotos de jugadores o estadios.
 
 ```html
-<div class="h-64 bg-gradient-to-t from-black to-transparent flex items-end p-6">
+<div class="h-64 bg-linear-to-t from-black to-transparent flex items-end p-6">
   <p class="text-white font-bold text-xl">Nombre del Jugador</p>
 </div>
 ```
@@ -130,7 +159,7 @@ La opacidad no es simplemente "hacer que algo desaparezca". En el diseño de int
 Este es el error número uno de los principiantes. Debes entender la diferencia para controlar bien tu diseño:
 
 1.  **`opacity-{n}`**: Afecta a **todo** el elemento. Si pones un texto dentro de un div con `opacity-50`, el texto también se volverá transparente.
-2.  **`bg-opacity-{n}`**: Afecta **solo al fondo**. El texto y los elementos hijos mantendrán su opacidad original al 100%.
+2.  **Opacidad solo del fondo**: se logra con el modificador `/` directamente sobre el color de fondo, ej. `bg-black/50`. El texto y los elementos hijos mantienen su opacidad original al 100%. La utilidad `bg-opacity-{n}` (separada del color) existió en versiones antiguas de Tailwind, pero fue eliminada desde la v3 — la opacidad va integrada en la clase de color.
 
 ### Implementación Técnica
 
@@ -221,13 +250,22 @@ A diferencia del anterior, este desenfoque es sobre el objeto. Es ideal para "sp
 
 ### Tabla de niveles de desenfoque (Tailwind Scale)
 
+Estas mismas clases funcionan tanto para `blur-*` (el elemento en sí) como para `backdrop-blur-*` (lo que hay detrás); solo cambia el prefijo.
+
 | Clase | Nivel | Uso recomendado |
 | :--- | :--- | :--- |
+| `blur-none` | 0 | Remover desenfoque (ideal para estados `hover`). |
+| `blur-xs` | Mínimo | Texturas casi imperceptibles, bordes suavizados. |
 | `blur-sm` | Sutil | Pequeños ajustes visuales. |
 | `blur-md` | Medio | El estándar para paneles Glassmorphism. |
 | `blur-lg` | Alto | Elementos que deben ser casi ilegibles. |
 | `blur-xl` | Muy alto | Fondos abstractos, formas decorativas. |
-| `blur-none` | 0 | Remover desenfoque (ideal para estados `hover`). |
+| `blur-2xl` | Extremo | Ocultar por completo una imagen ("spoiler" total). |
+| `blur-3xl` | Máximo | Manchas de color de fondo, efectos ambientales tipo "aura". |
+
+::: tip 💡 Consejo del Diseñador Frontend:
+Si vienes de Tailwind 3, ten en cuenta el mismo patrón de renombrado que viste (o verás) en `shadow-*` y `rounded-*`: en v4 se añadió un escalón más pequeño al inicio de la escala. La clase que antes era `blur-sm` sigue existiendo con el mismo nombre, pero ahora hay un `blur-xs` todavía más sutil por debajo, y un `blur-3xl` por encima de `blur-2xl`. Revisa siempre la escala completa antes de asumir cuál es el extremo de la tabla.
+:::
 
 
 ::: tip 💡 Consejos del Diseñador Frontend:
@@ -293,7 +331,7 @@ En tu aplicación, una galería de jugadores donde la foto cobra vida al pasar e
 | Utilidad | Clase Ejemplo | Uso |
 | :--- | :--- | :--- |
 | **Fondos** | `bg-cover`, `bg-center` | Optimizar imágenes de fondo. |
-| **Gradientes** | `bg-gradient-to-r` | Crear botones y headers vibrantes. |
-| **Opacidad** | `bg-opacity-50` | Crear capas de contraste o overlays. |
+| **Gradientes** | `bg-linear-to-r` | Crear botones y headers vibrantes. |
+| **Opacidad** | `bg-black/50` | Crear capas de contraste o overlays. |
 | **Desenfoque** | `backdrop-blur-lg` | Efecto vidrio (Glassmorphism). |
 | **Filtros** | `grayscale-0` | Efectos dinámicos en imágenes. |

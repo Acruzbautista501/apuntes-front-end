@@ -87,8 +87,8 @@ En este ejemplo, crearemos un buscador que se vuelve "brillante" cuando el usuar
 
 | Clase | Función | Uso |
 | :--- | :--- | :--- |
-| **`focus:ring-N`** | Crea un anillo exterior | Es el estándar moderno para mayor visibilidad. |
-| **`focus:ring-opacity-N`**| Controla la transparencia | Útil para anillos suaves que no tapen otros elementos. |
+| **`focus:ring-N`** | Crea un anillo exterior | Es el estándar moderno para mayor visibilidad. El ancho por defecto es 1px (`ring`), no 3px como en versiones anteriores. |
+| **`focus:ring-color/opacidad`**| Controla color y transparencia con el modificador `/` | Ej. `focus:ring-blue-500/50` — no existe una utilidad `ring-opacity-*` separada. |
 | **`focus:border-*`** | Cambia color de borde | Excelente para campos de formulario. |
 | **`focus:text-*`** | Cambia color de texto | Útil para enlaces de menú. |
 
@@ -103,6 +103,52 @@ Es un error común en el desarrollo frontend eliminar el indicador del navegador
 **Ejemplo de buen diseño (Haz esto):**
 `<button class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Click</button>` ✅
 :::
+
+### Focus Avanzado: `focus-visible:` y `focus-within:`
+
+`focus:` no es la única variante relacionada con el foco. Tailwind incluye dos variantes adicionales que resuelven problemas muy específicos de UX y de estructura del DOM.
+
+#### `focus-visible:` — Solo cuando el navegador lo considera necesario
+
+`focus:` se activa con **cualquier** forma de foco, incluyendo un clic de ratón. Eso genera un problema de UX conocido: al hacer clic en un botón, el usuario ve un anillo de foco que no necesita (ya tiene la confirmación visual del clic).
+
+`focus-visible:` usa la misma heurística nativa del navegador que decide cuándo el foco *merece* ser visible: se activa al navegar con `Tab` (teclado), pero normalmente **no** se activa al hacer clic con el ratón.
+
+```html
+<button class="focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none">
+  Confirmar Alineación
+</button>
+```
+
+Con `focus-visible`, un usuario de ratón que hace clic en "Confirmar Alineación" no ve ningún anillo; un usuario que llega al mismo botón con `Tab` sí lo ve. Es el mejor equilibrio entre estética y accesibilidad.
+
+> Ver también el **Módulo 19.3**, donde se profundiza en `focus-visible:` específicamente desde la perspectiva de accesibilidad (A11y).
+
+#### `focus-within:` — Cuando el foco está en un descendiente
+
+`focus-within:` es distinta a las anteriores: no reacciona al foco del propio elemento, sino al foco de **cualquier elemento descendiente**. Se aplica al contenedor (padre), y se activa mientras el foco esté en él o en cualquier hijo, nieto, etc.
+
+Es ideal para resaltar un "grupo" de formulario completo (etiqueta + input) cuando el usuario está escribiendo dentro, aunque el `focus` técnicamente esté solo en el `<input>`.
+
+```html
+<div class="flex flex-col gap-1 p-3 border-2 border-gray-200 rounded-lg transition-colors focus-within:border-blue-500 focus-within:bg-blue-50">
+  <label for="resultado" class="text-sm font-medium text-gray-600">Resultado del Partido</label>
+  <input 
+    id="resultado" 
+    type="text" 
+    class="outline-none bg-transparent" 
+    placeholder="Ej. 2 - 1" 
+  />
+</div>
+```
+
+Aquí, el `<div>` contenedor (no el `<input>`) es el que cambia de color de borde y de fondo cuando el usuario hace clic dentro del campo de texto. Esto crea la sensación de un "grupo activo" completo, un patrón muy común en formularios modernos.
+
+| Variante | ¿Sobre qué elemento se activa? | ¿Cuándo? |
+| :--- | :--- | :--- |
+| `focus:` | El propio elemento | Con clic, `Tab`, o `.focus()` por JS. |
+| `focus-visible:` | El propio elemento | Solo cuando el navegador detecta navegación por teclado. |
+| `focus-within:` | El elemento **padre/ancestro** | Cuando el foco está en él o en cualquiera de sus descendientes. |
 
 ## 8.3 Active (`active:*`)
 

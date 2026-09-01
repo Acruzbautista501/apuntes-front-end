@@ -13,8 +13,8 @@ Tailwind 4 ofrece tres variantes de la directiva `@theme`, y elegir la correcta 
 | Variante | Comportamiento | Cuándo usarla |
 | :--- | :--- | :--- |
 | `@theme { }` | Genera variables CSS Y las expone para que Tailwind genere utilidades. Es el uso estándar. | Para el 95% de los casos (Módulo 12). |
-| `@theme inline { }` | El valor se resuelve e "inyecta" directamente en cada utilidad generada, en lugar de referenciar una variable CSS en tiempo de ejecución. | Cuando necesitas máximo rendimiento en un valor que **nunca** cambiará dinámicamente (ej. un `border-radius` de marca fijo). |
-| `@theme static { }` | Fuerza a que Tailwind genere **todas** las utilidades posibles de esa variable, incluso las que no detecta en uso durante el escaneo. | Cuando construyes una librería de componentes que otros proyectos consumirán, y no puedes garantizar que el escaneo automático detecte todas las clases que se usarán externamente. |
+| `@theme inline { }` | La utilidad generada usa directamente el *valor* resuelto de la variable, en vez de referenciar la variable CSS en tiempo de ejecución. | Cuando una variable de tema **referencia a otra variable** (ej. `--font-sans: var(--font-inter);`, típico cuando un framework como Next.js inyecta la fuente como variable). Sin `inline`, esa referencia puede resolverse en el lugar equivocado del árbol del DOM por las reglas de scoping de CSS, y el valor final no ser el esperado. |
+| `@theme static { }` | Por defecto, Tailwind solo emite en el CSS final las variables `--*` que detecta en uso. `static` fuerza a que **todas** las variables del bloque se emitan siempre como propiedades personalizadas CSS, se usen o no. | Cuando necesitas que las variables (no las clases) existan siempre en el CSS de salida — por ejemplo, para que código externo pueda leerlas con `var(--color-brand-500)` aunque ninguna utilidad de tu proyecto las use directamente. |
 
 ### Ejemplo: Publicar un Tema como Design System
 
@@ -30,7 +30,7 @@ Tailwind 4 ofrece tres variantes de la directiva `@theme`, y elegir la correcta 
 }
 ```
 
-Al usar `static`, garantizas que si otro equipo consume tu paquete de diseño y usa `bg-brand-500` en un archivo que tu escaneo automático no llegó a analizar (por ejemplo, contenido generado dinámicamente desde un CMS), la clase **igual existirá** en el CSS final.
+Al usar `static`, garantizas que las variables `--color-brand-*` existan siempre como propiedades CSS en `:root`, sin importar si tu escaneo detecta o no su uso. **Ojo:** esto no fuerza la generación de las *clases* de utilidad (`bg-brand-500`, etc.) — esas siguen dependiendo de que Tailwind detecte esa clase en algún archivo escaneado. Si necesitas garantizar que una clase específica exista aunque venga de contenido no escaneado (ej. generado dinámicamente desde un CMS), la herramienta correcta es la directiva `@source inline("bg-brand-500")`, no `@theme static`.
 
 ### Multi-Tema (Más Allá de Claro/Oscuro)
 
@@ -93,6 +93,16 @@ Para elementos que necesitan una etiqueta accesible pero no un texto visible (po
 ```
 
 `sr-only` oculta el texto visualmente (sin usar `display: none`, que también lo ocultaría de los lectores de pantalla) mientras lo mantiene disponible para tecnologías de asistencia.
+
+Su contraparte es `not-sr-only`: revierte `sr-only` a partir de cierta condición (normalmente un breakpoint o un estado), útil cuando un texto debe estar oculto por defecto pero visible en ciertos casos:
+
+```html
+<a href="#contenido" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2">
+  Saltar al contenido principal
+</a>
+```
+
+Este patrón de "skip link" mantiene el enlace invisible para usuarios videntes en navegación normal, pero lo muestra en pantalla en cuanto recibe foco de teclado (por ejemplo, al presionar `Tab` desde el inicio de la página).
 
 ### `focus-visible:` en Lugar de `focus:`
 

@@ -1,6 +1,8 @@
-# MÓDULO 17 — Extendiendo Tailwind: Las Directivas `@utility` y `@variant`
+# MÓDULO 17 — Extendiendo Tailwind: Las Directivas `@utility` y `@custom-variant`
 
-Hasta el Módulo 12 aprendiste a personalizar **valores de diseño** (colores, espaciados, fuentes) mediante `@theme`. Pero, ¿qué pasa cuando necesitas una **clase de utilidad completamente nueva** que Tailwind no ofrece, o una **variante personalizada** (como `hover:` o `disabled:`) que no existe por defecto? En Tailwind 3, esto requería configurar el *Plugin API* de JavaScript dentro de `tailwind.config.js`. En Tailwind 4, todo se resuelve con CSS puro, usando las directivas `@utility` y `@variant`.
+Hasta el Módulo 12 aprendiste a personalizar **valores de diseño** (colores, espaciados, fuentes) mediante `@theme`. Pero, ¿qué pasa cuando necesitas una **clase de utilidad completamente nueva** que Tailwind no ofrece, o una **variante personalizada** (como `hover:` o `disabled:`) que no existe por defecto? En Tailwind 3, esto requería configurar el *Plugin API* de JavaScript dentro de `tailwind.config.js`. En Tailwind 4, todo se resuelve con CSS puro, usando las directivas `@utility` y `@custom-variant`.
+
+> **`@variant` vs. `@custom-variant`, para no confundirlas:** `@variant` se usa **dentro** de tu propio CSS para *aplicar* un variant que ya existe (ej. `.mi-clase { @variant dark { color: white; } }`). La directiva que **crea** un variant nuevo, que es de lo que trata este módulo, es `@custom-variant`.
 
 ## 17.1 El Problema que Resuelven
 
@@ -40,7 +42,7 @@ Fíjate que, al ser una utilidad registrada de verdad (no una clase CSS suelta),
 
 ```css
 @utility text-shadow-* {
-  text-shadow: var(--value(--text-shadow- *, [length]));
+  text-shadow: --value(--text-shadow-*, [length]);
 }
 
 @theme {
@@ -57,14 +59,14 @@ Fíjate que, al ser una utilidad registrada de verdad (no una clase CSS suelta),
 Antes de crear una `@utility` nueva, pregúntate si el problema se puede resolver con `@theme` (Módulo 12). Si solo necesitas *un valor nuevo* de una propiedad que Tailwind ya soporta (un color, un espaciado), usa `@theme`. Reserva `@utility` para cuando necesitas una **propiedad CSS que Tailwind no expone en absoluto**, como `scrollbar-width` o `mask-composite`.
 :::
 
-## 17.3 Crear Variantes Personalizadas con `@variant`
+## 17.3 Crear Variantes Personalizadas con `@custom-variant`
 
-Así como `@utility` crea clases nuevas, `@variant` crea **prefijos condicionales** nuevos, análogos a `hover:` o `dark:`, pero definidos por ti.
+Así como `@utility` crea clases nuevas, `@custom-variant` crea **prefijos condicionales** nuevos, análogos a `hover:` o `dark:`, pero definidos por ti.
 
 ### Ejemplo: Variante para el Tercer Elemento de una Lista
 
 ```css
-@variant third-child (&:nth-child(3));
+@custom-variant third-child (&:nth-child(3));
 ```
 
 ```html
@@ -79,10 +81,10 @@ Solo "Equipo C" (el tercer `<li>`) recibirá el estilo.
 
 ### Ejemplo Práctico: Variante para un Atributo de Datos Personalizado
 
-En aplicaciones con estado dinámico (Vue/React), es común usar atributos `data-*` para reflejar estado en lugar de clases. Con `@variant`, puedes crear una variante propia para reaccionar a ellos declarativamente:
+En aplicaciones con estado dinámico (Vue/React), es común usar atributos `data-*` para reflejar estado en lugar de clases. Con `@custom-variant`, puedes crear una variante propia para reaccionar a ellos declarativamente:
 
 ```css
-@variant live (&[data-status="live"]);
+@custom-variant live (&[data-status="live"]);
 ```
 
 ```html
@@ -93,16 +95,16 @@ En aplicaciones con estado dinámico (Vue/React), es común usar atributos `data
 
 Esto es más legible y reutilizable que escribir clases condicionales `:class="status === 'live' ? '...' : '...'"` cada vez que necesitas ese mismo patrón.
 
-## 17.4 Tabla Comparativa: v3 (JS Plugin API) vs. v4 (`@utility` / `@variant`)
+## 17.4 Tabla Comparativa: v3 (JS Plugin API) vs. v4 (`@utility` / `@custom-variant`)
 
 | Necesidad | Tailwind v3 | Tailwind v4 |
 | :--- | :--- | :--- |
 | Nueva clase de utilidad | `plugin(({ addUtilities }) => {...})` en `tailwind.config.js` | `@utility nombre { ... }` en CSS |
-| Nueva variante | `plugin(({ addVariant }) => {...})` | `@variant nombre (&selector);` en CSS |
+| Nueva variante | `plugin(({ addVariant }) => {...})` | `@custom-variant nombre (&selector);` en CSS |
 | Familia de utilidades con valores | `matchUtilities()` (API compleja de JS) | `@utility nombre-* { ... var(--value(...)) }` |
 | Curva de aprendizaje | Requiere conocer la API interna de JS de Tailwind | Requiere solo CSS estándar (selectores, `&`) |
 | Reinicio del servidor de desarrollo | A veces necesario tras cambiar el plugin | Nunca; es CSS, se recarga en caliente igual que cualquier estilo |
 
 ::: tip 💡 Consejo del Diseñador Frontend:
-Guarda tus `@utility` y `@variant` personalizados en un archivo dedicado (por ejemplo, `theme/utilities.css`) e impórtalo junto a tu `@theme`. Así, cualquier desarrollador nuevo en tus proyectos sabe exactamente dónde buscar "el vocabulario extendido" del proyecto, sin tener que rastrear un `tailwind.config.js` disperso como en v3.
+Guarda tus `@utility` y `@custom-variant` personalizados en un archivo dedicado (por ejemplo, `theme/utilities.css`) e impórtalo junto a tu `@theme`. Así, cualquier desarrollador nuevo en tus proyectos sabe exactamente dónde buscar "el vocabulario extendido" del proyecto, sin tener que rastrear un `tailwind.config.js` disperso como en v3.
 :::

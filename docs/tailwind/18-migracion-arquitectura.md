@@ -26,6 +26,10 @@ La automatización no es perfecta. Estos son los cambios de comportamiento más 
 | **`@tailwind base/components/utilities`** | 3 directivas separadas | Una sola línea: `@import "tailwindcss";` |
 | **Espaciado con variables** | Valores fijos en el config | Todo pasa a variables CSS nativas (`--spacing-*`), lo que puede cambiar el cálculo si tenías overrides parciales. |
 | **Soporte de navegadores** | Amplio (incluía navegadores antiguos) | Requiere Safari 16.4+, Chrome 111+, Firefox 128+ (usa `@property` y `color-mix()` nativos). |
+| **Escalas de sombra/blur/radio** | `shadow-sm`, `shadow`, `blur-sm`, `blur`, `rounded-sm`, `rounded` | Cada escala se recorrió un peldaño para que todas tengan un nombre: `shadow-sm`→`shadow-xs`, `shadow`→`shadow-sm`, `blur-sm`→`blur-xs`, `blur`→`blur-sm`, `rounded-sm`→`rounded-xs`, `rounded`→`rounded-sm` (ver Módulo 9). |
+| **`outline-none`** | Ocultaba visualmente el outline, pero por accesibilidad seguía forzando uno en modo de "colores forzados" del SO. | Esa utilidad se renombró a `outline-hidden`. El nuevo `outline-none` ahora sí aplica literalmente `outline-style: none`, sin la excepción de accesibilidad. Si migras `focus:outline-none` de v3, debe pasar a `focus:outline-hidden`. |
+| **Orden de variantes apiladas** | Se aplicaban de derecha a izquierda: `first:*:pt-0`. | Se aplican de izquierda a derecha, igual que se leen: `*:first:pt-0`. La herramienta de migración reordena esto automáticamente, pero revísalo si escribes variantes apiladas a mano. |
+| **Modificador `!important`** | Prefijo, antes del nombre de la utilidad: `!bg-red-500`. | Sufijo, al final de la clase completa (después de variantes y valor): `bg-red-500!`. |
 
 ### Paso 3: Verificación visual
 
@@ -108,7 +112,19 @@ Detalle importante: Next.js pre-renderiza en el servidor (SSR/RSC). El CSS gener
 
 ### Vue 3 + Vite
 
-Idéntico al caso general de Vite (Módulo 2), con un detalle: si usas `<style scoped>` dentro de un `.vue` junto con `@apply`, recuerda que el motor de Tailwind necesita ver ese bloque durante el escaneo; esto funciona automáticamente con el plugin de Vite sin configuración adicional.
+Idéntico al caso general de Vite (Módulo 2), con un detalle importante: los bloques `<style scoped>` de un `.vue` **no tienen acceso directo a las variables de tu `@theme`** (colores, espaciados, etc.) — están aislados del resto del CSS. Si usas `@apply` o la función `theme()` dentro de un `<style scoped>`, debes agregar `@reference` al inicio del bloque para que Tailwind pueda resolver esos valores:
+
+```vue
+<style scoped>
+@reference "../../app.css"; /* o @reference "tailwindcss"; si no personalizaste el tema */
+
+.mi-boton {
+  @apply bg-primary text-white rounded-lg px-4 py-2;
+}
+</style>
+```
+
+Sin `@reference`, las utilidades que dependen de `@theme` simplemente no se aplican dentro de un componente con estilos `scoped`.
 
 ### Astro
 
@@ -120,9 +136,9 @@ El comando oficial de Astro configura automáticamente el `@tailwindcss/vite` de
 ### Nuxt 3
 
 ```bash
-npm install -D @nuxtjs/tailwindcss
+npm install tailwindcss @tailwindcss/vite
 ```
-El módulo oficial de Nuxt detecta automáticamente si tienes un archivo `@theme`; no necesitas configurar rutas de contenido manualmente, igual que en el resto del ecosistema v4.
+La integración recomendada para Tailwind 4 en Nuxt ya **no** es el módulo comunitario `@nuxtjs/tailwindcss`, sino registrar el plugin oficial `@tailwindcss/vite` directamente en `nuxt.config.ts` (ver Módulo 2). No necesitas configurar rutas de contenido manualmente, igual que en el resto del ecosistema v4.
 
 ### Tabla Resumen
 
@@ -130,9 +146,9 @@ El módulo oficial de Nuxt detecta automáticamente si tienes un archivo `@theme
 | :--- | :--- | :--- |
 | React + Vite | `@tailwindcss/vite` | Ninguna, el caso más simple. |
 | Next.js | `@tailwindcss/postcss` | Usa PostCSS, no el plugin de Vite. |
-| Vue 3 + Vite | `@tailwindcss/vite` | Compatible con `<style scoped>` + `@apply`. |
+| Vue 3 + Vite | `@tailwindcss/vite` | `<style scoped>` + `@apply` requiere `@reference`. |
 | Astro | `npx astro add tailwind` | Se integra en la arquitectura de Islands. |
-| Nuxt 3 | `@nuxtjs/tailwindcss` | Detección automática de `@theme`. |
+| Nuxt 3 | `@tailwindcss/vite` | Se registra en `nuxt.config.ts`, no vía módulo comunitario. |
 
 ::: tip 💡 Consejo del Diseñador Frontend:
 Independientemente del framework, el concepto central no cambia: **el tema vive en CSS, no en JavaScript**. Una vez que interiorizas esto, moverte entre React, Vue o Astro con Tailwind 4 se siente prácticamente idéntico; la única diferencia real es *cómo* cada build tool le entrega tu CSS al navegador.

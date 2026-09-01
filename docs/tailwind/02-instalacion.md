@@ -9,9 +9,17 @@ Tailwind se adapta a cualquier flujo de trabajo, desde prototipos rápidos hasta
 * **CDN (Content Delivery Network):** Ideal para prototipos rápidos o archivos HTML simples. No requiere instalación.
     * *Uso:* Solo añades la etiqueta `<script src="https://cdn.tailwindcss.com"></script>`. No recomendado para producción porque descarga todo el motor al cliente.
 * **CLI (Command Line Interface):** Permite procesar CSS sin depender de un framework. Es la forma más rápida de usar Tailwind en proyectos estáticos o *backend* puro (PHP, Django).
-* **PostCSS:** Es la forma en que Tailwind se integra como un plugin dentro de herramientas más grandes. Es el "motor" que utiliza el resto de los métodos.
-* **Vite:** La opción estándar de la industria. Vite proporciona un entorno de desarrollo ultra rápido y una integración perfecta con Tailwind mediante plugins.
+* **Vite:** La opción estándar de la industria. Vite proporciona un entorno de desarrollo ultra rápido y una integración perfecta con Tailwind mediante el plugin `@tailwindcss/vite`, sin pasar por PostCSS.
+* **PostCSS:** Un plugin (`@tailwindcss/postcss`) para integrar Tailwind dentro de una cadena de PostCSS ya existente. **Ya no es obligatorio como en la versión 3.**
 * **Frameworks Modernos:** Integraciones nativas que abstraen la configuración, permitiendo que Tailwind "simplemente funcione" apenas inicias el proyecto.
+
+::: tip 💡 Consejo del Diseñador Frontend:
+En Tailwind 3, PostCSS era el motor obligatorio: prácticamente todos los métodos de instalación (`tailwindcss init -p`, plugins de framework, etc.) pasaban por él para procesar el CSS.
+
+En Tailwind 4 esto cambió: el propio motor de Tailwind, escrito en Rust, y **Lightning CSS** (también en Rust) se encargan internamente de tareas como el *autoprefixing* o la minificación, sin necesitar PostCSS en absoluto. Por eso el plugin `@tailwindcss/vite` y el CLI funcionan de forma totalmente independiente.
+
+PostCSS solo sigue siendo necesario cuando tu proyecto **ya depende de otros plugins de PostCSS** (por ejemplo, para procesar CSS generado por un CMS) y necesitas que Tailwind conviva con ellos en la misma cadena. Para esos casos existe el paquete `@tailwindcss/postcss`, que es justo el que instalan frameworks como Next.js más adelante en este módulo.
+:::
 
 ## 2.2 Instalación en Proyectos Modernos
 
@@ -74,14 +82,21 @@ Para estos frameworks, la experiencia es la más sencilla, ya que los módulos o
     3.  El motor de Tailwind 4 se encargará de purgar y optimizar el CSS automáticamente al construir para producción.
 
 * **Nuxt:**
-    1.  `npm install -D @nuxtjs/tailwindcss`
-    2.  En `nuxt.config.ts`:
+    1.  `npm install tailwindcss @tailwindcss/vite`
+    2.  En `nuxt.config.ts`, agrega el plugin de Vite:
         ```typescript
+        import tailwindcss from '@tailwindcss/vite'
+
         export default defineNuxtConfig({
-          modules: ['@nuxtjs/tailwindcss']
+          css: ['~/assets/css/main.css'],
+          vite: {
+            plugins: [tailwindcss()],
+          },
         })
         ```
-    3.  Nuxt configurará automáticamente el entorno para que Tailwind sea totalmente responsivo dentro de tus layouts y páginas.
+    3.  En `assets/css/main.css`: `@import "tailwindcss";`
+
+    > La guía oficial de Nuxt para Tailwind 4 ya no usa el módulo comunitario `@nuxtjs/tailwindcss`, sino el plugin oficial `@tailwindcss/vite` — el mismo mecanismo que Vite puro, solo que registrado dentro de la config de Nuxt.
 
 ---
 
@@ -128,6 +143,31 @@ Esta es la jerarquía estándar para un proyecto limpio donde Tailwind 4 se inte
     });
     ```
 * **`src/assets/index.css`**: En la versión 4, este archivo es el centro de mando. Al escribir `@import "tailwindcss";`, le indicas al motor que debe escanear todo el proyecto en busca de clases utilitarias para generar el CSS final.
+
+### La directiva `@source`: cuando el escaneo automático no es suficiente
+
+El escaneo automático de Tailwind 4 es muy potente, pero solo revisa los archivos dentro de la raíz de tu proyecto (respetando tu `.gitignore`). Hay situaciones en las que necesitas indicarle **manualmente** que revise (o ignore) rutas adicionales:
+
+* Archivos fuera de la raíz del proyecto (por ejemplo, una carpeta de plantillas de un CMS externo).
+* Una librería en `node_modules` cuyas clases usas directamente y que, al estar dentro de `.gitignore`, Tailwind ignoraría por defecto.
+* Carpetas de código "legacy" que no quieres que se escaneen, para acelerar la compilación.
+
+Para estos casos existe la directiva `@source`, que se escribe en tu archivo CSS junto al `@import "tailwindcss";`:
+
+```css
+@import "tailwindcss";
+
+/* Registra manualmente una librería de node_modules
+   que Tailwind no escanearía por defecto */
+@source "../node_modules/@liga-stats/marcador-widget";
+```
+
+::: tip 💡 Consejo del Diseñador Frontend:
+`@source` tiene dos variantes útiles que vale la pena conocer:
+
+* **`@source not "ruta";`** excluye una ruta del escaneo. Es perfecta para dejar fuera carpetas antiguas o de terceros que nunca deberían generar clases, como `@source not "../src/legacy/plantillas-2019";`.
+* **`@source inline("...");`** fuerza la generación de clases concretas aunque el motor nunca las "vea" escritas tal cual en tu código. Es muy útil cuando una clase se construye dinámicamente (por ejemplo, un CMS que arma `bg-${color}-500` en tiempo de ejecución desde el panel de un club deportivo), ya que el JIT solo detecta texto literal: `@source inline("{hover:,}bg-red-{50,500,900}");`.
+:::
 
 ### Cómo funciona el *Build Process* en Vite
 Para un desarrollador Frontend, es vital entender el ciclo de vida del *Build*:

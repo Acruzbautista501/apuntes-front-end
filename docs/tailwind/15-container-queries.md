@@ -89,7 +89,43 @@ Si los breakpoints estándar no se ajustan a tu diseño, puedes usar valores arb
 </div>
 ```
 
-## 15.5 Container Queries vs. Media Queries: Cuándo usar cada una
+## 15.5 Variantes `@max-*` y Rangos de Contenedor
+
+Todas las variantes que hemos visto hasta ahora (`@md:`, `@lg:`, `@min-[500px]:`) aplican el estilo **a partir de** cierto ancho del contenedor, igual que `md:` en el viewport. Pero a veces necesitas justo lo contrario: un estilo que se aplique **por debajo** de un tamaño de contenedor. Para eso existen las variantes `@max-*`.
+
+```html
+<div class="@container">
+  <!-- Se apila en columna solo cuando el contenedor es angosto -->
+  <div class="flex flex-row @max-md:flex-col gap-4 p-4 border rounded-lg">
+    <div class="w-32 h-32 bg-slate-200 rounded shrink-0"></div>
+    <p>Alineación de la Copa Sudamericana, fase de grupos</p>
+  </div>
+</div>
+```
+
+Aquí `@max-md:flex-col` funciona al revés que `@md:flex-row`: en vez de activarse cuando el contenedor **crece**, se activa mientras el contenedor sigue **por debajo** de 448px. Es el equivalente, dentro de un contenedor, a lo que `max-md:` hace con el viewport.
+
+### Combinar variantes para definir un rango
+
+Puedes encadenar una variante normal (`@sm:`) con una `@max-*` (`@max-lg:`) para que el estilo aplique **solo dentro de un rango** de anchos del contenedor, ni antes ni después:
+
+```html
+<div class="@container">
+  <!-- Fila de resultados: solo en columna cuando el contenedor
+       mide entre @sm (384px) y @lg (512px) -->
+  <div class="flex flex-row @sm:@max-lg:flex-col gap-4 p-4 border rounded-lg">
+    <span>Tigres del Norte 2 — 1 Halcones FC</span>
+  </div>
+</div>
+```
+
+Fuera de ese rango —ya sea porque el contenedor es más angosto que `@sm` o más ancho que `@lg`— la clase `@sm:@max-lg:flex-col` simplemente no se aplica y prevalece el `flex-row` por defecto.
+
+::: tip 💡 Consejo del Diseñador Frontend:
+Los rangos de contenedor (`@sm:@max-lg:...`) son útiles para esos "tamaños intermedios incómodos" donde un componente no cabe cómodo ni con el layout angosto ni con el ancho. No abuses de ellos: si necesitas más de un rango para un mismo componente, probablemente es momento de dividirlo en variantes más simples o replantear su diseño.
+:::
+
+## 15.6 Container Queries vs. Media Queries: Cuándo usar cada una
 
 | Escenario | Herramienta correcta | Razón |
 | :--- | :--- | :--- |

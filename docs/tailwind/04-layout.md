@@ -76,6 +76,18 @@ En tu proyecto de tu aplicación, podrías usar estas propiedades así:
 Si alguna vez intentas centrar algo y no funciona, o un elemento no toma el tamaño que le asignas, el 90% de las veces es porque el `display` configurado no lo permite (por ejemplo, intentar darle `width` a un elemento `inline`). ¡Verifica siempre esto primero!
 :::
 
+### `flow-root` (Contexto de formato de bloque)
+* **Comportamiento:** Aplica `display: flow-root`. Crea un elemento de bloque con su propio "Contexto de Formato de Bloque" (BFC), de forma limpia y sin efectos secundarios raros.
+* **Uso:** Es la solución moderna para el clásico problema de "contener flotantes" (`float`). Si dentro de un contenedor tienes elementos con `float-left` o `float-right` (por ejemplo, una alineación antigua de escudo + texto), el contenedor padre "colapsa" su altura porque no ve a sus hijos flotantes. Antes esto se resolvía con el hack del "clearfix"; hoy basta con poner `flow-root` en el padre.
+
+### `contents` (El contenedor fantasma)
+* **Comportamiento:** Aplica `display: contents`. La caja del propio elemento desaparece por completo (no se pinta ni participa en el layout), pero sus hijos se siguen renderizando como si fueran hijos directos del padre.
+* **Uso:** Útil cuando necesitas un `div` extra en el HTML, por ejemplo para agrupar semánticamente algunos elementos, pero ese `div` está "rompiendo" un layout de `flex` o `grid` porque sus hijos dejan de comportarse como *flex items* o *grid items* directos del contenedor.
+
+::: tip 💡 Consejo del Diseñador Frontend:
+No abuses de `contents`: al desaparecer la caja del elemento, también pierdes la posibilidad de aplicarle `padding`, `margin`, `background` o incluso algunos comportamientos de accesibilidad (no hay caja donde "colgar" esos estilos). Úsalo solo cuando de verdad necesites que los hijos "salten" el nivel de su contenedor directo.
+:::
+
 ## 4.2 Position
 
 La propiedad `position` es la herramienta de "control de tráfico" del CSS. Por defecto, los elementos siguen el flujo natural del documento, pero `position` te permite sacar elementos de ese flujo, fijarlos en pantalla o superponerlos con precisión quirúrgica.
@@ -100,6 +112,22 @@ El elemento se saca del flujo y se fija en el navegador. No importa cuánto haga
 ### `sticky` (El elemento inteligente)
 Es un híbrido entre `relative` y `fixed`. El elemento fluye normalmente hasta que alcanza un umbral (ej. `top-0`). Al llegar ahí, se "pega" y se comporta como `fixed`.
 * **Uso:** Encabezados de tablas de posiciones que quieres que sigan visibles mientras el usuario hace scroll hacia abajo.
+
+### Moviendo el elemento: `top`, `right`, `bottom`, `left` e `inset`
+Una vez que un elemento tiene `relative`, `absolute`, `fixed` o `sticky`, estas utilidades definen **a cuánta distancia** de cada borde de su contenedor de referencia se coloca.
+
+* **`top-*`, `right-*`, `bottom-*`, `left-*`:** Controlan un solo borde. `top-4` equivale a `top: 1rem;` y `left-0` a `left: 0px;`.
+* **`inset-*`:** Es el atajo para fijar los 4 lados a la vez. `inset-0` equivale a escribir `top-0 right-0 bottom-0 left-0` en una sola clase; es la opción ideal para overlays o fondos que deben cubrir por completo a su contenedor.
+* **`inset-x-*` / `inset-y-*`:** Controlan un eje completo. `inset-x-0` fija `left` y `right` en `0`; `inset-y-0` fija `top` y `bottom`.
+* **Valores negativos:** Anteponiendo un guion "sacas" el elemento fuera de su contenedor, como el badge de "Top Goleador" que viste antes: `-top-2 -right-2` lo desplaza hacia afuera de cada borde.
+
+```html
+<!-- Cubre completamente al padre: ideal para el fondo oscuro de un modal -->
+<div class="absolute inset-0 bg-black/50"></div>
+
+<!-- Franja de "en vivo" pegada al borde superior de una tarjeta -->
+<div class="absolute inset-x-0 top-0 h-1 bg-red-500"></div>
+```
 
 ### Resumen para tu proyecto
 
@@ -135,7 +163,9 @@ Este es el error más común: creer que un `z-index: 9999` siempre irá al frent
 * **La Regla de Oro:** Si un hijo tiene `z-index: 9999` pero su padre tiene `z-index: 1`, y otro elemento (fuera de ese padre) tiene `z-index: 2`, **el hijo nunca podrá superar al elemento externo**. El padre está limitado por su propio contexto.
 
 ### La escala de Tailwind (z-index predefinido)
-Tailwind no te obliga a usar números aleatorios como 999 o 1000. Utiliza una escala semántica que ayuda a organizar tu código:
+Tailwind no te obliga a usar números aleatorios como 999 o 1000. Te da una escala numérica ya lista (`z-0`, `z-10`, `z-20`, `z-30`, `z-40`, `z-50`...) con "huecos" entre cada paso para que puedas insertar tus propios valores intermedios si algún día lo necesitas.
+
+**Importante:** esta escala **no tiene un significado oficial** por parte de Tailwind. No existe una regla del framework que diga "`z-40` es para modales" o "`z-50` es para tooltips" — esos números son solo pasos de una escala numérica, sin ningún significado predefinido más allá de "más grande = más arriba". La siguiente lista es únicamente **un ejemplo de convención** que tú (o tu equipo) podrían adoptar en un proyecto; lo importante es que la documenten y la respeten de forma consistente, no que coincida con estos números exactos:
 
 * `z-0`: Fondo absoluto.
 * `z-10`: Elementos básicos (textos, tarjetas).
@@ -174,10 +204,11 @@ En el desarrollo profesional de dashboards (como tu sistema de gestión), manté
 La propiedad `overflow` controla qué sucede cuando el contenido de un elemento es **más grande** que el área definida para él. En una aplicación de gestión deportiva como tu aplicación, donde manejas tablas largas de jugadores o listas de resultados, esto es vital para mantener un diseño limpio.
 
 
-### Los 4 Estados de Overflow
+### Los Estados de Overflow
 
 * **`overflow-visible` (Por defecto):** El contenido se "sale" del contenedor y se dibuja encima de otros elementos. Es arriesgado si no controlas bien las dimensiones.
 * **`overflow-hidden`:** El contenido que excede los límites se corta y se vuelve invisible. Es perfecto para crear recortes de imágenes en tarjetas de jugadores.
+* **`overflow-clip`:** Recorta el contenido igual que `overflow-hidden`, pero de forma más "ligera": no crea un nuevo contexto de formato de bloque y, a diferencia de `overflow-hidden`, no permite hacer scroll del contenido de forma programática (por ejemplo con `element.scrollTo()`). Úsalo cuando solo quieres ocultar visualmente el desbordamiento, sin los efectos secundarios de layout de `overflow-hidden`.
 * **`overflow-scroll`:** El navegador añade barras de desplazamiento (scrollbars) siempre, incluso si el contenido cabe perfectamente. Se siente poco profesional y a veces es confuso para el usuario.
 * **`overflow-auto`:** El navegador es "inteligente". Solo añade barras de scroll si es **estrictamente necesario**. Si el contenido cabe, no muestra nada. **Esta es la opción estándar para interfaces profesionales.**
 
@@ -211,6 +242,7 @@ Imagina tu tabla de posiciones. En móviles, las columnas son muchas y el ancho 
 | Clase | Comportamiento | Uso en tu aplicación |
 | :--- | :--- | :--- |
 | `overflow-hidden` | Corta el contenido | Recortar fotos de jugadores en un círculo o cuadrado. |
+| `overflow-clip` | Corta el contenido (sin BFC ni scroll por JS) | Ocultar desbordamientos visuales leves, como sombras o decoraciones que sobresalen un poco. |
 | `overflow-auto` | Scroll dinámico | Tablas de posiciones, listas de comentarios. |
 | `overflow-x-auto` | Scroll horizontal | Tablas con muchas columnas (ej: estadísticas detalladas). |
 

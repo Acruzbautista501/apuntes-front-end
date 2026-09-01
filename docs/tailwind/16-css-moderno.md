@@ -36,7 +36,7 @@ Un patrón muy popular: al hacer hover, la tarjeta se voltea como una carta de b
 
 ```html
 <div class="group perspective-distant w-64 h-80">
-  <div class="relative w-full h-full transition-transform duration-500 preserve-3d group-hover:rotate-y-180">
+  <div class="relative w-full h-full transition-transform duration-500 transform-3d group-hover:rotate-y-180">
 
     <div class="absolute inset-0 backface-hidden bg-white border rounded-xl p-4 flex items-center justify-center">
       <h3 class="font-bold text-lg">Juan Pérez</h3>
@@ -91,7 +91,6 @@ Se usa como variante: `starting:*`.
     opacity-100 scale-100
     transition-all duration-300
     starting:opacity-0 starting:scale-90
-    closed:opacity-0 closed:scale-90
   "
 >
   <h2 class="font-bold text-xl">Confirmar Resultado</h2>
@@ -100,7 +99,9 @@ Se usa como variante: `starting:*`.
 ```
 
 ::: tip 💡 Consejo del Diseñador Frontend:
-`@starting-style` funciona en conjunto con los elementos nativos `<dialog>` y `[popover]`, que además resuelven accesibilidad (foco, cierre con `Esc`) de forma gratuita. Prefiere estos elementos nativos sobre un `<div>` con `v-if` cuando construyas modales: obtienes animación de entrada/salida y accesibilidad sin librerías externas.
+`@starting-style` funciona en conjunto con los elementos nativos `<dialog>` y `[popover]`, que además resuelven accesibilidad (foco, cierre con `Esc`) de forma gratuita. Prefiere estos elementos nativos sobre un `<div>` con `v-if` cuando construyas modales: obtienes animación de entrada y accesibilidad sin librerías externas.
+
+Ojo: **no existe una variante `closed:*`** en Tailwind — el ejemplo de arriba solo anima la *entrada*. Animar la *salida* de un `<dialog>`/`[popover]` nativo (antes de que el navegador lo quite del árbol de accesibilidad) requiere combinarlo con la utilidad `transition-discrete` y normalmente algo de JavaScript para retrasar el cierre real hasta que la transición termine — no es algo que resuelvas solo con clases declarativas.
 :::
 
 ## 16.3 La Variante `not-*`
@@ -111,11 +112,13 @@ Tailwind 3 no tenía forma nativa de decir "aplica este estilo solo si **no** se
 <!-- Aplica el borde solo a los inputs que NO están deshabilitados -->
 <input class="not-disabled:border-blue-500 disabled:opacity-50" />
 
-<!-- Aplica hover solo si el dispositivo SÍ soporta hover real (no táctil) -->
+<!-- Reduce la opacidad mientras el botón NO está en hover, y la sube al 100% al pasar el mouse -->
 <button class="not-hover:opacity-90">
-  Botón que no se "apaga" en móviles al no tener hover verdadero
+  Botón que se atenúa un poco cuando no le pasas el mouse
 </button>
 ```
+
+`not-hover:` es simplemente el equivalente a `:not(:hover)` — el estado en que el cursor **no** está sobre el elemento en ese momento. No tiene relación con detectar si el dispositivo soporta hover real (para eso existe la media feature `pointer`/`any-pointer`, que Tailwind no expone como variante `not-*`).
 
 ### Combinándola con otras variantes: `not-last:` para separadores
 
@@ -186,7 +189,7 @@ Usa `subgrid` cuando la alineación entre un contenedor y sus hijos debe ser **m
 
 ## 16.5 Gradientes Avanzados
 
-El Módulo 10 cubrió los gradientes lineales básicos (`bg-gradient-to-r`). Tailwind 4 amplía la familia con gradientes **cónicos**, **radiales** y control sobre el **modo de interpolación de color**.
+El Módulo 10 cubrió los gradientes lineales básicos (`bg-linear-to-r`). Tailwind 4 amplía la familia con gradientes **cónicos**, **radiales** y control sobre el **modo de interpolación de color**.
 
 ### Gradiente Radial (`bg-radial-*`)
 
@@ -201,23 +204,25 @@ Expande el color desde un punto central hacia afuera. Ideal para efectos de "foc
 Gira el color alrededor de un punto, como las agujas de un reloj. Perfecto para gráficos circulares de progreso (por ejemplo, "porcentaje de victorias" de un equipo) sin necesidad de SVG o `<canvas>`.
 
 ```html
-<div class="size-32 rounded-full bg-conic from-emerald-500 via-emerald-500 to-slate-200" style="--tw-gradient-stops: conic-gradient(from 0deg, var(--tw-gradient-stops))"></div>
+<div class="size-32 rounded-full bg-conic-180 from-emerald-500 via-emerald-500 to-slate-200"></div>
 ```
+
+`bg-conic-{ángulo}` ya incluye el ángulo de inicio del degradado (ej. `bg-conic-180`) — no hace falta ningún `style` en línea ni tocar variables `--tw-gradient-stops` a mano, lo resuelve la propia clase.
 
 ### Modos de Interpolación de Color (`/oklch`, `/srgb`)
 
-Por defecto, Tailwind 4 interpola los gradientes en el espacio de color **OKLCH**, lo que produce transiciones de color más vivas y perceptualmente uniformes que el clásico RGB (evita esa "zona gris apagada" que aparece en el punto medio de un gradiente rojo-a-azul en RGB). Puedes forzar el modo de interpolación explícitamente:
+Por defecto, Tailwind 4 interpola los gradientes en el espacio de color **OKLAB**, lo que produce transiciones de color más vivas y perceptualmente uniformes que el clásico RGB (evita esa "zona gris apagada" que aparece en el punto medio de un gradiente rojo-a-azul en RGB). Puedes forzar el modo de interpolación explícitamente, agregando el modificador sobre la propia clase de dirección:
 
 ```html
-<!-- Interpolación por defecto (OKLCH): colores más vibrantes en el punto medio -->
-<div class="bg-gradient-to-r from-red-500 to-blue-500"></div>
+<!-- Interpolación por defecto (OKLAB): colores más vibrantes en el punto medio -->
+<div class="bg-linear-to-r from-red-500 to-blue-500"></div>
 
 <!-- Forzar interpolación en el espacio HSL, por ejemplo -->
-<div class="bg-gradient-to-r/hsl from-red-500 to-blue-500"></div>
+<div class="bg-linear-to-r/hsl from-red-500 to-blue-500"></div>
 ```
 
 ::: tip 💡 Consejo del Diseñador Frontend:
-No necesitas tocar el modo de interpolación en el 95% de los casos: el valor por defecto de v4 (OKLCH) ya resuelve el problema que teníamos en v3 con gradientes "sucios" en el punto medio. Solo experimenta con `/hsl` o `/srgb` si un diseñador te entrega specs que dependen de un espacio de color específico.
+No necesitas tocar el modo de interpolación en el 95% de los casos: el valor por defecto de v4 (OKLAB) ya resuelve el problema que teníamos en v3 con gradientes "sucios" en el punto medio. Solo experimenta con `/hsl` o `/srgb` si un diseñador te entrega specs que dependen de un espacio de color específico.
 :::
 
 ## Resumen del Módulo

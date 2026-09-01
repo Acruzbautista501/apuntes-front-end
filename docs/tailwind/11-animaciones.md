@@ -121,7 +121,7 @@ Cuando un usuario hace clic en el botón de "Registrar Gol", este debe encogerse
 ```
 
 ### El "Secreto Pro": Transform Origin
-Por defecto, las transformaciones ocurren desde el centro (`transform-origin-center`). Pero, ¿qué pasa si quieres que un elemento rote como si fuera una puerta (desde el borde)? Aquí entra la utilidad `origin-*`.
+Por defecto, las transformaciones ocurren desde el centro (`origin-center`). Pero, ¿qué pasa si quieres que un elemento rote como si fuera una puerta (desde el borde)? Aquí entra la utilidad `origin-*`.
 
 * `origin-top-left`: El punto de pivote es la esquina superior izquierda.
 * `origin-bottom`: El punto de pivote es la base.
@@ -154,6 +154,7 @@ Estas animaciones son **cíclicas** por defecto (se repiten infinitamente), por 
 | `animate-pulse` | Opacidad oscilante | "Skeleton screens" (esquemas de carga) en tablas de posiciones. |
 | `animate-ping` | Expansión suave (onda) | Notificaciones de "nuevo gol" o "partido en vivo". |
 | `animate-bounce` | Salto vertical | Indicadores de "bajar para ver más" o botones de llamado a la acción. |
+| `animate-none` | Ninguna (elimina la animación) | Estado base antes de aplicar una animación condicionalmente, o para anularla en un breakpoint/estado concreto (ej. `lg:animate-none`). |
 
 
 ### Implementación Práctica
@@ -197,6 +198,37 @@ Los *Skeleton Screens* mejoran la percepción de velocidad de la app. Es mejor m
 </div>
 ```
 
+#### 4. `animate-none` (Detener una Animación)
+No todas las animaciones deben durar para siempre. `animate-none` elimina cualquier animación aplicada, y su verdadero poder aparece cuando la combinas con un breakpoint o un estado: te permite tener una animación activa por defecto y "apagarla" bajo ciertas condiciones.
+
+```html
+<button class="animate-bounce lg:animate-none bg-green-600 text-white px-4 py-2 rounded-lg">
+  Ver Marcador en Vivo
+</button>
+```
+
+En pantallas pequeñas, el botón "salta" (`animate-bounce`) para llamar la atención sobre el marcador. En pantallas grandes (`lg:animate-none`) el botón ya ocupa un lugar visible en el layout, así que apagamos la animación para no distraer al usuario innecesariamente.
+
+### Animación Responsable: `motion-safe:` y `motion-reduce:`
+
+Hasta aquí hemos asumido que a todos los usuarios les gusta ver movimiento en pantalla. En realidad, muchas personas activan la preferencia de accesibilidad **"Reducir movimiento"** en su sistema operativo (macOS, Windows, iOS, Android) porque las animaciones les provocan mareo, distracción o molestias (trastornos vestibulares). El navegador expone esta preferencia mediante la media query `prefers-reduced-motion`, y Tailwind la convierte directamente en dos variantes de estado, sin que tengas que escribir CSS a mano:
+
+* `motion-safe:`: Aplica la utilidad **solo si el usuario NO ha solicitado reducir el movimiento**. Es la forma recomendada de envolver cualquier animación puramente decorativa: si el usuario no pidió nada especial, se anima con normalidad.
+* `motion-reduce:`: Aplica la utilidad **solo si el usuario SÍ solicitó reducir el movimiento**. Casi siempre se combina con `animate-none` para anular una animación que esté activa por defecto.
+
+**Ejemplo: Notificación de "Gol en Vivo" respetuosa con la accesibilidad**
+
+```html
+<div class="motion-safe:animate-bounce motion-reduce:animate-none
+            bg-red-600 text-white font-bold px-4 py-2 rounded-full inline-block">
+  ⚽ ¡GOL! Marcador actualizado
+</div>
+```
+
+En este ejemplo, `motion-safe:animate-bounce` activa el salto únicamente para quienes no pidieron reducir el movimiento. `motion-reduce:animate-none` garantiza que, si el usuario sí lo solicitó, la notificación se muestre completamente estática: el gol se sigue anunciando con el mismo texto y color, solo que sin el salto que podría resultar molesto.
+
+> Ver también **Módulo 19.3**, donde se profundiza en `prefers-reduced-motion` dentro del contexto más amplio de diseño de rendimiento y accesibilidad.
+
 ::: tip 💡 Consejos del Diseñador Frontend:
 1.  **No abuses del infinito:** Animaciones como `animate-spin` o `animate-pulse` son infinitas. Si tienes 20 elementos con estas animaciones activas al mismo tiempo, el navegador consumirá mucha batería y recursos del procesador (especialmente en móviles). **Úsalas solo cuando el estado lo requiera** (ej. mostrar el spinner solo mientras dura la petición HTTP).
 2.  **Accesibilidad (Crucial):** Algunos usuarios experimentan mareos con animaciones continuas. Tailwind 4 respeta las preferencias del sistema. Si quieres ser un desarrollador senior, puedes añadir una clase de utilidad en tu CSS global para detener las animaciones en usuarios que prefieren "Reducción de Movimiento":
@@ -211,6 +243,7 @@ Los *Skeleton Screens* mejoran la percepción de velocidad de la app. Es mejor m
 }
 ```
 
+    Como viste arriba, también puedes lograr el mismo resultado directamente en tu HTML, elemento por elemento, con las variantes `motion-safe:` y `motion-reduce:`, sin salir de tus clases de Tailwind.
 3.  **¿Spinning eterno?**: Si usas `animate-spin`, asegúrate de que el icono sea simple. Un SVG complejo girando constantemente es una pesadilla de rendimiento. Mantén los iconos de carga lo más simples posible.
 :::
 
