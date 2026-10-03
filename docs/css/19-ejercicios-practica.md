@@ -1,86 +1,76 @@
-# Módulo 19: Ejercicios de Práctica
+# Módulo 19: Ejercicios Prácticos de CSS3
 
-Antes de abordar el Proyecto Integrador, conviene practicar cada bloque de conceptos por separado, en piezas pequeñas y autocontenidas. Cada ejercicio indica los módulos que pone en juego para que puedas repasarlos si te atoras.
+Esta colección de ejercicios prácticos refuerza los conceptos fundamentales y avanzados de CSS3, organizados por orden de dificultad y cubriendo los patrones que usarás en proyectos reales de desarrollo web.
 
-## 19.1 Fundamentos y Modelo de Caja (Módulo 1)
+---
 
-1. **Cascada y box-sizing.** Construye una tarjeta con `box-sizing: border-box`, usando selectores combinados (descendiente, hijo directo) y demuestra un caso de cascada/especificidad resuelto a propósito.
-2. **Solo unidades relativas.** Crea un layout usando solo unidades relativas (`rem`, `%`, `vw`) y `calc()` para un ancho dinámico.
+## 🟢 Bloque 1: Fundamentos, Color y Tipografía (Módulos 1 al 4)
 
-## 19.2 Layout y Posicionamiento (Módulo 2)
+### Ejercicio 1: Tarjeta con Modelo de Caja Estricto
+* Aplica el reseteo universal con `box-sizing: border-box`.
+* Construye una tarjeta con `width: 320px;`, `padding: 2rem;` y `border: 2px solid #ccc;`.
+* Abre el inspector de elementos (F12) y verifica que el ancho total siga siendo exactamente `320px` sin importar el relleno.
 
-3. **Navbar con badge posicionado.** Construye una navbar con Flexbox que incluya un badge de notificación posicionado con `position: absolute` sobre un ícono.
-4. **Dashboard con sticky y z-index.** Diseña un dashboard de 3 columnas con CSS Grid, con un elemento `sticky` y otro superpuesto a propósito con `z-index`.
+### Ejercicio 2: Paleta de Colores con OKLCH y `color-mix()`
+* Define una variable `--color-primario` utilizando el modelo **OKLCH**.
+* Genera dinámicamente un color de fondo al 10% de opacidad y un estado `:hover` un 20% más oscuro utilizando exclusivamente la función `color-mix()`, sin definir variables de color adicionales.
 
-## 19.3 Diseño Adaptativo y Fluidez (Módulo 3)
+### Ejercicio 3: Tipografía Editorial y Balanceada
+* Limita un párrafo de texto a una longitud máxima de lectura confortable usando `max-width: 65ch;`.
+* Aplica `text-wrap: balance` en los títulos `<h1>` y `<h2>` para evitar que queden palabras viudas y solitarias al final.
 
-5. **Mobile-first con clamp y temas.** Aplica mobile-first a un componente, con tipografía fluida usando `clamp()` y variables CSS para un sistema de temas claro/oscuro.
-6. **aspect-ratio y contenedor flexible.** Crea una tarjeta con `aspect-ratio` fijo para su imagen y hazla adaptable con un contenedor flexible moderno.
+---
 
-## 19.4 Animaciones y UX (Módulo 4)
+## 🟡 Bloque 2: Layouts, Flexbox y Grid (Módulos 5 al 8)
 
-7. **Transiciones y transformaciones.** Anima un botón con transición suave en hover, y una tarjeta con transformación 2D/3D al pasar el mouse.
-8. **Spinner accesible.** Crea un spinner de carga con `@keyframes`, agregando soporte para `prefers-reduced-motion`.
+### Ejercicio 4: Barra de Navegación con Flexbox
+* Construye una cabecera `<header>` con Flexbox:
+  * Logotipo a la izquierda.
+  * Menú de navegación en el centro con espaciado uniforme usando `gap`.
+  * Botones de acción (Login y Registro) a la derecha.
+* Haz que la cabecera quede pegada arriba al hacer scroll mediante `position: sticky; top: 0;`.
 
-## 19.5 Arquitectura, SASS y Ecosistema (Módulo 5)
+### Ejercicio 5: Dashboard con CSS Grid y Áreas Nombradas
+* Maqueta la estructura de un panel de administración con `min-height: 100vh`:
+* Utiliza `grid-template-areas` con las áreas `"header header"`, `"sidebar main"` y `"footer footer"`.
+* La barra lateral debe medir `250px` fijos y el área principal debe ocupar el resto (`1fr`).
 
-9. **BEM + SASS.** Refactoriza un componente aplicando BEM, y organiza sus estilos en SASS con al menos una función o mixin propio.
-10. **Arquitectura por capas.** Organiza un mini-proyecto CSS siguiendo el patrón de arquitectura por capas (ITCSS o 7-1).
+### Ejercicio 6: Alineación Perfecta de Tarjetas con Subgrid
+* Crea un catálogo de 3 tarjetas de productos usando `repeat(auto-fit, minmax(280px, 1fr))`.
+* Cada tarjeta debe tener: imagen, título, descripción y botón de compra.
+* Aplica `grid-row: span 4` y `grid-template-rows: subgrid` para garantizar que los botones de compra queden **matemáticamente alineados en la misma línea horizontal** en todas las tarjetas, sin importar la longitud del título.
 
-## 19.6 Color y Gradientes (Módulo 6)
+---
 
-11. **Paleta con color-mix y gradiente cónico.** Construye una paleta usando `color-mix()` para generar variantes de un color base, y aplica un gradiente cónico para un indicador de progreso circular.
+## 🟠 Bloque 3: Fluidez, Componentes y Variables (Módulos 9 al 14)
 
-## 19.7 Tipografía Web (Módulo 7)
+### Ejercicio 7: Sección Hero Mobile-First con Rangos Modernos
+* Diseña una sección Hero comenzando por el diseño móvil a 1 sola columna.
+* Añade un breakpoint con la sintaxis moderna de rangos `@media (width >= 768px)` para transformarlo en 2 columnas equilibradas.
+* Define el tamaño del título principal usando `clamp(2rem, 5vw, 4rem)`.
 
-12. **Fuente personalizada con ritmo vertical.** Carga una fuente personalizada con `@font-face` y `font-display` correcto, y define una jerarquía tipográfica con ritmo vertical consistente.
+### Ejercicio 8: Tarjeta Auto-Adaptable con Container Queries
+* Declara un contenedor con `container-type: inline-size`.
+* Diseña una tarjeta de usuario que se muestre en formato vertical cuando su contenedor mida menos de `450px`, y cambie a formato horizontal con la foto al lado cuando su contenedor mida `450px` o más mediante `@container`.
 
-## 19.8 Selectores Avanzados (Módulo 8)
+### Ejercicio 9: Modo Oscuro en una Línea con `light-dark()`
+* Declara en `:root` los tokens semánticos de fondo y texto utilizando `light-dark()`.
+* Añade un botón que alterne `data-theme="dark"` en el `<html>` y comprueba cómo el diseño conmuta de tema instantáneamente.
 
-13. **:has() combinado con :is()/:where().** Usa `:has()` para estilizar un contenedor según el estado de su contenido (ej. un formulario con un input inválido), combinando con `:is()`/`:where()`.
+### Ejercicio 10: Formulario Inteligente sin JS con `:has()`
+* Diseña un formulario con campos obligatorios.
+* Utiliza `form:has(input:invalid)` para aplicar un borde rojo sutil en todo el formulario cuando haya errores.
+* Utiliza `label:has(input:checked)` para resaltar las opciones activas en un grupo de radio buttons.
 
-## 19.9 Flexbox a Fondo (Módulo 9)
+---
 
-14. **Elemento que empuja y anchos desiguales.** Construye una navbar con un elemento que "empuja" al resto (`margin-left: auto`), y practica `flex-grow`/`shrink`/`basis` en 3 tarjetas de ancho desigual.
+## 🔴 Bloque 4: Movimiento, Rendimiento y CSS Moderno (Módulos 15 al 18)
 
-## 19.10 CSS Grid a Fondo (Módulo 10)
+### Ejercicio 11: Giro Tridimensional Accesible
+* Construye una tarjeta con efecto de giro 3D usando `perspective` y `transform-style: preserve-3d`.
+* Incluye la media query `@media (prefers-reduced-motion: reduce)` para apagar la animación si el usuario tiene activada la reducción de movimiento en su sistema operativo.
 
-15. **auto-fit y grid-template-areas.** Crea una rejilla verdaderamente responsiva con `auto-fit` + `minmax()`, y un layout con `grid-template-areas` nombradas (header/sidebar/main/footer).
-
-## 19.11 Backgrounds, Bordes y Sombras (Módulo 11)
-
-16. **Fondos y sombras apiladas.** Aplica múltiples fondos superpuestos y sombras apiladas (`box-shadow`) para dar profundidad realista a una tarjeta.
-
-## 19.12 CSS Moderno (Módulo 12)
-
-17. **Nesting, @layer y @supports.** Reescribe un CSS con nesting nativo, organizado en capas con `@layer`, y usa `@supports` para dar un fallback a una propiedad moderna.
-
-## 19.13 Formularios y Estados Interactivos (Módulo 13)
-
-18. **Validación visual nativa.** Construye un formulario con validación visual usando `:valid`/`:invalid`, `accent-color` en los controles nativos y `:focus-within` en el contenedor.
-
-## 19.14 Container Queries (Módulo 14)
-
-19. **Tarjeta adaptable a su contenedor.** Convierte una tarjeta para que cambie su layout según el ancho de su *contenedor* (no del viewport) con `@container` y unidades `cqw`.
-
-## 19.15 Scroll Moderno (Módulo 15)
-
-20. **Carrusel sin JavaScript.** Crea un carrusel horizontal con `scroll-snap`, `scroll-behavior` suave y `overscroll-behavior` contenido.
-
-## 19.16 Layouts Avanzados (Módulo 16)
-
-21. **Columnas y propiedades lógicas.** Diseña un artículo con texto en columnas (`columns`), usando propiedades lógicas en vez de físicas (`margin-inline`, `padding-block`).
-
-## 19.17 Accesibilidad en CSS (Módulo 17)
-
-22. **Auditoría de accesibilidad.** Audita un componente: agrega `.sr-only` donde falte texto accesible, soporte para `prefers-contrast` y `forced-colors`, y verifica el contraste de color.
-
-## 19.18 Novedades de CSS 2024+ (Módulo 18)
-
-23. **View Transitions y @starting-style.** Implementa una transición de página con la View Transitions API, y una aparición animada de un elemento con `@starting-style`.
-
-## 19.19 Cómo Usar Esta Lista
-
-* No hace falta resolverlos en orden estricto, pero sí conviene no saltarse un bloque sin haber leído su módulo correspondiente.
-* Cada ejercicio es independiente: no se acumulan entre sí ni forman un solo proyecto, a diferencia del Módulo 20.
-* Cuando te sientas cómodo resolviendo estos ejercicios sueltos, estás listo para el Proyecto Integrador.
+### Ejercicio 12: Carrusel Magnético con Scroll Snap
+* Maqueta una galería de imágenes horizontal con `overflow-x: auto` y `scroll-snap-type: x mandatory`.
+* Cada imagen debe centrarse magnéticamente al soltar el dedo usando `scroll-snap-align: center`.
+* Añade una barra de progreso en la parte superior que se complete al hacer scroll usando `animation-timeline: scroll()`.

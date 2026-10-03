@@ -4,16 +4,16 @@ Bienvenido a mi repositorio personal de conocimientos. Aquí documento conceptos
 
 ## 🚀 Lógica y Lenguaje
 
-### [Fundamentos de Programación](../fundamentos/01-introduccion)
-Base de programación con TypeScript: tipado y estructuras de datos, control de flujo, funciones, interfaces, Programación Orientada a Objetos avanzada, asincronismo con APIs REST, y despliegue con Vite.
+### [Fundamentos de Programación](../fundamentos/01-pensamiento-computacional)
+Bases universales de la computación y la algoritmia: pensamiento computacional, arquitectura de hardware y memoria, tipos primitivos, lógica booleana, ciclos, funciones puras, ámbito y closures, mutabilidad vs inmutabilidad, estructuras de datos (arrays, pilas, colas, objetos y colecciones), depuración, introducción al asincronismo y POO.
 
-### [TypeScript para Frontend](../typescript/01-fundamentos)
-Aplicación práctica de TypeScript orientada al desarrollo web: tipado básico, objetos e interfaces, funciones, control de flujo, genéricos, APIs y el DOM, e integración con frameworks modernos.
+### [TypeScript para Frontend](../typescript/01-entorno-frontend)
+Desarrollo web tipado y defensivo en el navegador: configuración de `tsconfig` para el DOM, manipulación segura de nodos y colecciones, eventos y formularios sin casting inseguro, modelado de estado con uniones discriminadas y verificación exhaustiva (`never`), genéricos aplicados, tipos utilitarios (`Omit`, `Pick`, etc.), Type Guards y predicados (`is`), consumo HTTP con Fetch y Axios, validación en runtime con Zod, Web APIs (`localStorage`, `IntersectionObserver`), integración en Vue 3 y React 18, y archivos de declaración (`.d.ts`).
 
 ## 🎨 Diseño y Maquetación
 
-### [CSS3](../css/01-introduccion)
-Desde layout y posicionamiento hasta las características más recientes de la especificación: Flexbox y Grid a fondo, selectores avanzados (`:has()`, `:is()`, `:where()`), Container Queries, CSS Nesting nativo, `@layer`, scroll-driven animations, View Transitions API y accesibilidad.
+### [CSS3](../css/01-fundamentos-caja)
+Desde el modelo de caja, colorimetría moderna (OKLCH, `color-mix()`) y tipografía web hasta Flexbox y CSS Grid con Subgrid a fondo; diseño responsivo mobile-first, Container Queries, funciones matemáticas (`clamp`, `calc`), variables CSS y modo oscuro (`light-dark()`), selectores modernos (`:has()`, `:is()`), formularios accesibles, animaciones aceleradas por GPU, arquitectura modular con `@layer` y Nesting nativo, scroll-driven animations y View Transitions.
 
 ### [Bootstrap 5](../bootstrap/01-fundamentos)
 Instalación vía npm, el sistema de Grid, catálogo completo de componentes, personalización con Sass (`$theme-colors`, Utility API), variables CSS y modo oscuro nativo, la API de JavaScript programática, integración con Vue/React y optimización para producción.
