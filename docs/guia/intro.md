@@ -4,7 +4,7 @@ Bienvenido a mi repositorio personal de conocimientos. Aquí documento conceptos
 
 ## 🚀 Lógica y Lenguaje
 
-### [Fundamentos de Programación](../fundamentos/01-pensamiento-computacional)
+### [Fundamentos de Programación](../fundamentos/01-pensar-programador)
 Bases universales de la computación y la algoritmia: pensamiento computacional, arquitectura de hardware y memoria, tipos primitivos, lógica booleana, ciclos, funciones puras, ámbito y closures, mutabilidad vs inmutabilidad, estructuras de datos (arrays, pilas, colas, objetos y colecciones), depuración, introducción al asincronismo y POO.
 
 ### [TypeScript para Frontend](../typescript/01-entorno-frontend)
