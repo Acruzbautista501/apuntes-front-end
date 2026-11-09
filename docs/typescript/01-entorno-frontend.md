@@ -1,6 +1,6 @@
 # Módulo 1: El Rol de TypeScript en el Frontend y Configuración
 
-> 🎯 **Prerrequisito:** Esta pista asume que ya conoces los fundamentos de programación (algoritmos, variables, funciones y estructuras de control). Si necesitas repasar las bases de la lógica computacional, consulta primero [Fundamentos de Programación](/fundamentos/01-pensamiento-computacional).
+> 🎯 **Prerrequisito:** Esta pista asume que ya conoces los fundamentos de programación (algoritmos, variables, funciones y estructuras de control). Si necesitas repasar las bases de la lógica computacional, consulta primero [Fundamentos de Programación](/fundamentos/01-pensar-programador).
 
 En el desarrollo Frontend moderno, JavaScript por sí solo presenta un desafío crítico: es un lenguaje de **tipado dinámico y débil**. Un error tipográfico en una propiedad de un objeto o asumir que una respuesta de red contiene un dato que viene como `undefined` provoca una pantalla en blanco y la caída de la aplicación frente al usuario final.
 
